@@ -4,7 +4,7 @@
 
 Webapp that puts in contact a pet owner with a petkeeper
 
-### User Stories
+### User Stories / MVP
 
 **404** - As a user I want to see a nice 404 page when I go to a page that doesn’t exist so that I know it was my fault
 
@@ -12,32 +12,72 @@ Webapp that puts in contact a pet owner with a petkeeper
 
 **Homepage** - As a user I want to be able to access the homepage so that I see what the app is about and login and signup
 
-**Sign up **- As a user I want to sign up on the webpage so that I can see all the events that I could attend
+**Sign up** - As a user I want to sign up on the webpage so that I can see all the events that I could attend
 
 **Login** - As a user I want to be able to log in on the webpage so that I can get back to my account
 
 **Logout** - As a user I want to be able to log out from the webpage so that I can make sure no one will access my account
 
-**Events list** - As a user I want to see all the events available so that I can choose which ones I want to attend
+**Pet:**
+- As a user I want to add the profile of my pet.
 
-**Events create** - As a user I want to create an event so that I can invite others to attend
+**Events:**
 
-**Events detail** - As a user I want to see the event details and attendee list of one event so that I can decide if I want to attend
-Attend event - As a user I want to be able to attend to event so that the organizers can count me in
+- As a user I want to create my events.
+- As a user I want to accept a keeper.
+- As a user I want to enroll in an event.
+- As a user I want to list all existing events.
 
 ### Backlog
 
 List of other features outside of the MVPs scope
 
-User profile: - see my profile - upload my profile picture - see other users profile -
+**User profile:**
 
-list of events created by the user - list events the user is attending
+- As a user I want to edit my profile.
+- As a user I want to delete my profile.
+- As a user I want to view my profile.
+- As a user I want to view other profiles.
 
-Geo Location: - add geolocation to events when creating - show event in a map in event
+**Pet:**
 
-detail page - show all events in a map in the event list page
+- As a user I want to edit the profile of my pet.
+- As a user I want to delete the profile of my pet.
+- As a user I want to list the profiles of my pets.
 
-Homepage: - …
+**Events:**
+
+- As a user I want to edit my events.
+- As a user I want to delete my events.
+- As a user I want to list my events.
+- As a user I want to reject a keeper.
+- As a user I want to unsubscribe from am event.
+- As a user I want to invite a keeper for my event.
+- As a user I want to list of events the user is attending.
+- As a user I want to user geolocation:
+add geolocation to events when creating - show event in a map in event
+
+**Alerts:**
+
+- As a user I want to subscribe to an alert.
+- As a user I want to unsubscribe from an alert.
+
+**Reviews:**
+- As a user I want create my review about my event.
+- As a user I want create a review of the event in which I was involved.
+- As a user I want to edit my review.
+- As a user I want to delete my review.
+- As a user I want list my reviews.
+- As a user I want list user reviews.
+
+**Searches:**
+- As a user I want to search user applying filters.
+    ( By ranking, by zone, by pet, by type of services,by price, by geolocation )
+- As a user I want to search event applying filters.
+    ( By date, by zone, by pet, by type of services, by geolocation )
+
+**Chat:**
+- As a user I want to chat with other user.
 
 ### ROUTES
 
@@ -55,13 +95,13 @@ Untitled
     password: { type: String, required: true},
     telephone: [],
     email: { type: String },
-    address: {
+    address: [{
        street: {type: String },
        number: Number,
        zipcode: Number,
        city: String
-   },
-   img = {type: String, required: true}},
+   }],
+   img = {type: String}},
 
 {
   timestamps: true
@@ -72,21 +112,17 @@ Untitled
 **_Event Model_**
 
 ```javascript
-{
-    name: { type: String, required: true, unique: true },
-    lastName: String,
-    username: { type: String, required: true, unique: true },
-    password: { type: String, required: true },
-    telephone: [Number],
-    email: { type: String },
-    address: {
-        street: { type: String },
-        number: Number,
-        zipcode: Number,
-        city: String
-    },
-    img: { type: String, required: true }
-},
+{ 
+	owner: Schema.Types.ObjectId, /*ObjectId<User>*/
+	title: String,
+	description: String
+	creationEventDate: Date.now(),
+            initialDateTime: Date
+            finalDateTime: Date
+	location: User Adress,
+	keeper: Schema.Types.ObjectId /*[ObjectId<User>*/
+}
+,
 {
     timestamps: true
 }
