@@ -1,10 +1,10 @@
-##AUPET##
+# AUPET
 
-###Description###
+### Description
 
 Webapp that puts in contact a pet owner with a petkeeper
 
-###User Stories###
+### User Stories
 
 **404** - As a user I want to see a nice 404 page when I go to a page that doesn’t exist so that I know it was my fault
 
@@ -25,33 +25,29 @@ Webapp that puts in contact a pet owner with a petkeeper
 **Events detail** - As a user I want to see the event details and attendee list of one event so that I can decide if I want to attend
 Attend event - As a user I want to be able to attend to event so that the organizers can count me in
 
-###Backlog###
+### Backlog
 
 List of other features outside of the MVPs scope
 
-User profile: - see my profile - upload my profile picture - see other users profile - 
+User profile: - see my profile - upload my profile picture - see other users profile -
 
 list of events created by the user - list events the user is attending
 
-Geo Location: - add geolocation to events when creating - show event in a map in event 
+Geo Location: - add geolocation to events when creating - show event in a map in event
 
 detail page - show all events in a map in the event list page
 
 Homepage: - …
 
-###ROUTES:###
+### ROUTES
 
 Untitled
 
-###Models###
+### Models
 
-####User model####
+**_User Model_**
 
-
-***User Model***
-
-~~~
-
+```javascript
 {
     name: {  type: String, required: true, unique: true },
     lastName: String,
@@ -71,86 +67,69 @@ Untitled
   timestamps: true
 }
 
-~~~
+```
 
-***Event Model***
+**_Event Model_**
 
-~~~
-
+```javascript
 {
-name: { type: String, required: true, unique: true },
-lastName: String,
-username: { type: String, required: true, unique: true },
-password: { type: String, required: true },
-telephone: [Number],
-email: { type: String },
-address: {
-street: { type: String },
-number: Number,
-zipcode: Number,
-city: String
-},
-img: { type: String, required: true }
+    name: { type: String, required: true, unique: true },
+    lastName: String,
+    username: { type: String, required: true, unique: true },
+    password: { type: String, required: true },
+    telephone: [Number],
+    email: { type: String },
+    address: {
+        street: { type: String },
+        number: Number,
+        zipcode: Number,
+        city: String
+    },
+    img: { type: String, required: true }
 },
 {
     timestamps: true
 }
+```
 
-~~~
+**_Pet Model_**
 
-***Pet Model***
-
-~~~
-
+```javascript
 {
-owner: Schema.Types.ObjectId, /* ObjectId<User>  */
-petType: String,
-petWeight: Number,
-petName: String,
-petAge: Number,
-petImg: [String],
-event:  Schema.Types.ObjectId}, /*ObjectId<Event>},*/
+    owner: Schema.Types.ObjectId, /* ObjectId<User>  */
+    petType: String,
+    petWeight: Number,
+    petName: String,
+    petAge: Number,
+    petImg: [String],
+    event:  Schema.Types.ObjectId /*ObjectId<Event>},*/
+},
 {
-timestamps: true
+    timestamps: true
 }
+```
 
-~~~
+**_Review Model_**
 
-***Review Model***
-
-~~~
-
+```
 {
-owner: Schema.Types.ObjectId /*ObjectId<User>*/,
-event: Schema.Types.ObjectId /*ObjectId<Event>*/,
-rating: Number /* “⭐”*/,
-comment: { type: String },
-executer: Schema.Types.ObjectId /*ObjectId<User>*/
+    owner: Schema.Types.ObjectId /*ObjectId<User>*/,
+    event: Schema.Types.ObjectId /*ObjectId<Event>*/,
+    rating: Number /* “⭐”*/,
+    comment: { type: String },
+    executer: Schema.Types.ObjectId /*ObjectId<User>*/
 },
 {
     timestamps: true
 }`
-~~~
-##Links##
+```
 
-###Git###
+### Git
 
-[Repository Link][repository]
+[Repository Link](https://github.com/aupet-group/aupet-app)
 
-[Deploy Link][deploy]
+[Deploy Link](deploy)
 
-[repository]: http://github.com
+### Slides
 
-[deploy]:  http://github.com
-
-###Slides###
-
-[Slides Link][slides]
-
-[slides]:http://slides.com
-
-
-
-
-
-
+[Slides Link](slides)
