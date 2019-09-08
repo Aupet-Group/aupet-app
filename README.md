@@ -89,7 +89,7 @@ Untitled
 
 ```javascript
 {
-  name: { type: String, required: true },
+  name: { type: String, required: true, unique: true },
   lastName: String,
   username: { type: String, required: true, unique: true },
   password: { type: String, required: true },
@@ -150,11 +150,11 @@ Untitled
 
 ```
 {
-    owner: Schema.Types.ObjectId /*ObjectId<User>*/,
-    event: Schema.Types.ObjectId /*ObjectId<Event>*/,
-    rating: Number /* “⭐”*/,
+    owner: Schema.Types.ObjectId /* ObjectId<User> */,
+    event: Schema.Types.ObjectId /* ObjectId<Event> */,
+    rating: Number /* “⭐” */,
     comment: { type: String },
-    executer: Schema.Types.ObjectId /*ObjectId<User>*/
+    keeper: Schema.Types.ObjectId, /* ObjectId<User> */
 },
 {
     timestamps: true
