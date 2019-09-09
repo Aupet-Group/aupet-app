@@ -104,17 +104,17 @@ add geolocation to events when creating - show event in a map in event
 
 ```javascript
 {
-  name: { type: String, required: true, unique: true },
-  lastName: String,
-  username: { type: String, required: true, unique: true },
-  password: { type: String, required: true },
+  email: { type: String, required: true, unique: true },
+  hashedPassword: { type: String, required: true },
+  name: { type: String },
+  lastName: { type: String },
+  username: { type: String },
   telephone: [],
-  email: { type: String },
   address: [{
     street: { type: String },
     number: Number,
     zipcode: Number,
-    city: String,
+    city: { type: String },
   }],
   img: { type: String },
 },
