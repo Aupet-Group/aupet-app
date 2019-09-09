@@ -17,10 +17,11 @@ const mongoose = require('mongoose');
 const MongoStore = require('connect-mongo')(session);
 
 const flash = require('connect-flash');
-const { notifications } = require('./middlewares/index.js');
+const { notifications } = require('./middlewares/auth.js');
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
+const authRouter = require('./routes/auth');
 
 const app = express();
 
@@ -68,6 +69,7 @@ app.use(notifications(app));
 // Routes
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/', authRouter);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

@@ -8,4 +8,15 @@ const notifications = () => (req, res, next) => {
   next();
 };
 
-module.exports = { notifications };
+const checkEmailAndPasswordNotEmpty = (req, res, next) => {
+  const { email, password } = req.body;
+  if (email !== '' && password !== '') {
+    next();
+  } else {
+    req.flash('error', 'the email or password fields cannot be empty');
+    res.redirect('/signup');
+  }
+};
+
+
+module.exports = { notifications, checkEmailAndPasswordNotEmpty };
