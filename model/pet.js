@@ -1,14 +1,14 @@
 const mongoose = require('mongoose');
+const User = require('../model/user');
 
 const { Schema } = mongoose;
 const petSchema = new Schema({
-  owner: Schema.Types.ObjectId, /* ObjectId<User>  */
-  petType: String,
+  owner: { type: Schema.Types.ObjectId, ref: User }, /* ObjectId<User> the owner */
+  petType: { type: String },
   petWeight: Number,
-  petName: String,
+  petName: { type: String },
   petAge: Number,
-  petImg: [String],
-  event: Schema.Types.ObjectId, /* ObjectId<Event>}, */
+  petImg: [{ type: String }],
 },
 {
   timestamps: true,

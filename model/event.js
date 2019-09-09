@@ -1,14 +1,17 @@
 const mongoose = require('mongoose');
+const User = require('../model/user');
+const Pet = require('../model/user');
 
 const { Schema } = mongoose;
 const eventSchema = new Schema(
   {
-    owner: Schema.Types.ObjectId /* ObjectId<User> */,
-    title: String,
-    description: String,
+    owner: { type: Schema.Types.ObjectId, ref: User }, /* ObjectId<User> */
+    title: { type: String },
+    description: { type: String } ,
     creationEventDate: Date.now(),
     initialDateTime: Date,
     finalDateTime: Date,
+    pet: [{ type: Schema.Types.ObjectId, ref: Pet }],
     location: {
       /* This is a copy owner adresss */
       address: {
@@ -17,7 +20,7 @@ const eventSchema = new Schema(
         zipcode: Number,
         city: String,
       },
-      keeper: Schema.Types.ObjectId,
+      keeper: { type: Schema.Types.ObjectId, ref: User },
     }, /* [ObjectId]<User> */
 
   },

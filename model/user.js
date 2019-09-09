@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 const userSchema = new Schema({
   name: { type: String, required: true },
-  lastName: String,
+  lastName: { type: String },
   username: { type: String, required: true, unique: true },
   password: { type: String, required: true },
   telephone: [],
@@ -12,7 +12,7 @@ const userSchema = new Schema({
     street: { type: String },
     number: Number,
     zipcode: Number,
-    city: String,
+    city: { type: String },
   }],
   img: { type: String },
 },
