@@ -81,7 +81,22 @@ add geolocation to events when creating - show event in a map in event
 
 ### ROUTES
 
-Untitled
+| Mockup | Name | Method | Endpoint | Description | Body | Redirects |
+| :---: | :--- | :--- | :--- | :--- | :--- | :--- |
+| 1 | Home | GET | / | Show home page | - |  |
+| 2 | Sign Up Form | GET | /signup | User see the form in order to sign up | - |   | 
+| 2 | Sign Up | POST | /signup | Sign up a user | {username, password} | /profile | 
+| 3 | Log In Form | GET | /login | User see the form in order to log in | - |  | 
+| 3 | Log In | POST | /login | Log in a user | {username, password} | /profile | 
+|  | Log Out | POST | /logout | Log out a user | - |  | 
+| 4 | Profile | GET | /profile | User see his/her profile | - |  | 
+| 5 | Add Pet | GET | /pets/new | User see the form in order to add a pet | - |  | 
+| 5 | Add Pet | POST | /pets | Add a pet | {petType, petWeight, petName, petAge} | /profile |
+| 6 | Add Event | GET | /events/new | User see the form in order to add en event | - |  | 
+| 6 | Add Event | POST | /events | Add en event | {title, description, initialDateTime, finalDateTime, location} | /profile |
+| 7 | List All Events | GET | /events | Show all events | - |  |
+| 8 | Event View | GET | /events/:eventID | Show an event infromation | - |  |  
+| 9 | My Events | GET | /profile/events | Show a user events | - |  | 
 
 ### Models
 
