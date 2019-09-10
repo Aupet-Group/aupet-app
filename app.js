@@ -1,4 +1,5 @@
 /* eslint-disable no-unused-vars */
+const sassMiddleware = require('node-sass-middleware');
 
 const session = require('express-session');
 
@@ -31,6 +32,12 @@ mongoose.connect('mongodb://localhost/aupetDatabase', {
   reconnectTries: Number.MAX_VALUE,
 });
 
+app.use(sassMiddleware({
+  src: path.join(__dirname, 'sass'),
+  dest: path.join(__dirname, 'public'),
+  indentedSyntax: false, // true = .sass and false = .scss
+  sourceMap: true, // true for .map; false no .map file
+}));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
