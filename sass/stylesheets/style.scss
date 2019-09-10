@@ -5,8 +5,25 @@ body {
 
 .errorMessages {
   color: red;
+  font-weight: bolder;
 }
 
-.infoMessages{
+.warningMessages {
+  color: green;
+}
+
+.infoMessages .currentUser{
   color: black;
+}
+
+.currentUser{
+  font-weight: bolder;
+}
+
+.successMessages {
+  color: navy;
+}
+
+.dangerMessages{
+  color:violet;
 }

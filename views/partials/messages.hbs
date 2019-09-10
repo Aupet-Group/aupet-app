@@ -10,8 +10,26 @@
   {{/if }}
 </div>
 
-<div class="infoMessage">
+<div class="currentUser">
   {{#if currentUser }}
     <p>name: {{ currentUser.username }}</p>
+  {{/if}}
+</div>
+
+<div class="dangerMessages">
+  {{#if dangerMessages}}
+    <p class="info">{{dangerMessages}}</p>
+  {{/if}}
+</div>
+
+<div class="successMessages">
+  {{#if successMessages}}
+    <p class="info">{{successMessages}}</p>
+  {{/if}}
+</div>
+
+<div class="warningMessages">
+  {{#if warningMessages}}
+    <p class="info">{{warningMessages}}</p>
   {{/if}}
 </div>

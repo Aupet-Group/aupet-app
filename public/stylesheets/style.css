@@ -3,9 +3,22 @@ body {
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif; }
 
 .errorMessages {
-  color: red; }
+  color: red;
+  font-weight: bolder; }
 
-.infoMessages {
+.warningMessages {
+  color: green; }
+
+.infoMessages .currentUser {
   color: black; }
+
+.currentUser {
+  font-weight: bolder; }
+
+.successMessages {
+  color: navy; }
+
+.dangerMessages {
+  color: violet; }
 
 /*# sourceMappingURL=style.css.map */
