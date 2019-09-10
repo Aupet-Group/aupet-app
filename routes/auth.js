@@ -44,8 +44,37 @@ router.post(
   },
 );
 
+router.get('/login', (req, res, next) => {
+  res.render('login');
+});
+
+router.post('/login', checkEmailAndPasswordNotEmpty, async (req, res, next) => {
+  const { email, password } = req.body;
+  const user = await User.findOne({ email });
+  try {
+    if (user) {
+      if (bcrypt.compareSync(password, user.hashedPassword)) {
+        req.session.currentUSer = user;
+        res.redirect('/secret');
+      } else {
+        req.flash('error', 'User or password incorret');
+        res.redirect('/login');
+      }
+    } else {
+      res.flash('info', "User doesn't exist try to sign up!");
+      res.redirect('/signup');
+    }
+  } catch (error) {
+    next(error);
+  }
+});
+
 router.get('/created', (req, res, next) => {
   res.render('created');
+});
+
+router.get('/secret', (req, res, next) => {
+  res.render('secret');
 });
 
 module.exports = router;
