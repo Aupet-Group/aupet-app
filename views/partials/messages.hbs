@@ -1,0 +1,17 @@
+<div class="infoMessage">
+  {{#if infoMessages}}
+    <p class="info">{{infoMessages}}</p>
+  {{/if}}
+</div>
+
+<div class="errorMessages">
+  {{#if errorMessages }}
+    <p class="error">{{ errorMessages }}</p>
+  {{/if }}
+</div>
+
+<div class="infoMessage">
+  {{#if currentUser }}
+    <p>name: {{ currentUser.username }}</p>
+  {{/if}}
+</div>

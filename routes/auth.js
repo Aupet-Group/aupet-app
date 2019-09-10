@@ -45,7 +45,6 @@ router.post(
 );
 
 router.get('/created', (req, res, next) => {
-  // res.render('created');
   res.render('created');
 });
 

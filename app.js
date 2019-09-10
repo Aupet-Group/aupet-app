@@ -3,6 +3,8 @@ const sassMiddleware = require('node-sass-middleware');
 
 const session = require('express-session');
 
+const hbs = require('hbs');
+
 const createError = require('http-errors');
 
 const express = require('express');
@@ -19,6 +21,8 @@ const MongoStore = require('connect-mongo')(session);
 
 const flash = require('connect-flash');
 const { notifications } = require('./middlewares/auth.js');
+
+hbs.registerPartials(path.join(__dirname, '/views/partials'));
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
