@@ -26,16 +26,24 @@ body {
   font-size: 100px;
   text-align: center; }
 
-.errors {
+.errors h1 {
+  color: #5592c3;
+  font-size: 100px;
+  text-align: center; }
+
+.errors p {
   font-size: 25px;
   text-align: center; }
 
-.errors button{
+.errors button {
   font-size: 25px;
-   }
+  text-align: center; }
 
 img {
   display: block;
   margin: auto; }
+
+#error500 {
+  height: 400px; }
 
 /*# sourceMappingURL=style.css.map */
