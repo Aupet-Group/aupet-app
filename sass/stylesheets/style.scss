@@ -1,6 +1,18 @@
+@import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+}
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font: 28px "Source Sans Pro", sans-serif;
+  box-sizing: border-box;
+}
+
+h2 {
+  color: #f44336;
+  text-align: center;
+  font-size: 1.8rem;
 }
 
 .errorMessages {
@@ -12,11 +24,11 @@ body {
   color: green;
 }
 
-.infoMessages .currentUser{
+.infoMessages .currentUser {
   color: black;
 }
 
-.currentUser{
+.currentUser {
   font-weight: bolder;
 }
 
@@ -24,8 +36,8 @@ body {
   color: navy;
 }
 
-.dangerMessages{
-  color:violet;
+.dangerMessages {
+  color: violet;
 }
 
 .notfound {
@@ -39,7 +51,237 @@ body {
   text-align: center;
 }
 
-img {
-  display: block;
-  margin: auto;
+#container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+#topnav {
+  width: 72%;
+  margin: 0 auto;
+  color: #ffffff;
+
+  .image-wrpper-logo {
+    width: 80%;
+    img {
+      margin: 2% 0 2% 0;
+      width: 50%;
+    }
+  }
+}
+
+#event-finder {
+  border-top: 1px solid #000000;
+  // width: 100%;
+  // background-size: cover;
+  // background: url(../images/top_img.jpg);
+  // background-repeat: no-repeat;
+  // background-position: 50% 50%;
+  position: relative;
+}
+
+.div-form {
+  width: 100%;
+  margin: 0% auto 0% auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  justify-items: center;
+  justify-items: start;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.image-wrapper-event {
+  width: 100%;
+  img {
+    width: 100%;
+  }
+}
+
+.title-wrapper {
+  width: 100%;
+  margin: 25% auto 0 auto;
+
+  h2 {
+    padding: 0 18%;
+    text-align: left;
+  }
+}
+
+#findkeeper {
+  margin: 0 auto;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  input {
+    border-radius: 25px;
+    border: 1px solid #000000;
+    margin: 5% 20%;
+    background: #dbe6f1;
+    padding: 1%;
+  }
+
+  button {
+    border-radius: 15px;
+    border: none;
+    padding: 6%;
+    background: #5592c3;
+    margin: 5% auto 0 auto;
+    color: white;
+  }
+}
+#services {
+  .title-wrapper-services {
+    width: 100%;
+    margin: 0 auto 0 auto;
+    h2 {
+      margin: 4%;
+      text-align: center;
+    }
+  }
+
+  .list-services {
+    width: 100%;
+    margin: 8% 10% 8% 10%;
+  }
+}
+.icon {
+  width: 5%;
+  margin-right: 5%;
+  margin-bottom: 4%;
+}
+
+.list-services-wrapper {
+  display: flex;
+  flex-direction: row;
+}
+
+h4 {
+  margin: 0 auto;
+  font-size: 0.65em;
+  font-weight: lighter;
+}
+p {
+  font-size: 0.45em;
+  margin-bottom: 8%;
+}
+
+#how-it-works {
+  background: #5592c3;
+  color: #ffffff;
+  h2 {
+    font-size: 1.2rem;
+    color: #ffffff;
+    margin: 10% 0 7% 0;
+  }
+  p {
+    text-align: left;
+    font-size: 1rem;
+  }
+
+  .offer {
+    width: 100%;
+    margin: 5% auto;
+  }
+}
+
+.offer-text-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+}
+
+.number-hiw {
+  border: 1px solid #000000;
+  border-radius: 50%;
+  text-align: center;
+  color: #000000;
+  background: #ffffff;
+  margin: 0% 2% 15% 2%;
+  padding: 1% 3%;
+  font-weight: bold;
+  font-size: 50%;
+}
+
+#testimonials {
+  background: linear-gradient(#5592c3, #ffffff);
+  margin-bottom: 5%;
+  h2 {
+    color: white;
+  }
+  p {
+    width: 75%;
+    margin: 5% auto;
+    text-align: center;
+  }
+}
+
+#joinus {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  justify-items: start;
+  img {
+    width: 100%;
+  }
+  h2 {
+    text-align: center;
+    margin-bottom: 5%;
+  }
+}
+
+h4 {
+  color: #5592c3;
+}
+
+.button {
+  border-radius: 15px;
+  border: none;
+  padding: 3%;
+  background: #5592c3;
+  margin: 1% 30% 1% 30%;
+  a {
+    display: block;
+    color: white;
+    text-decoration: none;
+    text-align: center;
+  }
+}
+
+#footer {
+  width: 100%;
+
+  background: #5592c3;
+  display: flex;
+  flex-direction: row;
+ 
+
+  .icon {
+    width: 6%;
+    margin-top:4%;
+  }
+
+  a,
+  a:visited {
+    display: inline-block;
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 50%;
+    line-height: 50%;
+  }
+
+  .images-contact {
+    margin-left: 5%;
+  }
+
+  .contact {
+    margin-right: 5%;
+  }
 }
