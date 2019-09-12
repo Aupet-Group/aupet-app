@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const User = require('../model/user');
-const Pet = require('../model/user');
+const Pet = require('../model/pet');
 
 const { Schema } = mongoose;
 const eventSchema = new Schema(
@@ -8,7 +8,7 @@ const eventSchema = new Schema(
     owner: { type: Schema.Types.ObjectId, ref: User }, /* ObjectId<User> */
     title: { type: String },
     description: { type: String } ,
-    creationEventDate: Date.now(),
+    creationEventDate: { type: Date, default: Date.now()},
     initialDateTime: Date,
     finalDateTime: Date,
     pet: [{ type: Schema.Types.ObjectId, ref: Pet }],

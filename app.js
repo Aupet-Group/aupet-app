@@ -27,6 +27,7 @@ hbs.registerPartials(path.join(__dirname, '/views/partials'));
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const authRouter = require('./routes/auth');
+const eventRouter = require('./routes/events');
 
 const app = express();
 
@@ -72,6 +73,7 @@ app.use(flash());
 
 app.use((req, res, next) => {
   app.locals.currentUser = req.session.currentUser;
+  res.locals.currentUser = req.session.currentUser;
   next();
 });
 
@@ -81,6 +83,7 @@ app.use(notifications(app));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/', authRouter);
+app.use('/events', eventRouter);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
