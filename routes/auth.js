@@ -77,4 +77,10 @@ router.get('/secret', (req, res, next) => {
   res.render('secret');
 });
 
+router.get('/logout', (req, res, next) => {
+  req.session.destroy((error) => {
+      res.redirect('/login');
+  });
+});
+
 module.exports = router;
