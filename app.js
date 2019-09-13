@@ -25,9 +25,10 @@ const { notifications } = require("./middlewares/auth.js");
 
 hbs.registerPartials(path.join(__dirname, "/views/partials"));
 
-const indexRouter = require("./routes/index");
-const usersRouter = require("./routes/users");
-const authRouter = require("./routes/auth");
+const indexRouter = require('./routes/index');
+const usersRouter = require('./routes/users');
+const authRouter = require('./routes/auth');
+const eventRouter = require('./routes/events');
 const petsRouter = require("./routes/pets");
 
 const app = express();
@@ -76,16 +77,20 @@ app.use(flash());
 
 app.use((req, res, next) => {
   app.locals.currentUser = req.session.currentUser;
+  res.locals.currentUser = req.session.currentUser;
   next();
 });
 
 app.use(notifications(app));
 
 // Routes
-app.use("/", indexRouter);
-app.use("/users", usersRouter);
-app.use("/", authRouter);
+
+app.use('/', indexRouter);
+app.use('/users', usersRouter);
+app.use('/', authRouter);
 app.use("/pets", petsRouter);
+app.use('/events', eventRouter);
+
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
@@ -97,7 +102,9 @@ app.use((req, res, next) => {
 app.use((err, req, res, next) => {
   // set locals, only providing error in development
   res.locals.message = err.message;
-  res.locals.error = req.app.get("env") === "development" ? err : {};
+
+  console.log(err.message)
+  res.locals.error = req.app.get('env') === 'development' ? err : {};
 
   // render the error page
   res.status(err.status || 500);

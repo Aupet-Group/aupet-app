@@ -58,8 +58,8 @@ router.post("/login", checkEmailAndPasswordNotEmpty, async (req, res, next) => {
     if (user) {
       if (bcrypt.compareSync(password, user.hashedPassword)) {
         req.session.currentUser = user;
-        res.redirect("/secret");
-      } else {
+        res.redirect('/secret');
+       } else {
         req.flash("error", "User or password incorret");
         res.redirect("/login");
       }
@@ -78,6 +78,15 @@ router.get("/created", (req, res, next) => {
 
 router.get("/secret", checkIfLoggedIn, (req, res, next) => {
   res.render("secret");
+});
+
+router.get('/logout', checkIfLoggedIn, (req, res, next) => {
+  req.session.destroy((error) => {
+    if(error) {
+      next(error)
+    }
+      res.redirect('/login');
+  });
 });
 
 module.exports = router;
