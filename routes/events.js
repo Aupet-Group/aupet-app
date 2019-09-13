@@ -5,7 +5,7 @@ const { checkIfLoggedIn } = require("../middlewares/auth");
 
 const router = express.Router();
 
-/* GET events listing. */
+// GET events listing. 
 router.get('/', (req, res, next) => {
   Event.find({})
     .then((events) => {
@@ -16,12 +16,26 @@ router.get('/', (req, res, next) => {
     });
 });
 
-// Form to create new event
+//GET event details
+router.get('/:eventId', async (req, res, next) => {
+  const { eventId } = req.params;
+  
+  try {
+    const event = await Event.findById(eventId);
+    res.render('events/eventDetails', { event });  
+  }
+  catch (error){
+    next(error)
+};
+});
+
+
+// GET form to create new event
 router.get('/new', checkIfLoggedIn, (req, res) => {
   res.render('events/newevent');
 });
 
-
+// POST new event
 router.post('/', checkIfLoggedIn,  async (req, res, next) => {
  const {title, description, initialDateTime, finalDateTime, location} = req.body;
  const owner = res.locals.currentUser._id;
