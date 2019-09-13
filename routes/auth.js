@@ -77,8 +77,11 @@ router.get('/secret', checkIfLoggedIn, (req, res, next) => {
   res.render('secret');
 });
 
-router.get('/logout', (req, res, next) => {
+router.get('/logout', checkIfLoggedIn, (req, res, next) => {
   req.session.destroy((error) => {
+    if(error) {
+      next(error)
+    }
       res.redirect('/login');
   });
 });
