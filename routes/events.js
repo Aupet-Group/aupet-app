@@ -1,28 +1,32 @@
 /* eslint-disable no-underscore-dangle */
 const express = require('express');
 const Event = require('../model/event');
+const { checkIfLoggedIn } = require("../middlewares/auth");
 
 const router = express.Router();
 
 /* GET events listing. */
 router.get('/', (req, res, next) => {
-  Event.find()
+    console.log("events dsadf")
+  Event.find({})
     .then((events) => {
-      res.render('events', { events });
+      res.render('events/events', { events });
     })
-    .catch(next);
+    .catch((error) => {
+        console.log(error)
+        next(error);
+    });
 });
 
 // Form to create new event
-router.get('/new', (req, res) => {
+router.get('/new', checkIfLoggedIn, (req, res) => {
   res.render('events/newevent');
 });
 
 
-router.post('/', async (req, res, next) => {
+router.post('/', checkIfLoggedIn,  async (req, res, next) => {
  const {title, description, initialDateTime, finalDateTime, location} = req.body;
 //  todo añadir middleware auth
-console.log(res.locals.currentUser)
  const owner = res.locals.currentUser._id;
  try {
     const event = await Event.create({
