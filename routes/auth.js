@@ -10,7 +10,7 @@ const User = require('../model/user');
 
 const bcryptSalt = 10;
 
-const { checkEmailAndPasswordNotEmpty } = require('../middlewares/auth');
+const { checkEmailAndPasswordNotEmpty, checkIfLoggedIn } = require('../middlewares/auth');
 
 router.get('/signup', (req, res, next) => {
   res.render('signup');
@@ -73,7 +73,7 @@ router.get('/created', (req, res, next) => {
   res.render('created');
 });
 
-router.get('/secret', (req, res, next) => {
+router.get('/secret', checkIfLoggedIn, (req, res, next) => {
   res.render('secret');
 });
 
