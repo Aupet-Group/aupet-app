@@ -1,0 +1,21 @@
+<h1>Edit Profile</h1>
+<form action="/users" method="POST" id="form">
+    <label for="username">Username</label>
+    <input type="username" name="username" value="{{user.username}}">
+
+    <label for="name">Name</label>
+    <input type="text" name="name" value="{{user.name}}">
+
+    <label for="lastname">Last Name:</label>
+    <input type="text" name="lastname" value="{{user.lastname}}">
+
+    <label for="email">email:</label>
+    <input type="email" name="email" value="{{user.email}}">
+    
+    <label for="telephone">Telephone:</label>
+    {{#each user}}
+    <input type="telephone" name="telephone" value="{{this.telephone}}">
+    {{/each}}
+
+    <button type="submit">Update</button>
+</form>

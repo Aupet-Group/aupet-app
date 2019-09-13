@@ -54,7 +54,7 @@ router.post('/login', checkEmailAndPasswordNotEmpty, async (req, res, next) => {
   try {
     if (user) {
       if (bcrypt.compareSync(password, user.hashedPassword)) {
-        req.session.currentUSer = user;
+        req.session.currentUser = user;
         res.redirect('/secret');
       } else {
         req.flash('error', 'User or password incorret');
