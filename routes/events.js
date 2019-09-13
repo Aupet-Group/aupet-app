@@ -26,7 +26,6 @@ router.get('/new', checkIfLoggedIn, (req, res) => {
 
 router.post('/', checkIfLoggedIn,  async (req, res, next) => {
  const {title, description, initialDateTime, finalDateTime, location} = req.body;
-//  todo añadir middleware auth
  const owner = res.locals.currentUser._id;
  try {
     const event = await Event.create({
@@ -44,26 +43,5 @@ router.post('/', checkIfLoggedIn,  async (req, res, next) => {
         next(error)
     };
 });
-    
-
-// router.post('/', async (req, res, next) => {
-//     const {title, description, initialDateTime, finalDateTime, location} = req.body;
-//    //  todo añadir middleware auth
-//     const owner = res.locals.currentUser._id;
-//     try {
-//     const createdEvent = await Event.create({
-//         owner,
-//         title,
-//         description,
-//         creationEventDate: Date.now(),
-//         initialDateTime,
-//         finalDateTime,
-//         location
-//      })
-//      res.redirect('events/events');
-//      } catch (error) {
-//        next(error);
-//      }
-//    });
 
 module.exports = router;
