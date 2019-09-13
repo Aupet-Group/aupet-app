@@ -12,16 +12,13 @@ const eventSchema = new Schema(
     initialDateTime: Date,
     finalDateTime: Date,
     pet: [{ type: Schema.Types.ObjectId, ref: Pet }],
-    location: {
-      /* This is a copy owner adresss */
-      address: {
+    address: {
         street: String,
         number: Number,
         zipcode: Number,
-        city: String,
+        location: String,
       },
-      keeper: { type: Schema.Types.ObjectId, ref: User },
-    }, /* [ObjectId]<User> */
+    keeper: { type: Schema.Types.ObjectId, ref: User }, /* [ObjectId]<User> */
 
   },
   {

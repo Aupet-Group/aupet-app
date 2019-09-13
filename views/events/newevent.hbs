@@ -1,11 +1,13 @@
 <h1>ADD EVENT</h1>
 <form  id="eventform" action="/events" method="POST">
-   <label for="title">Title</label><br>
-   <input type="radio" name="title" value="Pet boarding" checked> Pet boarding <br>
-   <input type="radio" value="House sitting">House sitting <br>
-   <input type="radio" value="Day care">Day care <br>
-   <input type="radio" value="Drop-in visits">Drop-in visits <br>
-   <input type="radio" value="Dog walking">Dog walking <br>
+   <label for="title">Title</label>
+   <select name="title">
+       <option>Pet boarding</option>
+       <option>House sitting</option>
+       <option>Day care</option>
+       <option>Drop-in visits</option>
+       <option>Dog walking</option>
+   </select><br>
         
     <label for="description">Description</label>
     <input type="textarea" name="description" placeholder="Describe your event" required><br>
