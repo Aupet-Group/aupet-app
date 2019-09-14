@@ -85,9 +85,9 @@ add geolocation to events when creating - show event in a map in event
 | :---: | :--- | :--- | :--- | :--- | :--- | :--- |
 | 1 | Home | GET | / | Show home page | - |  |
 | 2 | Sign Up Form | GET | /signup | User see the form in order to sign up | - |   | 
-| 2 | Sign Up | POST | /signup | Sign up a user | {username, password} | /profile | 
+| 2 | Sign Up | POST | /signup | Sign up a user | {email, password} | /profile | 
 | 3 | Log In Form | GET | /login | User see the form in order to log in | - |  | 
-| 3 | Log In | POST | /login | Log in a user | {username, password} | /profile | 
+| 3 | Log In | POST | /login | Log in a user | {email, password} | /profile | 
 |  | Log Out | POST | /logout | Log out a user | - |  | 
 | 4 | Profile | GET | /profile | User see his/her profile | - |  | 
 | 5 | Add Pet | GET | /pets/new | User see the form in order to add a pet | - |  | 
@@ -109,7 +109,9 @@ add geolocation to events when creating - show event in a map in event
   name: { type: String },
   lastName: { type: String },
   username: { type: String },
-  telephone: [],
+  phone: Number,
+  mobile: Number,
+  secondaryPhone: Number,
   address: [{
     street: { type: String },
     number: Number,
@@ -136,7 +138,8 @@ add geolocation to events when creating - show event in a map in event
             initialDateTime: Date
             finalDateTime: Date
 	location: User Adress,
-	keeper: Schema.Types.ObjectId /*[ObjectId<User>*/
+    keeper: Schema.Types.ObjectId /*[ObjectId<User>*/
+    pet: [{ type: Schema.Types.ObjectId, ref: Pet }]
 }
 ,
 {
