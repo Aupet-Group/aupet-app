@@ -7,6 +7,7 @@ const { checkIfLoggedIn } = require("../middlewares/auth");
 
 const router = express.Router();
 
+
 // GET all events listing
 router.get('/', (req, res, next) => {
   // todo usar async await
