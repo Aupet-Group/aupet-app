@@ -1,34 +1,33 @@
 /* eslint-disable no-underscore-dangle */
 const express = require('express');
 const Event = require('../model/event');
-const { checkIfLoggedIn } = require("../middlewares/auth");
+const { checkIfLoggedIn } = require('../middlewares/auth');
 
 const router = express.Router();
 
-// GET events listing. 
+// GET events listing.
 router.get('/', (req, res, next) => {
+  // todo usar async await
   Event.find({})
     .then((events) => {
       res.render('events/events', { events });
     })
     .catch((error) => {
-        next(error);
+      next(error);
     });
 });
 
-//GET event details
+// GET event details
 router.get('/:eventId', async (req, res, next) => {
   const { eventId } = req.params;
-  
+
   try {
     const event = await Event.findById(eventId);
-    res.render('events/eventDetails', { event });  
+    res.render('events/eventDetails', { event });
+  } catch (error) {
+    next(error);
   }
-  catch (error){
-    next(error)
-};
 });
-
 
 // GET form to create new event
 router.get('/new', checkIfLoggedIn, (req, res) => {
@@ -36,24 +35,25 @@ router.get('/new', checkIfLoggedIn, (req, res) => {
 });
 
 // POST new event
-router.post('/', checkIfLoggedIn,  async (req, res, next) => {
- const {title, description, initialDateTime, finalDateTime, location} = req.body;
- const owner = res.locals.currentUser._id;
- try {
+router.post('/', checkIfLoggedIn, async (req, res, next) => {
+  const {
+    title, description, initialDateTime, finalDateTime, location,
+  } = req.body;
+  const owner = res.locals.currentUser._id;
+  try {
     const event = await Event.create({
-        owner,
-        title,
-        description,
-        creationEventDate: Date.now(),
-        initialDateTime,
-        finalDateTime,
-        address: {location: location}
-     })
-     res.redirect('/events');
- }
-    catch (error){
-        next(error)
-    };
+      owner,
+      title,
+      description,
+      creationEventDate: Date.now(),
+      initialDateTime,
+      finalDateTime,
+      address: { location },
+    });
+    res.redirect('/events');
+  } catch (error) {
+    next(error);
+  }
 });
 
 module.exports = router;

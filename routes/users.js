@@ -1,13 +1,8 @@
-/* eslint-disable no-unused-vars */
 const express = require('express');
-
-const router = express.Router();
-
 const { checkIfLoggedIn } = require('../middlewares/auth');
-
 const User = require('../model/user');
 
-/* GET users listing. */
+const router = express.Router();
 
 router.get('/update', checkIfLoggedIn, async (req, res, next) => {
   const { _id } = req.session.currentUser;
@@ -23,13 +18,7 @@ router.get('/update', checkIfLoggedIn, async (req, res, next) => {
 router.post('/', async (req, res, next) => {
   const { _id } = req.session.currentUser;
   const {
-    email,
-    name,
-    lastName,
-    username,
-    phone,
-    mobile,
-    secondaryPhone,
+    email, name, lastName, username, phone, mobile, secondaryPhone,
   } = req.body;
   try {
     const user = await User.findByIdAndUpdate(_id, {
@@ -53,7 +42,9 @@ router.get('/profile', checkIfLoggedIn, async (req, res, next) => {
   try {
     const user = await User.findOne({ _id });
     res.render('users/profile', { user });
-  } catch (error) {}
+  } catch (error) {
+    next(error);
+  }
 });
 
 module.exports = router;

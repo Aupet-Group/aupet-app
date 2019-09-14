@@ -5,21 +5,20 @@ const Pet = require('../model/pet');
 const { Schema } = mongoose;
 const eventSchema = new Schema(
   {
-    owner: { type: Schema.Types.ObjectId, ref: User }, /* ObjectId<User> */
+    owner: { type: Schema.Types.ObjectId, ref: User },
     title: { type: String },
-    description: { type: String } ,
-    creationEventDate: { type: Date, default: Date.now()},
+    description: { type: String },
+    creationEventDate: { type: Date, default: Date.now() },
     initialDateTime: Date,
     finalDateTime: Date,
     pet: [{ type: Schema.Types.ObjectId, ref: Pet }],
     address: {
-        street: String,
-        number: Number,
-        zipcode: Number,
-        location: String,
-      },
-    keeper: { type: Schema.Types.ObjectId, ref: User }, /* [ObjectId]<User> */
-
+      street: String,
+      number: Number,
+      zipcode: Number,
+      location: String,
+    },
+    keeper: { type: Schema.Types.ObjectId, ref: User },
   },
   {
     timestamps: true,
