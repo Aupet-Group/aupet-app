@@ -2,11 +2,13 @@
 const express = require('express');
 const Event = require('../model/event');
 const Pet = require('../model/pet');
+const User = require('../model/user');
 const { checkIfLoggedIn } = require("../middlewares/auth");
 
 const router = express.Router();
 
-// GET events listing
+
+// GET all events listing
 router.get('/', (req, res, next) => {
   // todo usar async await
   Event.find({})
@@ -18,6 +20,16 @@ router.get('/', (req, res, next) => {
     });
 });
 
+// GET list user's own events
+router.get('/myevents', checkIfLoggedIn, async (req, res, next) => {
+  const owner = res.locals.currentUser._id;
+  try {
+    const events = await Event.find({owner});
+    res.render('events/events', { events });
+  } catch (error) {
+    next(error);
+  }
+});
 
 
 // GET form to create new event
@@ -53,10 +65,8 @@ router.post('/', checkIfLoggedIn,  async (req, res, next) => {
 //GET event details
 router.get('/:eventId', async (req, res, next) => {
   const { eventId } = req.params;
-  
   try {
     const event = await Event.findById(eventId).populate('pet');
-    console.log(event);
     const pets = event.pet;
     res.render('events/eventDetails', { event, pets });  
   }
