@@ -1,5 +1,3 @@
-/* eslint-disable no-console */
-/* eslint-disable no-unused-vars */
 const express = require('express');
 
 const bcrypt = require('bcrypt');
@@ -27,9 +25,10 @@ router.post('/signup', checkEmailAndPasswordNotEmpty, async (req, res, next) => 
     } else {
       const salt = bcrypt.genSaltSync(bcryptSalt);
       const hashedPassword = bcrypt.hashSync(password, salt);
-      await User.create({ email, hashedPassword });
-      req.flash('info', `user with mail ${email} created, you must log in to use the features of our page`);
-      res.redirect('/created');
+      req.session.currentUser = await User.create({ email, hashedPassword });
+      // const user2 = await User.findOne({ email });
+      // req.session.currentUser = user2;
+      res.redirect('/secret');
     }
   } catch (error) {
     req.flash('error', 'Please try again');
@@ -71,7 +70,7 @@ router.get('/secret', checkIfLoggedIn, (req, res, next) => {
 });
 
 router.get('/logout', checkIfLoggedIn, (req, res, next) => {
-  req.session.destroy((error) => {
+  req.session.destroy(error => {
     if (error) {
       next(error);
     }
