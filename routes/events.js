@@ -5,25 +5,37 @@ const { checkIfLoggedIn } = require("../middlewares/auth");
 
 const router = express.Router();
 
-/* GET events listing. */
+// GET events listing. 
 router.get('/', (req, res, next) => {
-    console.log("events dsadf")
   Event.find({})
     .then((events) => {
       res.render('events/events', { events });
     })
     .catch((error) => {
-        console.log(error)
         next(error);
     });
 });
 
-// Form to create new event
+//GET event details
+router.get('/:eventId', async (req, res, next) => {
+  const { eventId } = req.params;
+  
+  try {
+    const event = await Event.findById(eventId);
+    res.render('events/eventDetails', { event });  
+  }
+  catch (error){
+    next(error)
+};
+});
+
+
+// GET form to create new event
 router.get('/new', checkIfLoggedIn, (req, res) => {
   res.render('events/newevent');
 });
 
-
+// POST new event
 router.post('/', checkIfLoggedIn,  async (req, res, next) => {
  const {title, description, initialDateTime, finalDateTime, location} = req.body;
  const owner = res.locals.currentUser._id;
@@ -35,7 +47,7 @@ router.post('/', checkIfLoggedIn,  async (req, res, next) => {
         creationEventDate: Date.now(),
         initialDateTime,
         finalDateTime,
-        location
+        address: {location: location}
      })
      res.redirect('/events');
  }
