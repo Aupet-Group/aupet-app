@@ -62,7 +62,7 @@ router.post('/', checkIfLoggedIn,  async (req, res, next) => {
 
     });
   
-//GET event details
+// GET event details
 router.get('/:eventId', async (req, res, next) => {
   const { eventId } = req.params;
   try {
@@ -73,6 +73,28 @@ router.get('/:eventId', async (req, res, next) => {
   catch (error){
     next(error)
 };
+});
+
+//  GET form to update an event
+
+router.get('/:eventId/update', checkIfLoggedIn, (req, res, next) => {
+  const { eventId } = req.params;
+  Event.findById(eventId)
+    .then((event) => {
+      res.render('events/edit', event);
+    })
+    .catch(next);
+});
+
+router.post('/:eventId', checkIfLoggedIn, (req, res, next) => {
+  const { eventId } = req.params;
+  const {title, description, initialDateTime, finalDateTime, location} = req.body;
+  Event.findByIdAndUpdate(eventId)
+    .then((event) => {
+      console.log('event in updated', event);
+      res.redirect(`/events/${eventId}`);
+    })
+    .catch(next);
 });
 
 module.exports = router;

@@ -1,0 +1,27 @@
+<h1>Edit Event</h1>
+<form class="form" id="editEventForm" action="/events/{{_id}}" method="POST">
+    
+   <label for="title">Title</label>
+   <select name="title">
+       <option>Pet boarding</option>
+       <option>House sitting</option>
+       <option>Day care</option>
+       <option>Drop-in visit</option>
+       <option>Dog walking</option>
+   </select><br>
+        
+    <label for="description">Description</label>
+    <input type="textarea" name="description" value="{{description}}" required><br>
+
+    <label for="location">Location</label>
+    <input type="text" name="location" value="{{address.location}}" required><br>
+
+    <label for="startdate">Start date</label>
+    <input type="datetime-local" name="initialDateTime" value="{{initialDateTime}}" required><br>
+
+    <label for="enddate">End date</label>
+    <input type="datetime-local" name="finalDateTime" value="{{finalDateTime}}" required><br>
+
+    <button type="submit">UPDATE EVENT</button>
+
+</form>
