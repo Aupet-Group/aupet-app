@@ -5,9 +5,13 @@ const { checkIfLoggedIn } = require("../middlewares/auth");
 
 const Pet = require("../model/pet");
 
+// GET form to create new pet
+
 router.get("/new", checkIfLoggedIn, (req, res, next) => {
   res.render("addPet");
 });
+
+//  POST new pet
 
 router.post("/", async (req, res, next) => {
   const { petType, petWeight, petName, petAge, petImg } = req.body;
@@ -27,6 +31,21 @@ router.post("/", async (req, res, next) => {
     next(error);
   }
 });
+
+//GET pet details
+
+router.get("/:petId", async (req, res, next) => {
+  const { petId } = req.params;
+
+  try {
+    const pet = await Pet.findById(petId);
+    res.render("pets/petDetails", { pet });
+  } catch (error) {
+    next(error);
+  }
+});
+
+//
 
 router.get("/created", (req, res, next) => {
   res.render("created");
