@@ -1,18 +1,5 @@
 <h1>{{ event.title }} </h1>
 <p>{{ event.description }}</p>
-<ul>
-    {{#each pets}}
-    <li>
-      <p>{{ this.petType }} <p/> 
-      <p>{{ this.petName }}</p> 
-      <p>{{ this.petAge }} </p> 
-      <p>{{ this.petWeight }} </p>
-      
-    </li>
-    {{/each}}
-</ul>
-<p>{{ event.address.location }}</p>
-<p>{{ event.initialDateTime }} </p>
-<p>{{ event.finalDateTime }} </p>
+<p>{{ event.address.location }}</p> <p>{{ event.initialDateTime }} </p> <p>{{ event.finalDateTime }} </p>
 <button class="enroll"><a href="/">Enroll</button>
 <a href="/events">All events</a>
