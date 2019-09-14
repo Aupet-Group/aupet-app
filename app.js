@@ -25,6 +25,7 @@ mongoose.connect(process.env.MONGODB_URI, {
   keepAlive: true,
   useNewUrlParser: true,
   reconnectTries: Number.MAX_VALUE,
+  useCreateIndex: true,
 });
 
 app.use(
