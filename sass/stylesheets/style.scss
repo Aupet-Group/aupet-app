@@ -63,8 +63,8 @@ body {
     }
   }
 
-  #container {
-    width: 100%;
+  .container {
+    // max-width: 300px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -85,8 +85,11 @@ body {
   }
 
   #event-finder {
+    width: 100%;
     border-top: 1px solid #000000;
-    position: relative;
+    background-image: url("../images/top_img.jpg");
+    background-size: cover ;
+    background-repeat: no-repeat;
   }
 
   .div-form {
@@ -97,189 +100,189 @@ body {
     justify-content: center;
     justify-items: center;
     justify-items: start;
-    position: absolute;
-    left: 0;
-    top: 0;
+    // position: absolute;
+    // left: 0;
+    // top: 0;
   }
 
-  .image-wrapper-event {
-    width: 100%;
-    img {
-      width: 100%;
-    }
+  // .image-wrapper-event {
+  //   width: 100%;
+  //   img {
+  //     width: 100%;
+  //   }
+}
+
+.title-wrapper {
+  width: 100%;
+  margin: 55% auto 0 auto;
+
+  h2 {
+    padding: 0 18%;
+    text-align: left;
+    font-size: 24px;
   }
+}
 
-  .title-wrapper {
-    width: 100%;
-    margin: 50% auto 0 auto;
+#findkeeper {
+  margin: 0 auto;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 
-    h2 {
-      padding: 0 18%;
-      text-align: left;
-      font-size: 24px;
-    }
-  }
-
-  #findkeeper {
-    margin: 0 auto;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-
-    input {
-      border-radius: 25px;
-      border: 1px solid #000000;
-      margin: 5% 20%;
-      background: #dbe6f1;
-      padding: 1%;
-    }
-
-    button {
-      border-radius: 15px;
-      border: none;
-      padding: 4%;
-      background: #5592c3;
-      margin: 0 auto 0 auto;
-      color: white;
-    }
-  }
-  #services {
-    .title-wrapper-services {
-      width: 100%;
-      margin: 0 auto 0 auto;
-      h2 {
-        margin: 4%;
-        text-align: center;
-      }
-    }
-
-    .list-services {
-      width: 100%;
-      margin: 8%;
-      .text-service {
-        width: 100%;
-        h4 {
-          margin: 0 auto;
-          font-size: 0.65em;
-          font-weight: lighter;
-        }
-        p {
-          font-size: 0.4em;
-          margin-bottom: 8%;
-        }
-      }
-    }
-  }
-  .icon {
-    width: 5%;
-    margin-right: 5%;
-    margin-bottom: 4%;
-  }
-
-  .list-services-wrapper {
-    display: flex;
-    flex-direction: row;
-  }
-
-  #how-it-works {
-    background: #5592c3;
-    color: #ffffff;
-    h2 {
-      font-size: 1.2rem;
-      color: #ffffff;
-      margin: 10% 0 7% 0;
-    }
-    p {
-      text-align: left;
-      font-size: 1rem;
-    }
-
-    .offer {
-      width: 100%;
-      margin: 5% auto;
-    }
-  }
-
-  .offer-text-wrapper {
-    display: flex;
-    flex-direction: row;
-    justify-content: start;
-  }
-
-  .number-hiw {
+  input {
+    border-radius: 25px;
     border: 1px solid #000000;
-    border-radius: 50%;
-    text-align: center;
-    color: #000000;
-    background: #ffffff;
-    margin: 0% 2% 15% 2%;
-    padding: 1% 3%;
-    font-weight: bold;
-    font-size: 50%;
+    margin: 5% 20%;
+    background: #dbe6f1;
+    padding: 1%;
   }
 
-  #testimonials {
-    background: linear-gradient(#5592c3, #ffffff);
-    margin-bottom: 5%;
-    h2 {
-      color: white;
-    }
-    p {
-      padding: 0 10%;
-      margin: 5% auto;
-      text-align: center;
-    }
-  }
-
-  #joinus {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    justify-items: start;
-    img {
-      width: 100%;
-    }
-    h2 {
-      text-align: center;
-      margin-bottom: 5%;
-    }
-  }
-
-  h4 {
-    color: #5592c3;
-  }
-
-  #footer {
-    width: 100%;
-
+  button {
+    border-radius: 15px;
+    border: none;
+    padding: 4%;
     background: #5592c3;
-    display: flex;
-    flex-direction: row;
+    margin: 0 auto 50% auto;
+    color: white;
+  }
+}
+#services {
+  .title-wrapper-services {
+    width: 100%;
+    margin: 0 auto 0 auto;
+    h2 {
+      margin: 4%;
+      text-align: center;
+    }
   }
 
-  .icon {
-    width: 6%;
-    margin-top: 4%;
+  .list-services {
+    width: 100%;
+    margin: 8%;
+    .text-service {
+      width: 100%;
+      h3 {
+        margin: 0 auto;
+        font-size: 0.65em;
+        font-weight: lighter;
+      }
+      p {
+        font-size: 0.4em;
+        margin-bottom: 8%;
+      }
+    }
   }
+}
+.icon {
+  width: 5%;
+  margin-right: 5%;
+  margin-bottom: 4%;
+}
 
-  a,
-  a:visited {
-    display: inline-block;
+.list-services-wrapper {
+  display: flex;
+  flex-direction: row;
+}
+
+#how-it-works {
+  background: #5592c3;
+  color: #ffffff;
+  h2 {
+    font-size: 1.2rem;
     color: #ffffff;
-    text-decoration: none;
-    font-size: 50%;
-    line-height: 50%;
+    margin: 10% 0 7% 0;
+  }
+  p {
+    text-align: left;
+    font-size: 1rem;
   }
 
-  .images-contact {
-    margin-left: 5%;
+  .offer {
+    width: 100%;
+    margin: 5% auto;
   }
+}
 
-  .contact {
-    margin-right: 5%;
+.offer-text-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+}
+
+.number-hiw {
+  border: 1px solid #000000;
+  border-radius: 50%;
+  text-align: center;
+  color: #000000;
+  background: #ffffff;
+  margin: 0% 2% 15% 2%;
+  padding: 1% 3%;
+  font-weight: bold;
+  font-size: 50%;
+}
+
+#testimonials {
+  background: linear-gradient(#5592c3, #ffffff);
+  margin-bottom: 5%;
+  h2 {
+    color: white;
   }
+  p {
+    padding: 0 10%;
+    margin: 5% auto;
+    text-align: center;
+  }
+}
+
+#joinus {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  justify-items: start;
+  img {
+    width: 100%;
+  }
+  h2 {
+    text-align: center;
+    margin-bottom: 5%;
+  }
+}
+
+h3 {
+  color: #5592c3;
+  font-size:1.4rem;
+}
+
+#footer {
+  width: 100%;
+
+  background: #5592c3;
+  display: flex;
+  flex-direction: row;
+}
+
+.icon {
+  width: 6%;
+  margin-top: 4%;
+}
+
+a,
+a:visited {
+  display: inline-block;
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 50%;
+  line-height: 50%;
+}
+
+.images-contact {
+  margin-left: 5%;
+}
+
+.contact {
+  margin-right: 5%;
 }
 
 .button {

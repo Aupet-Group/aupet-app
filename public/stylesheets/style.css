@@ -49,8 +49,7 @@ body {
   font-size: 25px;
   text-align: center; }
 
-.home #container {
-  width: 100%;
+.home .container {
   display: flex;
   flex-direction: column;
   justify-content: center; }
@@ -66,8 +65,11 @@ body {
       width: 50%; }
 
 .home #event-finder {
+  width: 100%;
   border-top: 1px solid #000000;
-  position: relative; }
+  background-image: url("../images/top_img.jpg");
+  background-size: cover;
+  background-repeat: no-repeat; }
 
 .home .div-form {
   width: 100%;
@@ -76,93 +78,85 @@ body {
   flex-direction: column;
   justify-content: center;
   justify-items: center;
-  justify-items: start;
-  position: absolute;
-  left: 0;
-  top: 0; }
+  justify-items: start; }
 
-.home .image-wrapper-event {
-  width: 100%; }
-  .home .image-wrapper-event img {
-    width: 100%; }
-
-.home .title-wrapper {
+.title-wrapper {
   width: 100%;
-  margin: 50% auto 0 auto; }
-  .home .title-wrapper h2 {
+  margin: 55% auto 0 auto; }
+  .title-wrapper h2 {
     padding: 0 18%;
     text-align: left;
     font-size: 24px; }
 
-.home #findkeeper {
+#findkeeper {
   margin: 0 auto;
   width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center; }
-  .home #findkeeper input {
+  #findkeeper input {
     border-radius: 25px;
     border: 1px solid #000000;
     margin: 5% 20%;
     background: #dbe6f1;
     padding: 1%; }
-  .home #findkeeper button {
+  #findkeeper button {
     border-radius: 15px;
     border: none;
     padding: 4%;
     background: #5592c3;
-    margin: 0 auto 0 auto;
+    margin: 0 auto 50% auto;
     color: white; }
 
-.home #services .title-wrapper-services {
+#services .title-wrapper-services {
   width: 100%;
   margin: 0 auto 0 auto; }
-  .home #services .title-wrapper-services h2 {
+  #services .title-wrapper-services h2 {
     margin: 4%;
     text-align: center; }
 
-.home #services .list-services {
+#services .list-services {
   width: 100%;
   margin: 8%; }
-  .home #services .list-services .text-service {
+  #services .list-services .text-service {
     width: 100%; }
-    .home #services .list-services .text-service h4 {
+    #services .list-services .text-service h3 {
       margin: 0 auto;
       font-size: 0.65em;
       font-weight: lighter; }
-    .home #services .list-services .text-service p {
+    #services .list-services .text-service p {
       font-size: 0.4em;
       margin-bottom: 8%; }
 
-.home .icon {
+.icon {
   width: 5%;
   margin-right: 5%;
   margin-bottom: 4%; }
 
-.home .list-services-wrapper {
+.list-services-wrapper {
   display: flex;
   flex-direction: row; }
 
-.home #how-it-works {
+#how-it-works {
   background: #5592c3;
   color: #ffffff; }
-  .home #how-it-works h2 {
+  #how-it-works h2 {
     font-size: 1.2rem;
     color: #ffffff;
     margin: 10% 0 7% 0; }
-  .home #how-it-works p {
+  #how-it-works p {
     text-align: left;
     font-size: 1rem; }
-  .home #how-it-works .offer {
+  #how-it-works .offer {
     width: 100%;
     margin: 5% auto; }
 
-.home .offer-text-wrapper {
+.offer-text-wrapper {
   display: flex;
   flex-direction: row;
   justify-content: start; }
 
-.home .number-hiw {
+.number-hiw {
   border: 1px solid #000000;
   border-radius: 50%;
   text-align: center;
@@ -173,53 +167,54 @@ body {
   font-weight: bold;
   font-size: 50%; }
 
-.home #testimonials {
+#testimonials {
   background: linear-gradient(#5592c3, #ffffff);
   margin-bottom: 5%; }
-  .home #testimonials h2 {
+  #testimonials h2 {
     color: white; }
-  .home #testimonials p {
+  #testimonials p {
     padding: 0 10%;
     margin: 5% auto;
     text-align: center; }
 
-.home #joinus {
+#joinus {
   width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   justify-items: start; }
-  .home #joinus img {
+  #joinus img {
     width: 100%; }
-  .home #joinus h2 {
+  #joinus h2 {
     text-align: center;
     margin-bottom: 5%; }
 
-.home h4 {
-  color: #5592c3; }
+h3 {
+  color: #5592c3;
+  font-size: 1.3rem; }
 
-.home #footer {
+#footer {
   width: 100%;
   background: #5592c3;
   display: flex;
   flex-direction: row; }
 
-.home .icon {
+.icon {
   width: 6%;
   margin-top: 4%; }
 
-.home a,
-.home a:visited {
+a,
+a:visited {
   display: inline-block;
   color: #ffffff;
   text-decoration: none;
   font-size: 50%;
   line-height: 50%; }
 
-.home .images-contact {
+.images-contact {
   margin-left: 5%; }
 
-.home .contact {
+.contact {
   margin-right: 5%; }
 
 .button {
