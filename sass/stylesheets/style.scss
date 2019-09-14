@@ -157,17 +157,17 @@ body {
     .list-services {
       width: 100%;
       margin: 8%;
-      .text-service{
-        width:100%;
-          h4 {
-    margin: 0 auto;
-    font-size: 0.65em;
-    font-weight: lighter;
-  }
-  p {
-    font-size: 0.4em;
-    margin-bottom: 8%;
-  }
+      .text-service {
+        width: 100%;
+        h4 {
+          margin: 0 auto;
+          font-size: 0.65em;
+          font-weight: lighter;
+        }
+        p {
+          font-size: 0.4em;
+          margin-bottom: 8%;
+        }
       }
     }
   }
@@ -181,8 +181,6 @@ body {
     display: flex;
     flex-direction: row;
   }
-
-
 
   #how-it-works {
     background: #5592c3;
@@ -228,7 +226,7 @@ body {
       color: white;
     }
     p {
-      padding:0 10%;
+      padding: 0 10%;
       margin: 5% auto;
       text-align: center;
     }
@@ -253,7 +251,6 @@ body {
     color: #5592c3;
   }
 
- 
   #footer {
     width: 100%;
 
@@ -285,7 +282,6 @@ body {
   }
 }
 
-
 .button {
   border-radius: 15px;
   border: none;
@@ -299,13 +295,12 @@ body {
     text-align: center;
   }
 }
-
-img {
-  display: block;
-  margin: auto;
+.error-500-404 {
+  img {
+    display: block;
+    margin: auto;
+  }
 }
-
 #error500 {
   height: 400px;
-
 }
