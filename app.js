@@ -9,6 +9,7 @@ const mongoose = require('mongoose');
 const MongoStore = require('connect-mongo')(session);
 const flash = require('connect-flash');
 const { notifications } = require('./middlewares/auth.js');
+require('dotenv').config();
 
 hbs.registerPartials(path.join(__dirname, '/views/partials'));
 
@@ -20,7 +21,7 @@ const petsRouter = require('./routes/pets');
 
 const app = express();
 
-mongoose.connect('mongodb://localhost/aupetDatabase', {
+mongoose.connect(process.env.MONGODB_URI, {
   keepAlive: true,
   useNewUrlParser: true,
   reconnectTries: Number.MAX_VALUE,
@@ -51,7 +52,7 @@ app.use(
       mongooseConnection: mongoose.connection,
       ttl: 24 * 60 * 60, // 1 day
     }),
-    secret: 'ironhack',
+    secret: process.env.SECRET,
     resave: true,
     saveUninitialized: true,
     cookie: {
