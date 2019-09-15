@@ -14,5 +14,10 @@
 <p>{{ event.address.location }}</p>
 <p>{{ event.initialDateTime }} </p>
 <p>{{ event.finalDateTime }} </p>
+<p>{{ event.owner }}</p>
+<p>{{ currentUser._id }}</p>
 <button class="enroll"><a href="/">Enroll</button>
-<a href="/events">All events</a>
+<button class="edit"><a href="/events/{{event._id}}/update">Edit</button><br>
+
+<button class="events"><a href="/events">All events</button>
+

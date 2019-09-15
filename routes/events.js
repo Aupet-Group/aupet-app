@@ -9,16 +9,15 @@ const router = express.Router();
 
 
 // GET all events listing
-router.get('/', (req, res, next) => {
-  // todo usar async await
-  Event.find({})
-    .then((events) => {
-      res.render('events/events', { events });
-    })
-    .catch((error) => {
-      next(error);
-    });
+router.get('/', async (req, res, next) => {
+  try {
+    const events = await Event.find({});
+    res.render('events/events', { events });
+  } catch (error) {
+    next(error);
+  }
 });
+
 
 // GET list user's own events
 router.get('/myevents', checkIfLoggedIn, async (req, res, next) => {
@@ -43,7 +42,7 @@ router.post('/', checkIfLoggedIn,  async (req, res, next) => {
   const {title, description, initialDateTime, finalDateTime, location} = req.body;
   const owner = res.locals.currentUser._id;
   try {
-     const pet = await Pet.find({ owner })
+     const pet = await Pet.find({ owner });
      const event = await Event.create({
          owner,
          title,
@@ -62,13 +61,54 @@ router.post('/', checkIfLoggedIn,  async (req, res, next) => {
 
     });
   
-//GET event details
+// GET event details
 router.get('/:eventId', async (req, res, next) => {
   const { eventId } = req.params;
   try {
     const event = await Event.findById(eventId).populate('pet');
     const pets = event.pet;
     res.render('events/eventDetails', { event, pets });  
+  }
+  catch (error){
+    next(error)
+};
+});
+
+// GET form to update an event
+router.get('/:eventId/update', checkIfLoggedIn, async (req, res, next) => {
+  const owner = res.locals.currentUser._id;
+  const { eventId } = req.params;
+  try {
+    const event = await Event.findById(eventId);
+    if (owner == event.owner) {
+      res.render('events/edit', event);
+    } else {
+      res.redirect('/events');
+    }
+  }
+    catch (error){
+    next(error)
+};
+});
+
+// POST event update
+router.post('/:eventId', checkIfLoggedIn, async (req, res, next) => {
+  const { eventId } = req.params;
+  const owner = res.locals.currentUser._id;
+  const {title, description, initialDateTime, finalDateTime, location} = req.body;
+  try {
+    const pet = await Pet.find({ owner });
+    const event = await Event.findByIdAndUpdate(eventId, {
+      owner,
+      title,
+      description,
+      creationEventDate: Date.now(),
+      initialDateTime,
+      finalDateTime,
+      address: {location: location},
+      pet
+   });
+    res.redirect(`/events/${eventId}`);
   }
   catch (error){
     next(error)
