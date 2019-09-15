@@ -8,9 +8,9 @@ const userSchema = new Schema(
     name: { type: String },
     lastName: { type: String },
     username: { type: String },
-    phone: Number,
-    mobile: Number,
-    secondaryPhone: Number,
+    phone: { type: String },
+    mobile: { type: String },
+    secondaryPhone: { type: String },
     address: [
       {
         street: { type: String },
