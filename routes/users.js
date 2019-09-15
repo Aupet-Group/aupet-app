@@ -4,7 +4,7 @@ const User = require('../model/user');
 
 const router = express.Router();
 
-router.get('/update', checkIfLoggedIn, async (req, res, next) => {
+router.get('/profile/update', checkIfLoggedIn, async (req, res, next) => {
   const { _id } = req.session.currentUser;
   try {
     const user = await User.findOne({ _id });
