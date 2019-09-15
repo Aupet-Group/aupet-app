@@ -56,7 +56,7 @@ router.post('/', checkIfLoggedIn,  async (req, res, next) => {
       res.redirect('/events');
   }
      catch (error){
-         next(error)
+         next(error);
      };
 
     });
@@ -70,24 +70,24 @@ router.get('/:eventId', async (req, res, next) => {
     res.render('events/eventDetails', { event, pets });  
   }
   catch (error){
-    next(error)
+    next(error);
 };
 });
 
 // GET form to update an event
 router.get('/:eventId/update', checkIfLoggedIn, async (req, res, next) => {
-  const owner = res.locals.currentUser._id;
+  const userId = res.locals.currentUser._id;
   const { eventId } = req.params;
   try {
     const event = await Event.findById(eventId);
-    if (owner == event.owner) {
+    if (userId == event.owner) {
       res.render('events/edit', event);
     } else {
       res.redirect('/events');
     }
   }
     catch (error){
-    next(error)
+    next(error);
 };
 });
 
@@ -102,7 +102,6 @@ router.post('/:eventId', checkIfLoggedIn, async (req, res, next) => {
       owner,
       title,
       description,
-      creationEventDate: Date.now(),
       initialDateTime,
       finalDateTime,
       address: {location: location},
@@ -111,8 +110,29 @@ router.post('/:eventId', checkIfLoggedIn, async (req, res, next) => {
     res.redirect(`/events/${eventId}`);
   }
   catch (error){
-    next(error)
+    next(error);
 };
 });
 
+// POST delete event
+router.post('/:eventId/delete', checkIfLoggedIn, async (req, res, next) => {
+  const { eventId } = req.params;
+  const userId = res.locals.currentUser._id;
+  const event = await Event.findById(eventId);
+  if (userId == event.owner) {
+    try {
+      const delEvent = await Event.findByIdAndDelete(eventId);
+      res.redirect('/events');
+      } 
+    catch (error){
+        next(error);
+    };
+    } else {
+      res.redirect('/events');
+    }  
+});
+
+
 module.exports = router;
+
+
