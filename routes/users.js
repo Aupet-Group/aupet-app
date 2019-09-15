@@ -4,6 +4,16 @@ const User = require('../model/user');
 
 const router = express.Router();
 
+router.get('/profile', checkIfLoggedIn, async (req, res, next) => {
+  const { _id } = req.session.currentUser;
+  try {
+    const user = await User.findOne({ _id });
+    res.render('users/profile', { user });
+  } catch (error) {
+    next(error);
+  }
+});
+
 router.get('/profile/update', checkIfLoggedIn, async (req, res, next) => {
   const { _id } = req.session.currentUser;
   try {
@@ -17,9 +27,7 @@ router.get('/profile/update', checkIfLoggedIn, async (req, res, next) => {
 
 router.post('/', async (req, res, next) => {
   const { _id } = req.session.currentUser;
-  const {
-    email, name, lastName, username, phone, mobile, secondaryPhone,
-  } = req.body;
+  const { email, name, lastName, username, phone, mobile, secondaryPhone } = req.body;
   try {
     const user = await User.findByIdAndUpdate(_id, {
       email,
@@ -30,18 +38,8 @@ router.post('/', async (req, res, next) => {
       mobile,
       secondaryPhone,
     });
-    console.log(user);
-    res.redirect('users/profile');
-  } catch (error) {
-    next(error);
-  }
-});
-
-router.get('/profile', checkIfLoggedIn, async (req, res, next) => {
-  const { _id } = req.session.currentUser;
-  try {
-    const user = await User.findOne({ _id });
-    res.render('users/profile', { user });
+    req.session.currentUser = user;
+    res.redirect('/profile');
   } catch (error) {
     next(error);
   }
