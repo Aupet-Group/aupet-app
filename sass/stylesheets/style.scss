@@ -1,11 +1,11 @@
-@import url("https://fonts.googleapis.com/css?family=Source+Sans+Pro&display=swap");
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro&display=swap');
 
 * {
   margin: 0;
   padding: 0;
 }
 body {
-  font: 28px "Source Sans Pro", sans-serif;
+  font: 28px 'Source Sans Pro', sans-serif;
   box-sizing: border-box;
 }
 
@@ -87,8 +87,8 @@ body {
   #event-finder {
     width: 100%;
     border-top: 1px solid #000000;
-    background-image: url("../images/top_img.jpg");
-    background-size: cover ;
+    background-image: url('../images/top_img.jpg');
+    background-size: cover;
     background-repeat: no-repeat;
   }
 
@@ -252,7 +252,7 @@ body {
 
 h3 {
   color: #5592c3;
-  font-size:1.4rem;
+  font-size: 1.4rem;
 }
 
 #footer {
@@ -285,19 +285,6 @@ a:visited {
   margin-right: 5%;
 }
 
-.button {
-  border-radius: 15px;
-  border: none;
-  padding: 3%;
-  background: #5592c3;
-  margin: 1% 30% 1% 30%;
-  a {
-    display: block;
-    color: white;
-    text-decoration: none;
-    text-align: center;
-  }
-}
 .error-500-404 {
   img {
     display: block;
@@ -306,4 +293,21 @@ a:visited {
 }
 #error500 {
   height: 400px;
+}
+
+.button {
+  border-radius: 15px;
+  border: none;
+  background: #5592c3;
+  margin: 1% 30% 1% 30%;
+  text-align: center;
+  font-size: 3rem;
+  a,
+  a:visited {
+    padding: 10%;
+    display: block;
+    color: white;
+    text-decoration: none;
+    text-align: center;
+  }
 }
