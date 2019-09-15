@@ -74,7 +74,7 @@ app.use(notifications(app));
 
 // Routes
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/', usersRouter);
 app.use('/', authRouter);
 app.use('/pets', petsRouter);
 app.use('/events', eventRouter);
