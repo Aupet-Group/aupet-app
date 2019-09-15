@@ -1,0 +1,23 @@
+<h1>Edit pet:</h1>
+<form id="form" action="/pets/{{_id}}" method="POST">
+
+    <label for="petType">TYPE</label>
+    <input type="text" name="petType" value="{{petType}}">
+
+    <label for="petWeight">WEIGHT</label>
+    <input type="number" name="petWeight" value="{{petWeight}}">
+
+    <label for="petAge">AGE</label>
+    <input type="number" name="petAge" value="{{petAge}}">
+
+    <label for="petName">NAME</label>
+    <input type="text" name="petName" value="{{petName}}">
+
+
+    <button type="submit">UPDATE</button>
+
+</form>
+
+
+
+<a href="/pets">All my pets</a>

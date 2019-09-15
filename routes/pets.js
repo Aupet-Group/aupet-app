@@ -47,8 +47,36 @@ router.get('/:petId', async (req, res, next) => {
   }
 });
 
-//
+// Get form to Edit Pet
+router.get('/:petId/update', checkIfLoggedIn, (req, res, next) => {
+  const { petId } = req.params;
+  Pet.findById(petId)
+    .then(pet => {
+      res.render('pets/editPet', pet);
+    })
+    .catch(next);
+});
 
+// Post update Pet
+
+router.post('/:petId', checkIfLoggedIn, async (req, res, next) => {
+  const { petId } = req.params;
+  const pet = Pet.findById(petId);
+  const { petType, petWeight, petAge, petName } = req.body;
+  try {
+    await Pet.findByIdAndUpdate(petId, {
+      petType,
+      petWeight,
+      petAge,
+      petName,
+    });
+    res.redirect(`/pets/${petId}`);
+  } catch (error) {
+    next(error);
+  }
+});
+
+//
 router.get('/created', (req, res, next) => {
   res.render('created');
 });
