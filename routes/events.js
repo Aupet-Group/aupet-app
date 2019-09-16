@@ -118,21 +118,21 @@ router.post('/:eventId', checkIfLoggedIn, async (req, res, next) => {
 router.post('/:eventId/delete', checkIfLoggedIn, async (req, res, next) => {
   const { eventId } = req.params;
   const userId = res.locals.currentUser._id;
-  const event = await Event.findById(eventId);
-  if (userId == event.owner) {
-    try {
+  try {
+    const event = await Event.findById(eventId);
+    if (userId == event.owner) {
       const delEvent = await Event.findByIdAndDelete(eventId);
       res.redirect('/events');
-      } 
-    catch (error){
-        next(error);
-    };
     } else {
       res.redirect('/events');
-    }  
+    }
+  }
+    catch (error){
+    next(error);
+};
 });
-
-
+  
+ 
 module.exports = router;
 
 
