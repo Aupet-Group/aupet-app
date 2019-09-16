@@ -131,6 +131,50 @@ router.post('/:eventId/delete', checkIfLoggedIn, async (req, res, next) => {
     next(error);
 };
 });
+
+
+// GET enroll in an event
+router.get('/:eventId/enroll', checkIfLoggedIn, async (req, res, next) => {
+  const { eventId } = req.params;
+  const userId = res.locals.currentUser._id;
+  try {
+    const user = await User.findById(userId);
+    const event = await Event.findById(eventId).populate('owner candidates keeper');
+
+    if (user._id.equals(event.owner._id)) {
+      req.flash('error', "The owner can't enroll in his/her own event.");
+    } else {
+
+      let enrolled = false;
+      let allocated = false;
+
+      if (event.keeper) {
+         allocated = true;
+        };
+      event.candidates.forEach((candidate) => {
+        if (candidate.email == user.email) {
+         enrolled = true;
+        }
+        });        
+      if (!allocated) {
+        if (!enrolled) {
+          
+          // Add user to candidates array
+          event = await Event.findByIdAndUpdate(eventId, { $push: { candidates: [userId] } }, { new: true });
+          req.flash('success', "You've just been enrolled. Wait to be accepted by the owner.");
+        }
+        else {
+          req.flash('error', "You are already enrolled. Wait to be accepted by the owner.");
+        }        
+      } else {
+        req.flash('error', "Sorry. The task is already allocated to other keeper. Try with another task.");
+      }
+    }
+    res.redirect(`/events/${eventId}`);
+  } catch (error) {
+    next(error);
+  }
+});
   
  
 module.exports = router;

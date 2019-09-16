@@ -20,6 +20,7 @@ const userSchema = new Schema(
       },
     ],
     img: { type: String },
+    events: [{  type: Schema.Types.ObjectId, ref: 'Event' }],
   },
 
   {
