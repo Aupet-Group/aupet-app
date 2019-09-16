@@ -17,7 +17,9 @@
 <p>{{ event.owner }}</p>
 <p>{{ currentUser._id }}</p>
 <button class="enroll"><a href="/">Enroll</button>
-<button class="edit"><a href="/events/{{event._id}}/update">Edit</button><br>
-
+<button class="edit"><a href="/events/{{event._id}}/update">Edit</button>
+<form action="/events/{{event._id}}/delete" method="POST">
+  <input type="submit" value="Delete">
+</form>
 <button class="events"><a href="/events">All events</button>
 
