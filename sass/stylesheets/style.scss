@@ -7,31 +7,6 @@
 //     font-size: 1.8rem;
 //   }
 
-//   .errorMessages {
-//     color: red;
-//     font-weight: bolder;
-//   }
-
-//   .warningMessages {
-//     color: green;
-//   }
-
-//   .infoMessages .currentUser {
-//     color: black;
-//   }
-
-//   .currentUser {
-//     font-weight: bolder;
-//   }
-
-//   .successMessages {
-//     color: navy;
-//   }
-
-//   .dangerMessages {
-//     color: violet;
-//   }
-
 //   .notfound {
 //     color: #5592c3;
 //     font-size: 100px;
@@ -306,6 +281,31 @@ body {
   box-sizing: border-box;
 }
 
+.errorMessages {
+  color: red;
+  font-weight: bolder;
+}
+
+.warningMessages {
+  color: green;
+}
+
+.infoMessages .currentUser {
+  color: black;
+}
+
+.currentUser {
+  font-weight: bolder;
+}
+
+.successMessages {
+  color: navy;
+}
+
+.dangerMessages {
+  color: violet;
+}
+
 .home-container {
   display: flex;
   flex-direction: column;
@@ -333,14 +333,46 @@ body {
 }
 
 .home-event-finder {
-  width:100%;
+  width: 100%;
   background-image: url('../images/top_img.jpg');
-  background-size:cover;
-  background-repeat:no-repeat; 
+  background-size: cover;
+  background-repeat: no-repeat;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
-h2{
-  margin:55% 20% 55% 20%;
-  color:red;
-  text-align:left;
-  font-size:4.5rem;
+
+h2 {
+  margin: 52% 17% 2% 17%;
+  color: red;
+  text-align: left;
+  font-size: 2rem;
+  font-weight: lighter;
+}
+.home-form-findkeeper {
+  width: 100%;
+  margin-bottom:50%;
+}
+
+.home-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  
+  input {
+    border:1px solid #000000;
+    border-radius:30px;
+    margin
+  }
+}
+
+button{
+  border:none;
+  background-color:#5592C3;
+  border: 1px solid #5592C3;
+  border-radius:30px;
+  padding:10%;
+  color:white;
+  font-size:1.5rem;
+  margin: 10% 30%;
 }
