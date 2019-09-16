@@ -288,11 +288,16 @@ h2 {
 }
 
 h3 {
-  text-align:center;
-  font-size: 0.65em;
+  text-align: center;
+  font-size: 1.5rem;
   font-weight: lighter;
 }
 
+p {
+  text-align: left;
+  font-size: 1rem;
+  font-weight: lighter;
+}
 .errorMessages {
   color: red;
   font-weight: bolder;
@@ -331,7 +336,7 @@ h3 {
   padding: 1rem 3rem;
   border-bottom: 1px solid #000000;
   .home-logo {
-    width: 25%;
+    width: 50%;
     img {
       width: 100%;
     }
@@ -385,24 +390,143 @@ button {
   margin: 3% 30%;
 }
 .home-services {
-  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 4%;
 }
 
 .home-title-services {
-  margin: 5% 20% 2% 20%;
   h2 {
     text-align: center;
   }
-}
-
-.home-service{
-  width:100%;
+  margin-bottom: 2%;
 }
 
 .home-list-services {
   width: 100%;
-  margin: 2%;
+
   .text-service {
     width: 100%;
   }
+}
+.home-list-services-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 2%;
+}
+
+.home-icon {
+  width: 8%;
+
+  img {
+    width: 100%;
+  }
+}
+
+.home-text-service {
+  width: 100%;
+  padding-left: 4%;
+  margin-bottom: 5%;
+  h3 {
+    text-align: left;
+    color: #5592c3;
+  }
+}
+
+.home-how-does-it-works {
+  width: 100%;
+  background-color: #5592c3;
+  p {
+    color: #ffffff;
+  }
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.home-hiw-title {
+  text-align: center;
+  margin-top: 2%;
+  h2 {
+    color: white;
+  }
+}
+
+.home-offer-text-wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  p {
+    padding: 4%;
+    font-size: 1.1rem;
+    font-weight: lighter;
+  }
+}
+.home-number-hiw {
+  border: 1px solid #000000;
+  background-color: #ffffff;
+  border-radius: 50%;
+  margin: 5% 3% 5% 5%;
+  padding: 1% 2%;
+  font-size: 1rem;
+  text-align: center;
+}
+
+.home-testimonials {
+  background: linear-gradient(#5592c3, #ffffff);
+}
+
+.home-testimonial-title {
+  h2 {
+    color: #ffffff;
+    text-align: center;
+    margin: 2% 0 4% 0;
+  }
+}
+
+.testimonials-text {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  margin: 0 10%;
+  p {
+    text-align: center;
+    margin: 3% auto;
+  }
+}
+
+.home-joinus {
+  width: 100%;
+
+  h2 {
+    margin-top: 8%;
+    text-align: center;
+  }
+
+  .home-button {
+    display: block;
+    background: #5592c3;
+    margin: 4% 35%;
+    border-radius: 15px;
+    border: none;
+    a,
+    a:visited {
+      padding: 8% 8%;
+      display: block;
+      text-align: center;
+      text-decoration: none;
+      color: white;
+      font-size: 1.2rem;
+      border-radius: 15px;
+    }
+  }
+  .home-joinus-background{
+    background-size:co
+    background-image:url('../images/buttom_img.png');
+  }
+
 }
