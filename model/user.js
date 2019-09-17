@@ -21,7 +21,7 @@ const userSchema = new Schema(
     ],
     img: { type: String },
     events: [{ type: Schema.Types.ObjectId, ref: 'Event' }],
-    owner: { type: Boolean, delfault: false },
+    owner: { type: Boolean, default: false },
     keeper: { type: Boolean, default: false },
   },
 
