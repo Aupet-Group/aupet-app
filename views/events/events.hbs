@@ -1,13 +1,17 @@
 <h1>EVENTS</h1>
 
 <button class="event"><a href="/events/new">Add an event</button>
-  <ul>
-    {{#each events}}
-    <li>
-      <a href="/events/{{this._id}}">{{ this.title }} </a> <p>{{ this.address.location }}</p> <p>{{ this.initialDateTime }} </p> <p>{{ this.finalDateTime }} </p>
-      <button class="enroll"><a href="/events/{{this._id}}/enroll">Enroll</button><button class="details"><a href="/events/{{this._id}}">Details</button>
-    
-    </li>
-    {{/each}}
-  </ul>
-  <a class="button" href="/profile">Back to profile</a>
+<ul>
+  {{#each events}}
+  <li>
+    <a href="/events/{{this._id}}">{{ this.title }} </a>
+    <p>{{ this.address.location }}</p>
+    <p>{{ this.initialDateTime }} </p>
+    <p>{{ this.finalDateTime }} </p>
+    <button class="enroll"><a href="/events/{{this._id}}/enroll">Enroll</button><button class="details"><a
+        href="/events/{{this._id}}">Details</button>
+
+  </li>
+  {{/each}}
+</ul>
+<a class="button" href="/profile">Back to profile</a>
