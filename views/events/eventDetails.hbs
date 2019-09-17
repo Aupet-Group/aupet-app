@@ -1,6 +1,6 @@
 <h1>{{ event.title }} </h1>
 <p>{{ event.description }}</p>
-<ul>
+<ul><p>Pets:</p>
    {{#each pets}}
    <li>
      <p>{{ this.petType }} <p/>
@@ -11,15 +11,24 @@
    </li>
    {{/each}}
 </ul>
-<p>{{ event.address.location }}</p>
-<p>{{ event.initialDateTime }} </p>
-<p>{{ event.finalDateTime }} </p>
-<p>{{ event.owner }}</p>
-<p>{{ currentUser._id }}</p>
+<p>Location: {{ event.address.location }}</p>
+<p>Starts: {{ event.initialDateTime }} </p>
+<p>Ends: {{ event.finalDateTime }} </p>
+<p>Owner: {{ event.owner.name }}</p>
 <button class="enroll"><a href="/events/{{event._id}}/enroll">Enroll</button>
 <button class="edit"><a href="/events/{{event._id}}/update">Edit</button>
 <form action="/events/{{event._id}}/delete" method="POST">
   <input type="submit" value="Delete">
 </form>
-<button class="events"><a href="/events">All events</button>
 
+{{#if candidates}}
+<ul><p>Candidates:</p>
+   {{#each candidates}}
+   <li>
+     <p>{{ this.name }} <p/> <button class="accept"><a href="/profile/{{this._id}}/accept">Accept</button>
+    
+   </li>
+   {{/each}}
+ {{/if}}  
+
+<button class="events"><a href="/events">All events</button>
