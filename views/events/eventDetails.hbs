@@ -1,21 +1,21 @@
 <h1>{{ event.title }} </h1>
 <p>{{ event.description }}</p>
-<ul>
+<ul><p>Pet(s):</p>
    {{#each pets}}
    <li>
-     <p>{{ this.petType }} <p/>
-     <p>{{ this.petName }}</p>
-     <p>{{ this.petAge }} </p>
-     <p>{{ this.petWeight }} </p>
+     <p>Type: {{ this.petType }} <p/>
+     <p>Name: {{ this.petName }}</p>
+     <p>Age: {{ this.petAge }} </p>
+     <p>Weight: {{ this.petWeight }} </p>
     
    </li>
    {{/each}}
 </ul>
-<p>{{ event.address.location }}</p>
-<p>{{ event.initialDateTime }} </p>
-<p>{{ event.finalDateTime }} </p>
-<p>{{ event.owner }}</p>
-<p>{{ currentUser._id }}</p>
+<p>Location: {{ event.address.location }}</p>
+<p>Starts: {{ event.initialDateTime }} </p>
+<p>Ends: {{ event.finalDateTime }} </p>
+<p>Owner: {{ event.owner.name }}</p>
+
 <button class="enroll"><a href="/events/{{event._id}}/enroll">Enroll</button>
 <button class="edit"><a href="/events/{{event._id}}/update">Edit</button>
 <form action="/events/{{event._id}}/delete" method="POST">

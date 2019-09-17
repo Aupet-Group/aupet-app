@@ -204,7 +204,10 @@ button {
       font-size: 1.2rem;
       border-radius: 15px; }
   .home-joinus .home-joinus-background {
-    background-image: url("../images/buttom_img.png"); }
+    height: 30vh;
+    background-image: url("../images/buttom_img.png");
+    background-size: contain;
+    background-repeat: no-repeat; }
 
 .home-footer {
   display: flex;
@@ -246,7 +249,8 @@ button {
   margin: 1% 30% 1% 30%;
   text-align: center;
   font-size: 2.4rem; }
-  .button a, .button a:visited {
+  .button a,
+  .button a:visited {
     padding: 10%;
     display: block;
     color: white;
