@@ -32,17 +32,29 @@ router.get('/myevents', checkIfLoggedIn, async (req, res, next) => {
 
 
 // GET form to create new event
-router.get('/new', checkIfLoggedIn, (req, res) => {
-  res.render('events/newevent');
+router.get('/new', checkIfLoggedIn, async (req, res) => {
+  const owner = res.locals.currentUser._id;
+  try {
+    const pets = await Pet.find({ owner });
+    res.render('events/newevent', { pets });
+  }
+  catch (error){
+    next(error);
+};
+  
 });
 
 
 // POST new event
 router.post('/', checkIfLoggedIn,  async (req, res, next) => {
-  const {title, description, initialDateTime, finalDateTime, location} = req.body;
+  const {title, description, selectedPet, initialDateTime, finalDateTime, location} = req.body;
   const owner = res.locals.currentUser._id;
   try {
-     const pet = await Pet.find({ owner });
+    if (selectedPet === "All") {
+      pet = await Pet.find({ owner });
+    } else {
+      pet = await Pet.find({owner, petName: selectedPet});
+    }
      const event = await Event.create({
          owner,
          title,
