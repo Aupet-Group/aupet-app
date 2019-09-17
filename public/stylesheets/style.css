@@ -7,220 +7,230 @@ body {
   font: 28px 'Source Sans Pro', sans-serif;
   box-sizing: border-box; }
 
-.home h2 {
-  color: #f44336;
-  text-align: center;
-  font-size: 1.8rem; }
+h2 {
+  color: red;
+  font-size: 2rem;
+  font-weight: lighter; }
 
-.home .errorMessages {
+h3 {
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: lighter; }
+
+p {
+  text-align: left;
+  font-size: 1rem;
+  font-weight: lighter; }
+
+.errorMessages {
   color: red;
   font-weight: bolder; }
 
-.home .warningMessages {
+.warningMessages {
   color: green; }
 
-.home .infoMessages .currentUser {
+.infoMessages .currentUser {
   color: black; }
 
-.home .currentUser {
+.currentUser {
   font-weight: bolder; }
 
-.home .successMessages {
+.successMessages {
   color: navy; }
 
-.home .dangerMessages {
+.dangerMessages {
   color: violet; }
 
-.home .notfound {
-  color: #5592c3;
-  font-size: 100px;
-  text-align: center; }
-
-.home .errors h1 {
-  color: #5592c3;
-  font-size: 100px;
-  text-align: center; }
-
-.home .errors p {
-  font-size: 25px;
-  text-align: center; }
-
-.home .errors button {
-  font-size: 25px;
-  text-align: center; }
-
-.home #container {
-  width: 100%;
+.home-container {
   display: flex;
-  flex-direction: column;
-  justify-content: center; }
+  flex-direction: column; }
 
-.home #topnav {
-  width: 100%;
-  margin: 0 auto;
-  color: #ffffff; }
-  .home #topnav .image-wrpper-logo {
-    width: 100%; }
-    .home #topnav .image-wrpper-logo img {
-      margin: 2% 0 2% 0;
-      width: 50%; }
-
-.home #event-finder {
-  border-top: 1px solid #000000;
-  position: relative; }
-
-.home .div-form {
-  width: 100%;
-  margin: 0% auto 0% auto;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  justify-items: center;
-  justify-items: start;
-  position: absolute;
-  left: 0;
-  top: 0; }
-
-.home .image-wrapper-event {
-  width: 100%; }
-  .home .image-wrapper-event img {
-    width: 100%; }
-
-.home .title-wrapper {
-  width: 100%;
-  margin: 50% auto 0 auto; }
-  .home .title-wrapper h2 {
-    padding: 0 18%;
-    text-align: left;
-    font-size: 24px; }
-
-.home #findkeeper {
-  margin: 0 auto;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center; }
-  .home #findkeeper input {
-    border-radius: 25px;
-    border: 1px solid #000000;
-    margin: 5% 20%;
-    background: #dbe6f1;
-    padding: 1%; }
-  .home #findkeeper button {
-    border-radius: 15px;
-    border: none;
-    padding: 4%;
-    background: #5592c3;
-    margin: 0 auto 0 auto;
-    color: white; }
-
-.home #services .title-wrapper-services {
-  width: 100%;
-  margin: 0 auto 0 auto; }
-  .home #services .title-wrapper-services h2 {
-    margin: 4%;
-    text-align: center; }
-
-.home #services .list-services {
-  width: 100%;
-  margin: 8%; }
-  .home #services .list-services .text-service {
-    width: 100%; }
-    .home #services .list-services .text-service h4 {
-      margin: 0 auto;
-      font-size: 0.65em;
-      font-weight: lighter; }
-    .home #services .list-services .text-service p {
-      font-size: 0.4em;
-      margin-bottom: 8%; }
-
-.home .icon {
-  width: 5%;
-  margin-right: 5%;
-  margin-bottom: 4%; }
-
-.home .list-services-wrapper {
-  display: flex;
-  flex-direction: row; }
-
-.home #how-it-works {
-  background: #5592c3;
-  color: #ffffff; }
-  .home #how-it-works h2 {
-    font-size: 1.2rem;
-    color: #ffffff;
-    margin: 10% 0 7% 0; }
-  .home #how-it-works p {
-    text-align: left;
-    font-size: 1rem; }
-  .home #how-it-works .offer {
-    width: 100%;
-    margin: 5% auto; }
-
-.home .offer-text-wrapper {
+.home-topnav {
+  max-width: 100%;
   display: flex;
   flex-direction: row;
-  justify-content: start; }
+  justify-content: space-between;
+  padding: 1rem 1rem;
+  border-bottom: 1px solid #000000; }
+  .home-topnav .home-logo {
+    width: 25%; }
+    .home-topnav .home-logo img {
+      width: 100%; }
+  .home-topnav .home-hmenu {
+    width: 10%; }
+    .home-topnav .home-hmenu img {
+      width: 100%; }
 
-.home .number-hiw {
-  border: 1px solid #000000;
-  border-radius: 50%;
-  text-align: center;
-  color: #000000;
-  background: #ffffff;
-  margin: 0% 2% 15% 2%;
-  padding: 1% 3%;
-  font-weight: bold;
-  font-size: 50%; }
-
-.home #testimonials {
-  background: linear-gradient(#5592c3, #ffffff);
-  margin-bottom: 5%; }
-  .home #testimonials h2 {
-    color: white; }
-  .home #testimonials p {
-    padding: 0 10%;
-    margin: 5% auto;
-    text-align: center; }
-
-.home #joinus {
+.home-event-finder {
   width: 100%;
+  background-image: url("../images/top_img.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; }
+
+.home-title-event-finder {
+  margin: 52% 20% 2% 20%; }
+  .home-title-event-finder h2 {
+    text-align: left; }
+
+.home-form {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  justify-items: start; }
-  .home #joinus img {
-    width: 100%; }
-  .home #joinus h2 {
-    text-align: center;
-    margin-bottom: 5%; }
+  margin-bottom: 40%; }
+  .home-form input {
+    border: 1px solid #000000;
+    border-radius: 30px;
+    margin: 0 22%;
+    padding: 1%; }
 
-.home h4 {
-  color: #5592c3; }
+button {
+  border: none;
+  background-color: #5592c3;
+  border: 1px solid #5592c3;
+  border-radius: 15px;
+  padding: 4% 3%;
+  color: white;
+  font-size: 1.2rem;
+  margin: 3% 30%; }
 
-.home #footer {
-  width: 100%;
-  background: #5592c3;
+.home-services {
   display: flex;
-  flex-direction: row; }
+  flex-direction: column;
+  justify-content: center;
+  padding: 4%; }
 
-.home .icon {
-  width: 6%;
-  margin-top: 4%; }
+.home-title-services {
+  margin-bottom: 2%; }
+  .home-title-services h2 {
+    text-align: center; }
 
-.home a,
-.home a:visited {
-  display: inline-block;
+.home-list-services {
+  width: 100%; }
+  .home-list-services .text-service {
+    width: 100%; }
+
+.home-list-services-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 2%; }
+
+.home-icon {
+  width: 8%; }
+  .home-icon img {
+    width: 100%; }
+
+.home-text-service {
+  width: 100%;
+  padding-left: 4%;
+  margin-bottom: 5%; }
+  .home-text-service h3 {
+    text-align: left;
+    color: #5592c3; }
+
+.home-how-does-it-works {
+  width: 100%;
+  background-color: #5592c3;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; }
+  .home-how-does-it-works p {
+    color: #ffffff; }
+
+.home-hiw-title {
+  text-align: center;
+  margin-top: 2%; }
+  .home-hiw-title h2 {
+    color: white; }
+
+.home-offer-text-wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center; }
+  .home-offer-text-wrapper p {
+    padding: 4%;
+    font-size: 1.1rem;
+    font-weight: lighter; }
+
+.home-number-hiw {
+  border: 1px solid #000000;
+  background-color: #ffffff;
+  border-radius: 50%;
+  margin: 5% 3% 5% 5%;
+  padding: 1% 2%;
+  font-size: 1rem;
+  text-align: center; }
+
+.home-testimonials {
+  background: linear-gradient(#5592c3, #ffffff); }
+
+.home-testimonial-title h2 {
   color: #ffffff;
-  text-decoration: none;
-  font-size: 50%;
-  line-height: 50%; }
+  text-align: center;
+  margin: 2% 0 4% 0; }
 
-.home .images-contact {
-  margin-left: 5%; }
+.testimonials-text {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  margin: 0 10%; }
+  .testimonials-text p {
+    text-align: center;
+    margin: 3% auto; }
 
-.home .contact {
+.home-joinus {
+  width: 100%; }
+  .home-joinus h2 {
+    margin-top: 8%;
+    text-align: center; }
+  .home-joinus .home-button {
+    display: block;
+    background: #5592c3;
+    margin: 4% 35%;
+    border-radius: 15px;
+    border: none; }
+    .home-joinus .home-button a,
+    .home-joinus .home-button a:visited {
+      padding: 8% 8%;
+      display: block;
+      text-align: center;
+      text-decoration: none;
+      color: white;
+      font-size: 1.2rem;
+      border-radius: 15px; }
+  .home-joinus .home-joinus-background {
+    background-image: url("../images/buttom_img.png"); }
+
+.home-footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  background: #5592c3;
+  padding-top: 2%; }
+  .home-footer .home-icon {
+    margin: 2%; }
+
+.home-footer-icons {
+  display: flex;
+  flex-direction: row;
+  align-content: start; }
+
+.home-icon.fb {
+  width: 4%; }
+
+.contact {
   margin-right: 5%; }
+  .contact a,
+  .contact a:visited {
+    color: white;
+    font-size: 1.1rem;
+    text-align: left;
+    text-decoration: none; }
 
 .error-500-404 img {
   display: block;
@@ -242,5 +252,6 @@ body {
     color: white;
     text-decoration: none;
     text-align: center; }
+
 
 /*# sourceMappingURL=style.css.map */
