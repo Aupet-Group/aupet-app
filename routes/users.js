@@ -45,4 +45,13 @@ router.post('/', async (req, res, next) => {
   }
 });
 
+router.get('/users', checkIfLoggedIn, async (req, res, next) => {
+  try {
+    const users = await User.find({});
+    res.render('users/users', { users });
+  } catch (error) {
+    next(error);
+  }
+});
+
 module.exports = router;
