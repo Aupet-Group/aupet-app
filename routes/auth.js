@@ -8,10 +8,7 @@ const User = require('../model/user');
 
 const bcryptSalt = 10;
 
-const {
-  checkEmailAndPasswordNotEmpty,
-  checkIfLoggedIn,
-} = require('../middlewares/auth');
+const { checkEmailAndPasswordNotEmpty, checkIfLoggedIn } = require('../middlewares/auth');
 
 router.get('/signup', (req, res, next) => {
   res.render('signup');
@@ -71,7 +68,7 @@ router.get('/created', (req, res, next) => {
 router.get('/profile', checkIfLoggedIn, (req, res, next) => {
   res.render('profile');
 });
-
+//makes log out
 router.get('/logout', checkIfLoggedIn, (req, res, next) => {
   req.session.destroy(error => {
     if (error) {
