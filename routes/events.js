@@ -15,7 +15,7 @@ router.get('/', async (req, res, next) => {
     res.render('events/events', { events });
   } catch (error) {
     next(error);
-  }
+  };
 });
 
 
@@ -27,12 +27,12 @@ router.get('/myevents', checkIfLoggedIn, async (req, res, next) => {
     res.render('events/events', { events });
   } catch (error) {
     next(error);
-  }
+  };
 });
 
 
 // GET form to create new event
-router.get('/new', checkIfLoggedIn, async (req, res) => {
+router.get('/new', checkIfLoggedIn, async (req, res, next) => {
   const owner = res.locals.currentUser._id;
   try {
     const pets = await Pet.find({ owner });
@@ -40,8 +40,7 @@ router.get('/new', checkIfLoggedIn, async (req, res) => {
   }
   catch (error){
     next(error);
-};
-  
+};  
 });
 
 
@@ -91,11 +90,12 @@ router.get('/:eventId/update', checkIfLoggedIn, async (req, res, next) => {
   const userId = res.locals.currentUser._id;
   const { eventId } = req.params;
   try {
-    const event = await Event.findById(eventId);
+    const event = await Event.findById(eventId).populate('pet');
+    const pets = event.pet;
     if (userId == event.owner) {
-      res.render('events/edit', event);
+      res.render('events/edit', {event, pets} );
     } else {
-      res.redirect('/events');
+      req.flash('error', "You can't edit this event.");
     }
   }
     catch (error){
@@ -103,13 +103,18 @@ router.get('/:eventId/update', checkIfLoggedIn, async (req, res, next) => {
 };
 });
 
+
 // POST event update
 router.post('/:eventId', checkIfLoggedIn, async (req, res, next) => {
   const { eventId } = req.params;
   const owner = res.locals.currentUser._id;
-  const {title, description, initialDateTime, finalDateTime, location} = req.body;
+  const {title, description, selectedPet, initialDateTime, finalDateTime, location} = req.body;
   try {
-    const pet = await Pet.find({ owner });
+    if (selectedPet === "All") {
+      pet = await Pet.find({ owner });
+    } else {
+      pet = await Pet.find({owner, petName: selectedPet});
+    }
     const event = await Event.findByIdAndUpdate(eventId, {
       owner,
       title,
