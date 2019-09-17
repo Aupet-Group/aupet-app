@@ -1,4 +1,6 @@
-<h1>View your profile</h1>
+{{!-- List of all users --}}
+<h1>Keepers list</h1>
+<a class="button" href="/profile">General Profile</a>
 {{#if users}}
 {{#each users}}
 {{#if this.email}}
@@ -8,7 +10,8 @@
 {{#if users.img}}
 <img src="users.img">
 {{/if}}
-<a href="{{this._id}}">Details</a>
+<a href="users/{{this._id}}">Details</a>
+
 {{/each}}
 
 {{/if}}

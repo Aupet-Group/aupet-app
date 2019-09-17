@@ -4,7 +4,7 @@ const User = require('../model/user');
 
 const router = express.Router();
 
-//Show profile of User
+// Show profile of User
 router.get('/profile', checkIfLoggedIn, async (req, res, next) => {
   const { _id } = req.session.currentUser;
   try {
@@ -16,7 +16,7 @@ router.get('/profile', checkIfLoggedIn, async (req, res, next) => {
   }
 });
 
-//Show the profile prepared to update
+// Show the profile prepared to update
 
 router.get('/profile/update', checkIfLoggedIn, async (req, res, next) => {
   const { _id } = req.session.currentUser;
@@ -29,11 +29,13 @@ router.get('/profile/update', checkIfLoggedIn, async (req, res, next) => {
   }
 });
 
-//Saves the user profile updated
+// Saves the user profile updated
 
 router.post('/', async (req, res, next) => {
   const { _id } = req.session.currentUser;
-  const { email, name, lastName, username, phone, mobile, secondaryPhone } = req.body;
+  const {
+ email, name, lastName, username, phone, mobile, secondaryPhone 
+} = req.body;
   try {
     const user = await User.findByIdAndUpdate(_id, {
       email,
@@ -64,9 +66,9 @@ router.get('/users/:_id', checkIfLoggedIn, async (req, res, next) => {
   console.log('detalle de un usuario que no soy yo');
   const { _id } = req.params;
   try {
-    const users = await User.findOne({ _id });
+    const user = await User.findOne({ _id });
     const enabled = false;
-    res.render('users/profile', { users, enabled });
+    res.render('users/profile', { user, enabled });
   } catch (error) {
     next(error);
   }
