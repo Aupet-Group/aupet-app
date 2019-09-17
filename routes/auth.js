@@ -31,7 +31,7 @@ router.post('/signup', checkEmailAndPasswordNotEmpty, async (req, res, next) => 
       req.session.currentUser = await User.create({ email, hashedPassword });
       // const user2 = await User.findOne({ email });
       // req.session.currentUser = user2;
-      res.redirect('/secret');
+      res.redirect('/profile');
     }
   } catch (error) {
     req.flash('error', 'Please try again');
@@ -50,13 +50,13 @@ router.post('/login', checkEmailAndPasswordNotEmpty, async (req, res, next) => {
     if (user) {
       if (bcrypt.compareSync(password, user.hashedPassword)) {
         req.session.currentUser = user;
-        res.redirect('/secret');
+        res.redirect('/profile');
       } else {
         req.flash('error', 'User or password incorret');
         res.redirect('/login');
       }
     } else {
-      res.flash('info', "User doesn't exist try to sign up!");
+      req.flash('info', "User doesn't exist try to sign up!");
       res.redirect('/signup');
     }
   } catch (error) {
@@ -68,8 +68,8 @@ router.get('/created', (req, res, next) => {
   res.render('created');
 });
 
-router.get('/secret', checkIfLoggedIn, (req, res, next) => {
-  res.render('secret');
+router.get('/profile', checkIfLoggedIn, (req, res, next) => {
+  res.render('profile');
 });
 
 router.get('/logout', checkIfLoggedIn, (req, res, next) => {
