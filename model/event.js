@@ -18,6 +18,7 @@ const eventSchema = new Schema(
       zipcode: Number,
       location: String,
     },
+    candidates: [{ type: Schema.Types.ObjectId, ref: User }],
     keeper: { type: Schema.Types.ObjectId, ref: User },
   },
   {

@@ -5,7 +5,7 @@
     {{#each events}}
     <li>
       <a href="/events/{{this._id}}">{{ this.title }} </a> <p>{{ this.address.location }}</p> <p>{{ this.initialDateTime }} </p> <p>{{ this.finalDateTime }} </p>
-      <button class="enroll"><a href="/">Enroll</button><button class="enroll"><a href="/events/{{this._id}}">Details</button>
+      <button class="enroll"><a href="/events/{{this._id}}/enroll">Enroll</button><button class="details"><a href="/events/{{this._id}}">Details</button>
     
     </li>
     {{/each}}
