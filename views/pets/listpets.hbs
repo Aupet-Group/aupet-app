@@ -1,0 +1,20 @@
+<h1>PETS</h1>
+
+<button class=""><a href="/pets/new">Add an pet</button>
+<ul>
+    {{#each pets}}
+    <li>
+        <a href="/pets/{{pet._id}}">Pet name:{{ this.petName }} </a>
+        <p> Pet type: {{this.petType }}</p>
+        <p> Pet weight: {{ this.petWeight }}</p>
+        <p> Pet age: {{ this.petAge }} </p>
+
+        <div>
+            <button class=""><a href="/pets/{{this._id}}">Details</button>
+            <button><a href="/pets/{{this._id}}/update">Edit my pet</button>
+        </div>
+
+    </li>
+    {{/each}}
+</ul>
+<a class="button" href="/profile">Back to profile</a>
