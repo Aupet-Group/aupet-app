@@ -1,8 +1,14 @@
+<h1>View your profile</h1>
 {{#if users}}
 {{#each users}}
-<h1>View your profile</h1>
-    <p>User name: {{this.username}}</p>
-    <img src="users.img">
+{{#if this.email}}
+<p>email: {{this.email}}</p>
+{{/if}}
+<p>User name: {{this.username}}</p>
+{{#if users.img}}
+<img src="users.img">
+{{/if}}
+<a href="{{this._id}}">Details</a>
 {{/each}}
 
 {{/if}}

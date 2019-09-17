@@ -1,5 +1,10 @@
 <div class="home-container">
-    <h1>View your profile</h1>
+    {{#if enabled}}
+      <h1>View your profile</h1>
+    {{else}}
+      <h1>View the profile detail </h1>
+    {{/if}}
+
     <p>User name: {{user.username}}</p>
     <p>Name: {{user.name}}</p>
     <p>Last Name: {{user.lastName}}</p>
@@ -7,12 +12,16 @@
     <p>Phone: {{user.phone}}</p>
     <p>Mobile: {{user.mobile}}</p>
     <p>Secondary Phone:{{user.secondaryPhone}}</p>
+
+    {{#if enabled}}
     <a class="button" href="profile/update">Edit Profile</a>
     <a class="button" href="">My events</a>
     <a class="button" href="">Enrolled in</a>
     <a class="button" href="">Add pet</a>
     <a class="button" href="">Add Event</a>
     <a class="button" href="">See events</a>
-    <a class="button" href="">See Keepers</a>
+    <a class="button" href="/users">See Keepers</a>
+    {{/if}}
+    <a class="button" href="users/">See Keepers</a>
     <a class="button" href="/logout">LOGOUT</a>
 </div>
