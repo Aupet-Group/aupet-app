@@ -50,10 +50,10 @@ p {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  padding: 1rem 3rem;
+  padding: 1rem 1rem;
   border-bottom: 1px solid #000000; }
   .home-topnav .home-logo {
-    width: 50%; }
+    width: 25%; }
     .home-topnav .home-logo img {
       width: 100%; }
   .home-topnav .home-hmenu {
@@ -205,5 +205,38 @@ button {
       border-radius: 15px; }
   .home-joinus .home-joinus-background {
     background-image: url("../images/buttom_img.png"); }
+
+.home-footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  background: #5592c3;
+  padding-top: 2%; }
+  .home-footer .home-icon {
+    margin: 2%; }
+
+.home-footer-icons {
+  display: flex;
+  flex-direction: row;
+  align-content: start; }
+
+.home-icon.fb {
+  width: 4%; }
+
+.contact {
+  margin-right: 5%; }
+  .contact a,
+  .contact a:visited {
+    color: white;
+    font-size: 1.1rem;
+    text-align: left;
+    text-decoration: none; }
+
+.error-500-404 img {
+  display: block;
+  margin: auto; }
+
+#error500 {
+  height: 400px; }
 
 /*# sourceMappingURL=style.css.map */
