@@ -33,8 +33,11 @@ router.get('/profile/update', checkIfLoggedIn, async (req, res, next) => {
 
 router.post('/', async (req, res, next) => {
   const { _id } = req.session.currentUser;
-  const { email, name, lastName, username, phone, mobile, secondaryPhone, owner, keeper } = req.body;
-  console.log(`las vaiaaaaaables  ${typeof req.body.owner}`);
+  const {
+    email, name, lastName, username, phone, mobile, secondaryPhone, owner: ownerString, keeper: keeperString,
+  } = req.body;
+  const owner = ownerString ==='true';
+  const keeper = keeperString === 'true';
   console.log(`${owner} ${keeper} are the variables`);
   try {
     const user = await User.findByIdAndUpdate(_id, {
