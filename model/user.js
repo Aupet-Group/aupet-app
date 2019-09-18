@@ -7,7 +7,7 @@ const userSchema = new Schema(
     hashedPassword: { type: String, required: true },
     name: { type: String },
     lastName: { type: String },
-    username: { type: String },
+  
     phone: { type: String },
     mobile: { type: String },
     secondaryPhone: { type: String },
