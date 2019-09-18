@@ -1,3 +1,4 @@
+{{user}}
 <h1>Edit Profile</h1>
 <form action="/" method="POST" id="form">
     <div>
@@ -28,6 +29,19 @@
         <label for="secondaryPhone">Secondary Phone:</label>
         <input type="tel" name="secondaryPhone" value="{{user.secondaryPhone}}">
     </div>
+    <div>
+        {{!-- <label for="owner"><input type="checkbox" name="owner" value="{{user.owner}}">Owner</label> --}}
+        {{!-- <input type="checkbox" name="owner" {{bindAttr checked="user.owner"}}> --}}
+        <label for="owner"><input type="checkbox" name="owner" value="checked" {{owner}} >Owner</label>
+        
+    </div>
+
+    <div>
+        {{!-- <label for="Keeper"><input type="checkbox" name="keeper" value="{{user.keeper}}">Keeper</label> --}}
+        {{!-- <input type="checkbox" name="keeper" {{bindAttr checked="user.owner"}}> --}}
+        <label for="keeper"><input type="checkbox" name="keeper" value="checked" {{keeper}} >Keeper</label>
+    </div>
+
     <div>
         {{#if user.img}}
         <img src="{{user.img:}}">
