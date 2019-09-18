@@ -34,17 +34,7 @@ router.get('/profile/update', checkIfLoggedIn, async (req, res, next) => {
 
 router.post('/', async (req, res, next) => {
   const { _id } = req.session.currentUser;
-  const {
-    email,
-    name,
-    lastName,
-    username,
-    phone,
-    mobile,
-    secondaryPhone,
-    owner: ownerString,
-    keeper: keeperString,
-  } = req.body;
+  const { email, name, lastName, phone, mobile, secondaryPhone, owner: ownerString, keeper: keeperString } = req.body;
 
   const owner = ownerString === 'checked';
   const keeper = keeperString === 'checked';
@@ -53,7 +43,6 @@ router.post('/', async (req, res, next) => {
       email,
       name,
       lastName,
-      username,
       phone,
       mobile,
       secondaryPhone,
@@ -70,11 +59,11 @@ router.post('/', async (req, res, next) => {
 // Show all of user that are keepers //
 router.get('/keepers', checkIfLoggedIn, async (req, res, next) => {
   try {
-     const KeepersWithoutUser = await User.find({ keeper: true });
-    const users = KeepersWithoutUser.filter((keeperFilter) => {
-     return  keeperFilter._id.toString() !== req.session.currentUser._id;
-     });
-      res.render('users/users', { users });
+    const keepersWithoutUser = await User.find({ keeper: true });
+    const users = keepersWithoutUser.filter(
+      keeperFilter => keeperFilter._id.toString() !== req.session.currentUser._id,
+    );
+    res.render('users/users', { users });
   } catch (error) {
     next(error);
   }
