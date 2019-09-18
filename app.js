@@ -26,7 +26,8 @@ mongoose.connect(process.env.MONGODB_URI, {
   useNewUrlParser: true,
   reconnectTries: Number.MAX_VALUE,
   useCreateIndex: true,
-});
+  useFindAndModify: false,
+  });
 
 app.use(
   sassMiddleware({
