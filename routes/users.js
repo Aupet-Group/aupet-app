@@ -22,8 +22,7 @@ router.get('/profile/update', checkIfLoggedIn, async (req, res, next) => {
   const { _id } = req.session.currentUser;
   try {
     const user = await User.findOne({ _id });
-    // res.send(user)
-    console.log(user);
+    console.log(`${user.owner} ${user.keeper} are the variables`);
     res.render('users/update', { user });
   } catch (error) {
     next(error);
@@ -34,12 +33,9 @@ router.get('/profile/update', checkIfLoggedIn, async (req, res, next) => {
 
 router.post('/', async (req, res, next) => {
   const { _id } = req.session.currentUser;
-  const {
-    email, name, lastName, username, phone, mobile, secondaryPhone,
-  } = req.body;
-  const { owner } = req.body;
-  const { keeper } = req.body;
-  console.log(`${owner} ${keeper}`);
+  const { email, name, lastName, username, phone, mobile, secondaryPhone, owner, keeper } = req.body;
+  console.log(`las vaiaaaaaables  ${typeof req.body.owner}`);
+  console.log(`${owner} ${keeper} are the variables`);
   try {
     const user = await User.findByIdAndUpdate(_id, {
       email,
