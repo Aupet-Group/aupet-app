@@ -1,6 +1,7 @@
 const express = require('express');
 const { checkIfLoggedIn } = require('../middlewares/auth');
 const User = require('../model/user');
+let ObjectId = require('mongodb').ObjectID;
 
 const router = express.Router();
 
@@ -67,12 +68,14 @@ router.post('/', async (req, res, next) => {
   }
 });
 
-
-//show all of user that are keepers
+// Show all of user that are keepers //
 router.get('/keepers', checkIfLoggedIn, async (req, res, next) => {
   try {
-    const users = await User.find({ keeper: true });
-    
+    const KeepersWithoutUser = await User.find({ keeper: true });
+    const users = KeepersWithoutUser.forEach((keeperFilter) => {
+
+      return keeperFilter.id !== req.session.currentUser._id;
+    });
     res.render('users/users', { users });
   } catch (error) {
     next(error);
