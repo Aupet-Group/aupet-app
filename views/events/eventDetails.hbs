@@ -16,10 +16,23 @@
 <p>Ends: {{ event.finalDateTime }} </p>
 <p>Owner: {{ event.owner.name }}</p>
 
+{{#unless ownEvents}}
 <button class="enroll"><a href="/events/{{event._id}}/enroll">Enroll</button>
+{{/unless}}
 <button class="edit"><a href="/events/{{event._id}}/update">Edit</button>
 <form action="/events/{{event._id}}/delete" method="POST">
   <input type="submit" value="Delete">
 </form>
+<br>
+<ul><p>Candidates:</p>
+   {{#each candidates}}
+   <li>
+     <p>Name: {{ this.name }}</p>
+     <p>Email: {{ this.email }} </p>
+     <p>Phone: {{ this.phone }} </p>
+    
+   </li>
+   {{/each}}
+</ul>
 <button class="events"><a href="/events">All events</button>
 
