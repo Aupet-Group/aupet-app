@@ -3,6 +3,7 @@ const Event = require('../model/event');
 const Pet = require('../model/pet');
 const User = require('../model/user');
 const { checkIfLoggedIn } = require('../middlewares/auth');
+const { isValidID } = require('../middlewares/help');
 
 const router = express.Router();
 let ownEvents = false;
@@ -83,7 +84,7 @@ router.post('/', checkIfLoggedIn, async (req, res, next) => {
 });
 
 // GET event details
-router.get('/:eventId', async (req, res, next) => {
+router.get('/:eventId', isValidID('eventId'), async (req, res, next) => {
   const { eventId } = req.params;
   try {
     const event = await Event.findById(eventId).populate('pet candidates');
@@ -96,7 +97,7 @@ router.get('/:eventId', async (req, res, next) => {
     //     return candidate;
     //   } catch (error) {
     //     next(error);
-    //   }     
+    //   }
     // });
     console.log(pets);
     console.log(candidates);
@@ -107,7 +108,7 @@ router.get('/:eventId', async (req, res, next) => {
 });
 
 // GET form to update an event
-router.get('/:eventId/update', checkIfLoggedIn, async (req, res, next) => {
+router.get('/:eventId/update', checkIfLoggedIn, isValidID('eventId'), async (req, res, next) => {
   const userId = res.locals.currentUser._id;
   const { eventId } = req.params;
   try {
@@ -125,7 +126,7 @@ router.get('/:eventId/update', checkIfLoggedIn, async (req, res, next) => {
 });
 
 // POST event update
-router.post('/:eventId', checkIfLoggedIn, async (req, res, next) => {
+router.post('/:eventId', checkIfLoggedIn, isValidID('eventId'), async (req, res, next) => {
   const { eventId } = req.params;
   const owner = res.locals.currentUser._id;
   const { title, description, selectedPet, initialDateTime, finalDateTime, location } = req.body;
@@ -151,7 +152,7 @@ router.post('/:eventId', checkIfLoggedIn, async (req, res, next) => {
 });
 
 // POST delete event
-router.post('/:eventId/delete', checkIfLoggedIn, async (req, res, next) => {
+router.post('/:eventId/delete', checkIfLoggedIn, isValidID('eventId'), async (req, res, next) => {
   const { eventId } = req.params;
   const userId = res.locals.currentUser._id;
   try {
@@ -168,7 +169,7 @@ router.post('/:eventId/delete', checkIfLoggedIn, async (req, res, next) => {
 });
 
 // GET enroll in an event
-router.get('/:eventId/enroll', checkIfLoggedIn, async (req, res, next) => {
+router.get('/:eventId/enroll', checkIfLoggedIn, isValidID('eventId'), async (req, res, next) => {
   const { eventId } = req.params;
   const userId = res.locals.currentUser._id;
   try {
