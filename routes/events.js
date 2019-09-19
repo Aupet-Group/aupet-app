@@ -1,4 +1,3 @@
-/* eslint-disable no-underscore-dangle */
 const express = require('express');
 const Event = require('../model/event');
 const Pet = require('../model/pet');
@@ -43,6 +42,20 @@ router.get('/new', checkIfLoggedIn, async (req, res, next) => {
   }
 });
 
+// Get de list where de user are enrolled in as a keeper or as a candidate
+
+router.get('/enrolledin', checkIfLoggedIn, async (req, res, next) => {
+  try {
+    console.log(req.session.currentUser._id);
+    const { _id } = req.session.currentUser;
+    const events = await Event.find({ $or: [{ candidates: _id }, { keeper: _id }] });
+    console.log(events);
+    res.render('events/enrolledin', { events, _id });
+  } catch (error) {
+    next(error);
+  }
+});
+
 // POST new event
 router.post('/', checkIfLoggedIn, async (req, res, next) => {
   const { title, description, selectedPet, initialDateTime, finalDateTime, location } = req.body;
@@ -60,7 +73,7 @@ router.post('/', checkIfLoggedIn, async (req, res, next) => {
       creationEventDate: Date.now(),
       initialDateTime,
       finalDateTime,
-      address: { location: location },
+      address: { location },
       pet,
     });
     res.redirect('/events');
@@ -128,7 +141,7 @@ router.post('/:eventId', checkIfLoggedIn, async (req, res, next) => {
       description,
       initialDateTime,
       finalDateTime,
-      address: { location: location },
+      address: { location },
       pet,
     });
     res.redirect(`/events/${eventId}`);
@@ -160,8 +173,7 @@ router.get('/:eventId/enroll', checkIfLoggedIn, async (req, res, next) => {
   const userId = res.locals.currentUser._id;
   try {
     const user = await User.findById(userId);
-    let event = await Event.findById(eventId).populate('owner', 'candidates', 'keeper');
-    
+    let event = await Event.findById(eventId).populate('owner candidates keeper');
     if (user._id.equals(event.owner._id)) {
       req.flash('error', "The owner can't enroll in his/her own event.");
     } else {

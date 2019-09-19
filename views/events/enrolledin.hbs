@@ -1,0 +1,17 @@
+<h1>EVENTS ENROLLED IN</h1>
+
+<ul>
+    {{#each events}}
+    <li>
+        <h2>{{ this.title }}</h2>
+        <p>{{ this.address.location }}</p>
+        <p>{{ this.initialDateTime }} </p>
+        <p>{{ this.finalDateTime }} </p>
+        {{#ifequal _id this.keeper}}
+         <h2>You are the keeper selectec</h2>
+        {{/ifequal}}
+        <a class="button" href="/events/{{this._id}}">Details</button>
+    </li>
+    {{/each}}
+</ul>
+<a class="button" href="/profile">Back to profile</a>
