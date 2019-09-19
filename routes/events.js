@@ -42,8 +42,8 @@ router.get('/new', checkIfLoggedIn, async (req, res, next) => {
 // POST new event
 router.post('/', checkIfLoggedIn, async (req, res, next) => {
   const {
- title, description, selectedPet, initialDateTime, finalDateTime, location 
-} = req.body;
+    title, description, selectedPet, initialDateTime, finalDateTime, location,
+  } = req.body;
   const owner = res.locals.currentUser._id;
   try {
     if (selectedPet === 'All') {
@@ -101,8 +101,8 @@ router.post('/:eventId', checkIfLoggedIn, async (req, res, next) => {
   const { eventId } = req.params;
   const owner = res.locals.currentUser._id;
   const {
- title, description, selectedPet, initialDateTime, finalDateTime, location 
-} = req.body;
+    title, description, selectedPet, initialDateTime, finalDateTime, location,
+  } = req.body;
   try {
     if (selectedPet === 'All') {
       pet = await Pet.find({ owner });
@@ -181,16 +181,14 @@ router.get('/:eventId/enroll', checkIfLoggedIn, async (req, res, next) => {
   }
 });
 
-// Get the list of event where is enrolled in as a keeper
 
-// router.get('/enrolledin', (req, res, next)=> {
-//   const { id } = req.session.currentUser;
-//   try{
-//     const events = Event.find({keeper :})
-//   }
-//   catch(error){
-//     next(error);
-//   }
-// });
+router.get('/enrolledin', (req, res, next) => {
+  const { id: keeper } = req.session.currentUser;
+  try {
+    const events = Event.find().populate('user');
+  } catch (error) {
+    next(error);
+  }
+});
 
 module.exports = router;
