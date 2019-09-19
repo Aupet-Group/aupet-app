@@ -41,7 +41,9 @@ router.get('/new', checkIfLoggedIn, async (req, res, next) => {
 
 // POST new event
 router.post('/', checkIfLoggedIn, async (req, res, next) => {
-  const { title, description, selectedPet, initialDateTime, finalDateTime, location } = req.body;
+  const {
+ title, description, selectedPet, initialDateTime, finalDateTime, location 
+} = req.body;
   const owner = res.locals.currentUser._id;
   try {
     if (selectedPet === 'All') {
@@ -56,7 +58,7 @@ router.post('/', checkIfLoggedIn, async (req, res, next) => {
       creationEventDate: Date.now(),
       initialDateTime,
       finalDateTime,
-      address: { location: location },
+      address: { location },
       pet,
     });
     res.redirect('/events');
@@ -98,7 +100,9 @@ router.get('/:eventId/update', checkIfLoggedIn, async (req, res, next) => {
 router.post('/:eventId', checkIfLoggedIn, async (req, res, next) => {
   const { eventId } = req.params;
   const owner = res.locals.currentUser._id;
-  const { title, description, selectedPet, initialDateTime, finalDateTime, location } = req.body;
+  const {
+ title, description, selectedPet, initialDateTime, finalDateTime, location 
+} = req.body;
   try {
     if (selectedPet === 'All') {
       pet = await Pet.find({ owner });
@@ -111,7 +115,7 @@ router.post('/:eventId', checkIfLoggedIn, async (req, res, next) => {
       description,
       initialDateTime,
       finalDateTime,
-      address: { location: location },
+      address: { location },
       pet,
     });
     res.redirect(`/events/${eventId}`);
@@ -154,7 +158,7 @@ router.get('/:eventId/enroll', checkIfLoggedIn, async (req, res, next) => {
       if (event.keeper) {
         allocated = true;
       }
-      event.candidates.forEach(candidate => {
+      event.candidates.forEach((candidate) => {
         if (candidate.email == user.email) {
           enrolled = true;
         }
@@ -177,4 +181,15 @@ router.get('/:eventId/enroll', checkIfLoggedIn, async (req, res, next) => {
   }
 });
 
+// Get the list of event where is enrolled in as a keeper
+
+router.get('/enrolledin', (req, res, next)=> {
+  const { id } = req.session.currentUser;
+  try{
+    const events = Event.find({keeper :})
+  }
+  catch(error){
+    next(error);
+  }
+});
 module.exports = router;
