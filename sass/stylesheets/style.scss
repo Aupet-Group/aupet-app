@@ -1,5 +1,8 @@
 @import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro&display=swap');
 
+
+// Layout
+
 * {
   margin: 0;
   padding: 0;
@@ -8,6 +11,17 @@
 body {
   font: 28px 'Source Sans Pro', sans-serif;
   box-sizing: border-box;
+  margin: 0 auto;
+  max-width: 500px;
+  width: 100%;
+  background-color: #f3f3f3;
+}
+
+.main-container {
+  padding: 10px;
+  border-left: 2px solid;
+  border-right: 2px solid;
+  border-color: #dddbdb;  
 }
 
 h2 {
@@ -53,12 +67,13 @@ p {
   color: violet;
 }
 
+// Home page
+
 .home-container {
   display: flex;
   flex-direction: column;
+  margin: -10px;
 }
-
-
 
 .home-event-finder {
   width: 100%;
@@ -107,6 +122,7 @@ button {
   flex-direction: column;
   justify-content: center;
   padding: 4%;
+  background-color: #ffffff;
 }
 
 .home-title-services {
@@ -216,6 +232,7 @@ button {
 
 .home-joinus {
   width: 100%;
+  background-color: #ffffff;
 
   h2 {
     margin-top: 8%;
@@ -326,11 +343,8 @@ button {
 // Header & Nav bar
 
 header {
-  box-sizing: border-box;
-  margin: 0 auto;
   padding-top: 15px;
-  max-width: 500px;
-  width: 100%;
+  background-color: #ffffff;
 
   div {
     float: left;
@@ -395,16 +409,16 @@ header {
 }
 
 .close { 
- display:none;
+  display:none;
 }
       
 #navigation:target .open {
-    display: none;
+  display: none;
 }
 
 
 #navigation:target .close {
-      display: block;
+  display: block;
 }
 
 ul.nav-items {
