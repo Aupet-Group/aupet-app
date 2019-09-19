@@ -88,18 +88,7 @@ router.get('/:eventId', async (req, res, next) => {
   try {
     const event = await Event.findById(eventId).populate('pet candidates');
     const pets = event.pet;
-    const candidates = event.candidates;
-    // const candidatesIds = event.candidates;
-    // const candidates = candidatesIds.map(async function(id) {
-    //   try {
-    //     let candidate = await User.findOne(id);
-    //     return candidate;
-    //   } catch (error) {
-    //     next(error);
-    //   }     
-    // });
-    console.log(pets);
-    console.log(candidates);
+    const {candidates} = event;
     res.render('events/eventDetails', { event, pets, candidates, ownEvents });
   } catch (error) {
     next(error);
@@ -183,7 +172,7 @@ router.get('/:eventId/enroll', checkIfLoggedIn, async (req, res, next) => {
       if (event.keeper) {
         allocated = true;
       }
-      event.candidates.forEach(candidate => {
+      event.candidates.forEach((candidate) => {
         if (candidate.email == user.email) {
           enrolled = true;
         }
@@ -201,6 +190,34 @@ router.get('/:eventId/enroll', checkIfLoggedIn, async (req, res, next) => {
       }
     }
     res.redirect(`/events/${eventId}`);
+  } catch (error) {
+    next(error);
+  }
+});
+
+// GET accept a keeper
+router.get('/:eventId/accept/:userId', checkIfLoggedIn, async (req, res, next) => {
+  const { userId } = req.params;
+  const { eventId } = req.params;
+
+  try {
+    let event = await Event.findById(eventId).populate('keeper pet candidates');
+    const pets = event.pet;
+    const {candidates} = event;
+    let allocated = false;
+
+    if (event.keeper) {
+      req.flash('error', 'Sorry. This task is already allocated.');
+      allocated = true;
+    } else {
+      event = await Event.findByIdAndUpdate(eventId, { $set: { keeper: userId } }, { new: true });
+      allocated = true;
+      req.flash('success', "You've just accepted a keeper for your task.");
+      
+    }
+    
+  res.render('events/eventDetails', { event, pets, candidates, allocated });
+    
   } catch (error) {
     next(error);
   }
