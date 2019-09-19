@@ -103,80 +103,90 @@ add geolocation to events when creating - show event in a map in event
 **_User Model_**
 
 ```javascript
-{
-  email: { type: String, required: true, unique: true },
-  hashedPassword: { type: String, required: true },
-  name: { type: String },
-  lastName: { type: String },
-  username: { type: String },
-  phone: Number,
-  mobile: Number,
-  secondaryPhone: Number,
-  address: [{
-    street: { type: String },
-    number: Number,
-    zipcode: Number,
-    city: { type: String },
-  }],
-  img: { type: String },
-},
+ {
+    email: { type: String, required: true, unique: true },
+    hashedPassword: { type: String, required: true },
+    name: { type: String },
+    lastName: { type: String },
+  
+    phone: { type: String },
+    mobile: { type: String },
+    secondaryPhone: { type: String },
+    address: [
+      {
+        street: { type: String },
+        number: Number,
+        zipcode: Number,
+        location: { type: String },
+      },
+    ],
+    img: { type: String },
+    events: [{ type: Schema.Types.ObjectId, ref: 'Event' }],
+    owner: { type: Boolean, default: false },
+    keeper: { type: Boolean, default: false },
+  },
 
-{
-  timestamps: true
-}
+  {
+    timestamps: true,
+  }
+
 
 ```
 
 **_Event Model_**
 
 ```javascript
-{ 
-	owner: Schema.Types.ObjectId, /*ObjectId<User>*/
-	title: String,
-	description: String
-	creationEventDate: Date.now(),
-            initialDateTime: Date
-            finalDateTime: Date
-	location: User Adress,
-    keeper: Schema.Types.ObjectId /*[ObjectId<User>*/
-    pet: [{ type: Schema.Types.ObjectId, ref: Pet }]
-}
-,
 {
-    timestamps: true
-}
+    owner: { type: Schema.Types.ObjectId, ref: User },
+    title: { type: String },
+    description: { type: String },
+    creationEventDate: { type: Date, default: Date.now() },
+    initialDateTime: Date,
+    finalDateTime: Date,
+    pet: [{ type: Schema.Types.ObjectId, ref: Pet }],
+    address: {
+      street: String,
+      number: Number,
+      zipcode: Number,
+      location: String,
+    },
+    candidates: [{ type: Schema.Types.ObjectId, ref: User }],
+    keeper: { type: Schema.Types.ObjectId, ref: User },
+  },
+  {
+    timestamps: true,
+  }
 ```
 
 **_Pet Model_**
 
 ```javascript
-{
-    owner: Schema.Types.ObjectId, /* ObjectId<User>  */
-    petType: String,
+  {
+    owner: { type: Schema.Types.ObjectId, ref: User } /* ObjectId<User> the owner */,
+    petType: { type: String },
     petWeight: Number,
-    petName: String,
+    petName: { type: String },
     petAge: Number,
-    petImg: [String],
-    event:  Schema.Types.ObjectId /*ObjectId<Event>},*/
-},
-{
-    timestamps: true
-}
+    petImg: [{ type: String }],
+  },
+  {
+    timestamps: true,
+  }
 ```
 
 **_Review Model_**
 
 ```
 {
-    owner: Schema.Types.ObjectId /* ObjectId<User> */,
-    event: Schema.Types.ObjectId /* ObjectId<Event> */,
+    owner: { type: Schema.Types.ObjectId, ref: User },
+    event: { type: Schema.Types.ObjectId, ref: Event },
     rating: Number /* “⭐” */,
     comment: { type: String },
-    keeper: Schema.Types.ObjectId, /* ObjectId<User> */
-},
-{
-    timestamps: true
-}`
+    keeper: { type: Schema.Types.ObjectId, ref: User },
+  },
+  {
+    timestamps: true,
+  }
 ```
 
 ### Git

@@ -1,0 +1,16 @@
+{{!-- List of all users --}}
+<h1>Keepers list</h1>
+<a class="button" href="/profile">General Profile</a>
+{{#if users}}
+{{#each users}}
+{{#if this.email}}
+<p>email: {{this.email}}</p>
+{{/if}}
+{{#if users.img}}
+<img src="users.img">
+{{/if}}
+<a href="users/{{this._id}}">Details</a>
+
+{{/each}}
+
+{{/if}}

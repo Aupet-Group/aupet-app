@@ -5,9 +5,40 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>AUPET</title>
+  <link href='http://fonts.googleapis.com/css?family=Raleway:400,500,600' rel='stylesheet' type='text/css'>
   <link rel='stylesheet' href='/stylesheets/style.css' />
+  
 </head>
+
 <body>
+  <header>
+    <div id="logo">
+      <a href="/">
+        <img src="/images/logo.png">
+      </a>
+    </div>    
+
+    <nav id="navigation">
+      <div class="control-menu">
+        <a href="#navigation" class="open"><span>MENU</span></a>
+         <a href="#" class="close"><span>CERRAR</span></a>        
+      </div>
+      
+      <ul class="nav-items">
+        <li><a href="/profile"><span>Profile</span></a></li>
+        {{#if enabled}}
+        <li><a href="/events/myevents"><span>See my own tasks</span></a></li>
+        <li><a href="/logout"><span>Log out</span></a></li>
+        {{else}}
+        <li><a href="/signup"><span>Sign up</span></a></li>
+        <li><a href="/login"><span>Log in</span></a></li>
+        {{/if}}        
+        <li><a href="/events"><span>See all tasks</span></a></li>
+        <li><a href="/keepers"><span>See keepers</span></a></li>
+      </ul>
+    </nav>
+  </header>
+
   {{> messages }}
   {{{body}}}
   

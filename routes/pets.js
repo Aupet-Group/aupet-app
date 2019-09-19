@@ -1,9 +1,18 @@
 const express = require('express');
-
+const Pet = require('../model/pet');
 const router = express.Router();
+const User = require('../model/user');
 const { checkIfLoggedIn } = require('../middlewares/auth');
 
-const Pet = require('../model/pet');
+// Get list all my pets
+router.get('/', async (req, res, next) => {
+  try {
+    const pets = await Pet.find({});
+    res.render('pets/listpets', { pets });
+  } catch (error) {
+    next(error);
+  }
+});
 
 // GET form to create new pet
 
@@ -17,6 +26,7 @@ router.post('/', async (req, res, next) => {
   const { petType, petWeight, petName, petAge, petImg } = req.body;
   console.log(req.session.currentUser);
 
+  const { petId } = req.params;
   const owner = req.session.currentUser._id;
 
   try {
@@ -28,7 +38,7 @@ router.post('/', async (req, res, next) => {
       petAge,
       petImg: ['/images/default.png'],
     });
-    res.redirect('/created');
+    res.render('pets/petDetails', { pet });
   } catch (error) {
     next(error);
   }
@@ -74,11 +84,6 @@ router.post('/:petId', checkIfLoggedIn, async (req, res, next) => {
   } catch (error) {
     next(error);
   }
-});
-
-//
-router.get('/created', (req, res, next) => {
-  res.render('created');
 });
 
 module.exports = router;

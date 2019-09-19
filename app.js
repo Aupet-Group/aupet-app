@@ -12,6 +12,16 @@ const { notifications } = require('./middlewares/auth.js');
 require('dotenv').config();
 
 hbs.registerPartials(path.join(__dirname, '/views/partials'));
+hbs.registerHelper('ifequal', (firstValue, secondValue, options) =>  {
+  if (firstValue === secondValue) { return options.fn(this); }
+  return options.inverse(this);
+});
+
+hbs.registerHelper('ifnotequal', (firstValue, secondValue, options) => {
+  if (firstValue !== secondValue) { return options.fn(this); }
+  return options.inverse(this);
+});
+
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
@@ -26,7 +36,8 @@ mongoose.connect(process.env.MONGODB_URI, {
   useNewUrlParser: true,
   reconnectTries: Number.MAX_VALUE,
   useCreateIndex: true,
-});
+  useFindAndModify: false,
+  });
 
 app.use(
   sassMiddleware({

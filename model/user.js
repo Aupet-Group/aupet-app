@@ -7,7 +7,7 @@ const userSchema = new Schema(
     hashedPassword: { type: String, required: true },
     name: { type: String },
     lastName: { type: String },
-    username: { type: String },
+  
     phone: { type: String },
     mobile: { type: String },
     secondaryPhone: { type: String },
@@ -20,7 +20,9 @@ const userSchema = new Schema(
       },
     ],
     img: { type: String },
-    events: [{  type: Schema.Types.ObjectId, ref: 'Event' }],
+    events: [{ type: Schema.Types.ObjectId, ref: 'Event' }],
+    owner: { type: Boolean, default: false },
+    keeper: { type: Boolean, default: false },
   },
 
   {
