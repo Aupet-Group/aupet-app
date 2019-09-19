@@ -183,13 +183,14 @@ router.get('/:eventId/enroll', checkIfLoggedIn, async (req, res, next) => {
 
 // Get the list of event where is enrolled in as a keeper
 
-router.get('/enrolledin', (req, res, next)=> {
-  const { id } = req.session.currentUser;
-  try{
-    const events = Event.find({keeper :})
-  }
-  catch(error){
-    next(error);
-  }
-});
+// router.get('/enrolledin', (req, res, next)=> {
+//   const { id } = req.session.currentUser;
+//   try{
+//     const events = Event.find({keeper :})
+//   }
+//   catch(error){
+//     next(error);
+//   }
+// });
+
 module.exports = router;
