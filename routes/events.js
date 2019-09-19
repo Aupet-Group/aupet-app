@@ -5,12 +5,13 @@ const User = require('../model/user');
 const { checkIfLoggedIn } = require('../middlewares/auth');
 
 const router = express.Router();
+let ownEvents = false;
 
 // GET all events listing
 router.get('/', async (req, res, next) => {
   try {
     const events = await Event.find({});
-    res.render('events/events', { events });
+    res.render('events/events', { events, ownEvents });
   } catch (error) {
     next(error);
   }
@@ -22,7 +23,8 @@ router.get('/myevents', checkIfLoggedIn, async (req, res, next) => {
   try {
     const events = await Event.find({ owner });
     const enabled = true;
-    res.render('events/events', { events, enabled });
+    ownEvents = true;
+    res.render('events/events', { events, enabled, ownEvents });
   } catch (error) {
     next(error);
   }
@@ -84,9 +86,21 @@ router.post('/', checkIfLoggedIn, async (req, res, next) => {
 router.get('/:eventId', async (req, res, next) => {
   const { eventId } = req.params;
   try {
-    const event = await Event.findById(eventId).populate('pet');
+    const event = await Event.findById(eventId).populate('pet candidates');
     const pets = event.pet;
-    res.render('events/eventDetails', { event, pets });
+    const candidates = event.candidates;
+    // const candidatesIds = event.candidates;
+    // const candidates = candidatesIds.map(async function(id) {
+    //   try {
+    //     let candidate = await User.findOne(id);
+    //     return candidate;
+    //   } catch (error) {
+    //     next(error);
+    //   }     
+    // });
+    console.log(pets);
+    console.log(candidates);
+    res.render('events/eventDetails', { event, pets, candidates, ownEvents });
   } catch (error) {
     next(error);
   }
