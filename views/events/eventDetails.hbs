@@ -3,6 +3,7 @@
 <ul><p>Pet(s):</p>
    {{#each pets}}
    <li>
+     <p id="paw">🐾</p>
      <p>Type: {{ this.petType }} <p/>
      <p>Name: {{ this.petName }}</p>
      <p>Age: {{ this.petAge }} </p>
@@ -16,6 +17,21 @@
 <p>Ends: {{ event.finalDateTime }} </p>
 <p>Owner: {{ event.owner.name }}</p>
 
+<section>
+  <ul><p>Candidates:</p>
+    {{#each candidates}}
+    <li>
+      <p id="whiteCheck">✅</p>
+      <p>Name: {{ this.name }}</p>
+      <p>Email: {{ this.email }} </p>
+      <p>Phone: {{ this.phone }} </p>
+      <button class="accept"><a href="/{{this._id}}/accept">Accept keeper</button>
+    </li>
+    {{/each}}
+  </ul>
+</section>
+
+
 {{#unless ownEvents}}
 <button class="enroll"><a href="/events/{{event._id}}/enroll">Enroll</button>
 {{/unless}}
@@ -23,16 +39,9 @@
 <form action="/events/{{event._id}}/delete" method="POST">
   <input type="submit" value="Delete">
 </form>
-<br>
-<ul><p>Candidates:</p>
-   {{#each candidates}}
-   <li>
-     <p>Name: {{ this.name }}</p>
-     <p>Email: {{ this.email }} </p>
-     <p>Phone: {{ this.phone }} </p>
-    
-   </li>
-   {{/each}}
-</ul>
+
+
+
+
 <button class="events"><a href="/events">All events</button>
 

@@ -86,18 +86,18 @@ router.post('/', checkIfLoggedIn, async (req, res, next) => {
 router.get('/:eventId', async (req, res, next) => {
   const { eventId } = req.params;
   try {
-    const event = await Event.findById(eventId).populate('pet', 'candidates');
+    const event = await Event.findById(eventId).populate('pet candidates');
     const pets = event.pet;
-    const candidatesIds = event.candidates;
-    console.log(candidatesIds);
-    const candidates = candidatesIds.map(async function(id) {
-      try {
-        let candidate = await User.findOne(id);
-        return candidate;
-      } catch (error) {
-        next(error);
-      }     
-    });
+    const candidates = event.candidates;
+    // const candidatesIds = event.candidates;
+    // const candidates = candidatesIds.map(async function(id) {
+    //   try {
+    //     let candidate = await User.findOne(id);
+    //     return candidate;
+    //   } catch (error) {
+    //     next(error);
+    //   }     
+    // });
     console.log(pets);
     console.log(candidates);
     res.render('events/eventDetails', { event, pets, candidates, ownEvents });
