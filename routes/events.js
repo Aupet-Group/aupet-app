@@ -88,18 +88,7 @@ router.get('/:eventId', async (req, res, next) => {
   try {
     const event = await Event.findById(eventId).populate('pet candidates');
     const pets = event.pet;
-    const candidates = event.candidates;
-    // const candidatesIds = event.candidates;
-    // const candidates = candidatesIds.map(async function(id) {
-    //   try {
-    //     let candidate = await User.findOne(id);
-    //     return candidate;
-    //   } catch (error) {
-    //     next(error);
-    //   }     
-    // });
-    console.log(pets);
-    console.log(candidates);
+    const {candidates} = event;
     res.render('events/eventDetails', { event, pets, candidates, ownEvents });
   } catch (error) {
     next(error);
@@ -183,7 +172,7 @@ router.get('/:eventId/enroll', checkIfLoggedIn, async (req, res, next) => {
       if (event.keeper) {
         allocated = true;
       }
-      event.candidates.forEach(candidate => {
+      event.candidates.forEach((candidate) => {
         if (candidate.email == user.email) {
           enrolled = true;
         }
@@ -207,48 +196,31 @@ router.get('/:eventId/enroll', checkIfLoggedIn, async (req, res, next) => {
 });
 
 // GET accept a keeper
-router.get('/:userId/accept', checkIfLoggedIn, async (req, res, next) => {
+router.get('/:eventId/accept/:userId', checkIfLoggedIn, async (req, res, next) => {
+  const { userId } = req.params;
   const { eventId } = req.params;
-  const userId = res.locals.currentUser._id;
+
   try {
-    const owner = await User.findById(userId);
-    const event = await Event.findById(eventId).populate('owner candidates keeper');
+    let event = await Event.findById(eventId).populate('keeper pet candidates');
+    const pets = event.pet;
+    const {candidates} = event;
+    let allocated = false;
 
-    if (user._id.equals(event.owner._id)) {
-      req.flash('error', "The owner can't enroll in his/her own event.");
+    if (event.keeper) {
+      req.flash('error', 'Sorry. This task is already allocated.');
+      allocated = true;
     } else {
-
-      let enrolled = false;
-      let allocated = false;
-
-      if (event.keeper) {
-         allocated = true;
-        };
-      event.candidates.forEach((candidate) => {
-        if (candidate.email == user.email) {
-         enrolled = true;
-        }
-        });        
-      if (!allocated) {
-        if (!enrolled) {
-          
-          // Add user to candidates array
-          event = await Event.findByIdAndUpdate(eventId, { $push: { candidates: [userId] } }, { new: true });
-          req.flash('success', "You've just been enrolled. Wait to be accepted by the owner.");
-        }
-        else {
-          req.flash('error', "You are already enrolled. Wait to be accepted by the owner.");
-        }        
-      } else {
-        req.flash('error', "Sorry. The task is already allocated to other keeper. Try with another task.");
-      }
+      event = await Event.findByIdAndUpdate(eventId, { $set: { keeper: userId } }, { new: true });
+      allocated = true;
+      req.flash('success', "You've just accepted a keeper for your task.");
+      
     }
-    res.redirect(`/events/${eventId}`);
+    
+  res.render('events/eventDetails', { event, pets, candidates, allocated });
+    
   } catch (error) {
     next(error);
   }
 });
-  
-
 
 module.exports = router;

@@ -8,7 +8,7 @@
     <p>{{ this.address.location }}</p>
     <p>{{ this.initialDateTime }} </p>
     <p>{{ this.finalDateTime }} </p>
-    {{#unless ownEvents}}
+    {{#unless ../ownEvents}}
     <button class="enroll"><a href="/events/{{this._id}}/enroll">Enroll</button>
     {{/unless}}
     <button class="details"><a
