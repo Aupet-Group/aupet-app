@@ -39,11 +39,23 @@ router.get('/new', checkIfLoggedIn, async (req, res, next) => {
   }
 });
 
+// Get de list where de user are enrolled in as a keeper or as a candidate
+
+router.get('/enrolledin', checkIfLoggedIn, async (req, res, next) => {
+  try {
+    console.log(req.session.currentUser._id);
+    const { _id } = req.session.currentUser;
+    const events = await Event.find({ $or: [{ candidates: _id }, { keeper: _id }] });
+    console.log(events);
+    res.render('events/enrolledin', { events, _id });
+  } catch (error) {
+    next(error);
+  }
+});
+
 // POST new event
 router.post('/', checkIfLoggedIn, async (req, res, next) => {
-  const {
-    title, description, selectedPet, initialDateTime, finalDateTime, location,
-  } = req.body;
+  const { title, description, selectedPet, initialDateTime, finalDateTime, location } = req.body;
   const owner = res.locals.currentUser._id;
   try {
     if (selectedPet === 'All') {
@@ -100,9 +112,7 @@ router.get('/:eventId/update', checkIfLoggedIn, async (req, res, next) => {
 router.post('/:eventId', checkIfLoggedIn, async (req, res, next) => {
   const { eventId } = req.params;
   const owner = res.locals.currentUser._id;
-  const {
-    title, description, selectedPet, initialDateTime, finalDateTime, location,
-  } = req.body;
+  const { title, description, selectedPet, initialDateTime, finalDateTime, location } = req.body;
   try {
     if (selectedPet === 'All') {
       pet = await Pet.find({ owner });
@@ -147,7 +157,7 @@ router.get('/:eventId/enroll', checkIfLoggedIn, async (req, res, next) => {
   const userId = res.locals.currentUser._id;
   try {
     const user = await User.findById(userId);
-    const event = await Event.findById(eventId).populate('owner candidates keeper');
+    let event = await Event.findById(eventId).populate('owner candidates keeper');
 
     if (user._id.equals(event.owner._id)) {
       req.flash('error', "The owner can't enroll in his/her own event.");
@@ -158,7 +168,7 @@ router.get('/:eventId/enroll', checkIfLoggedIn, async (req, res, next) => {
       if (event.keeper) {
         allocated = true;
       }
-      event.candidates.forEach((candidate) => {
+      event.candidates.forEach(candidate => {
         if (candidate.email == user.email) {
           enrolled = true;
         }
@@ -176,16 +186,6 @@ router.get('/:eventId/enroll', checkIfLoggedIn, async (req, res, next) => {
       }
     }
     res.redirect(`/events/${eventId}`);
-  } catch (error) {
-    next(error);
-  }
-});
-
-
-router.get('/enrolledin', (req, res, next) => {
-  const { id: keeper } = req.session.currentUser;
-  try {
-    const events = Event.find({}).populate('user');
   } catch (error) {
     next(error);
   }
