@@ -185,7 +185,7 @@ router.get('/:eventId/enroll', checkIfLoggedIn, async (req, res, next) => {
 router.get('/enrolledin', (req, res, next) => {
   const { id: keeper } = req.session.currentUser;
   try {
-    const events = Event.find().populate('user');
+    const events = Event.find({}).populate('user');
   } catch (error) {
     next(error);
   }
