@@ -45,22 +45,6 @@ p {
   display: flex;
   flex-direction: column; }
 
-.home-topnav {
-  max-width: 100%;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  padding: 1rem 1rem;
-  border-bottom: 1px solid #000000; }
-  .home-topnav .home-logo {
-    width: 25%; }
-    .home-topnav .home-logo img {
-      width: 100%; }
-  .home-topnav .home-hmenu {
-    width: 10%; }
-    .home-topnav .home-hmenu img {
-      width: 100%; }
-
 .home-event-finder {
   width: 100%;
   background-image: url("../images/top_img.jpg");
@@ -256,5 +240,86 @@ button {
     color: white;
     text-decoration: none;
     text-align: center; }
+
+header {
+  box-sizing: border-box;
+  margin: 0 auto;
+  padding-top: 15px;
+  max-width: 500px;
+  width: 100%; }
+  header div {
+    float: left;
+    padding: 0 0 0.2em; }
+  header a {
+    color: #222;
+    text-decoration: none; }
+  header ul, header li {
+    list-style: outside none none; }
+  header div#logo img {
+    height: 40px;
+    margin-left: 0.5em; }
+
+.control-menu {
+  background-color: transparent;
+  background-position: center center;
+  display: block;
+  float: right;
+  height: 40px;
+  margin-right: 0.5em;
+  width: 40px; }
+  .control-menu a span {
+    display: inline-block;
+    height: 40px;
+    text-indent: -9999px;
+    width: 40px; }
+  .control-menu .close {
+    background-image: url("../images/close.png");
+    background-size: contain;
+    background-position: center center;
+    background-repeat: no-repeat;
+    display: none; }
+  .control-menu .open {
+    background-image: url("../images/open.png");
+    background-size: contain;
+    background-position: center center;
+    background-repeat: no-repeat;
+    display: block; }
+
+#navigation:target ul.nav-items {
+  font-family: "Raleway",Arial,sans-serif;
+  background: #f0f0f0 none repeat scroll 0 0;
+  height: 15.8em;
+  transition: height 0.4s ease-in-out 0s, background-color 0.9s ease 0s; }
+
+.close {
+  display: none; }
+
+#navigation:target .open {
+  display: none; }
+
+#navigation:target .close {
+  display: block; }
+
+ul.nav-items {
+  clear: both;
+  height: 0;
+  overflow: hidden;
+  transition: height 0.4s ease-in-out 0s, background-color 2s ease 0s; }
+  ul.nav-items li {
+    display: block; }
+  ul.nav-items a {
+    border-top: 2px dotted #dddbdb;
+    color: #333;
+    display: block;
+    height: 3em;
+    line-height: 3em;
+    margin: 0 1.3em; }
+  ul.nav-items li:first-child a {
+    border-top: 2px solid transparent; }
+  ul.nav-items li a span {
+    border-left: 3px solid;
+    height: 3.2em;
+    padding: 0.4em 0.5em;
+    border-color: #f44336; }
 
 /*# sourceMappingURL=style.css.map */
