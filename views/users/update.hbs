@@ -1,10 +1,6 @@
-{{user}}
 <h1>Edit Profile</h1>
 <form action="/" method="POST" id="form">
-    <div>
-        <label for="username">Username</label>
-        <input type="username" name="username" value="{{user.username}}">
-    </div>
+   
     <div>
         <label for="name">Name</label>
         <input type="text" name="name" value="{{user.name}}">
@@ -30,16 +26,11 @@
         <input type="tel" name="secondaryPhone" value="{{user.secondaryPhone}}">
     </div>
     <div>
-        {{!-- <label for="owner"><input type="checkbox" name="owner" value="{{user.owner}}">Owner</label> --}}
-        {{!-- <input type="checkbox" name="owner" {{bindAttr checked="user.owner"}}> --}}
-        <label for="owner"><input type="checkbox" name="owner" value="checked" {{owner}} >Owner</label>
-        
+        <label for="owner"><input type="checkbox" name="owner" value="checked" {{owner}}>Owner</label>
     </div>
 
     <div>
-        {{!-- <label for="Keeper"><input type="checkbox" name="keeper" value="{{user.keeper}}">Keeper</label> --}}
-        {{!-- <input type="checkbox" name="keeper" {{bindAttr checked="user.owner"}}> --}}
-        <label for="keeper"><input type="checkbox" name="keeper" value="checked" {{keeper}} >Keeper</label>
+        <label for="keeper"><input type="checkbox" name="keeper" value="checked" {{keeper}}>Keeper</label>
     </div>
 
     <div>
@@ -49,3 +40,4 @@
     </div>
     <button class="button" type="submit">Update</button>
 </form>
+ <a class="button" href="/profile">Back to profile w/o update</a>
