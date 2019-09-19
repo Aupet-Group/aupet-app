@@ -19,13 +19,18 @@
 
 <section>
   <ul><p>Candidates:</p>
+  
     {{#each candidates}}
-    <li>
+    <li>      
+      {{#if ../allocated}}
+      <p id="ok">🆗</p>
+      {{else}}
       <p id="whiteCheck">✅</p>
+      {{/if}}
       <p>Name: {{ this.name }}</p>
       <p>Email: {{ this.email }} </p>
       <p>Phone: {{ this.phone }} </p>
-      <button class="accept"><a href="/{{this._id}}/accept">Accept keeper</button>
+      <button class="accept"><a href="/events/{{../event._id}}/accept/{{this._id}}">Accept keeper</button>
     </li>
     {{/each}}
   </ul>
@@ -39,8 +44,6 @@
 <form action="/events/{{event._id}}/delete" method="POST">
   <input type="submit" value="Delete">
 </form>
-
-
 
 
 <button class="events"><a href="/events">All events</button>
