@@ -22,7 +22,8 @@ router.get('/myevents', checkIfLoggedIn, async (req, res, next) => {
   const owner = res.locals.currentUser._id;
   try {
     const events = await Event.find({ owner });
-    res.render('events/events', { events });
+    const enabled = true;
+    res.render('events/events', { events, enabled });
   } catch (error) {
     next(error);
   }
@@ -33,7 +34,8 @@ router.get('/new', checkIfLoggedIn, async (req, res, next) => {
   const owner = res.locals.currentUser._id;
   try {
     const pets = await Pet.find({ owner });
-    res.render('events/newevent', { pets });
+    const enabled = true;
+    res.render('events/newevent', { pets, enabled });
   } catch (error) {
     next(error);
   }
@@ -84,8 +86,9 @@ router.get('/:eventId/update', checkIfLoggedIn, async (req, res, next) => {
   try {
     const event = await Event.findById(eventId).populate('pet');
     const pets = event.pet;
+    const enabled = true;
     if (userId == event.owner) {
-      res.render('events/edit', { event, pets });
+      res.render('events/edit', { event, pets, enabled });
     } else {
       req.flash('error', "You can't edit this event.");
     }
@@ -143,8 +146,8 @@ router.get('/:eventId/enroll', checkIfLoggedIn, async (req, res, next) => {
   const userId = res.locals.currentUser._id;
   try {
     const user = await User.findById(userId);
-    const event = await Event.findById(eventId).populate('owner candidates keeper');
-
+    let event = await Event.findById(eventId).populate('owner candidates keeper');
+    
     if (user._id.equals(event.owner._id)) {
       req.flash('error', "The owner can't enroll in his/her own event.");
     } else {
