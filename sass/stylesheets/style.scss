@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro&display=swap');
-
+// @import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Quicksand&display=swap');
+//font-family: 'Quicksand', sans-serif;
+@import url('https://fonts.googleapis.com/css?family=Raleway&display=swap');
+//font-family: 'Raleway', sans-serif;
 
 // Layout
 
@@ -16,14 +20,13 @@ body {
   width: 100%;
   border-left: 2px solid;
   border-right: 2px solid;
-  border-color: #dddbdb; 
-  
+  border-color: #dddbdb;
 }
 
 .main-container {
   padding: 10px;
   min-height: 900px;
-  background-color: #f3f3f3; 
+  background-color: #f3f3f3;
 }
 
 h2 {
@@ -60,7 +63,8 @@ header {
     text-decoration: none;
   }
 
-  ul, li {
+  ul,
+  li {
     list-style: outside none none;
   }
 
@@ -68,7 +72,6 @@ header {
     height: 40px;
     margin-left: 0.5em;
   }
-
 }
 
 .control-menu {
@@ -88,7 +91,7 @@ header {
   }
 
   .close {
-    background-image: url("../images/close.png");
+    background-image: url('../images/close.png');
     background-size: contain;
     background-position: center center;
     background-repeat: no-repeat;
@@ -96,7 +99,7 @@ header {
   }
 
   .open {
-    background-image: url("../images/open.png");
+    background-image: url('../images/open.png');
     background-size: contain;
     background-position: center center;
     background-repeat: no-repeat;
@@ -105,21 +108,19 @@ header {
 }
 
 #navigation:target ul.nav-items {
-  font-family: "Raleway",Arial,sans-serif;
+  font-family: 'Raleway', Arial, sans-serif;
   background: #f0f0f0 none repeat scroll 0 0;
   height: 15.8em;
-  transition: height 0.4s ease-in-out 0s, background-color 0.9s ease 0s; 
-
+  transition: height 0.4s ease-in-out 0s, background-color 0.9s ease 0s;
 }
 
-.close { 
-  display:none;
-}
-      
-#navigation:target .open {
+.close {
   display: none;
 }
 
+#navigation:target .open {
+  display: none;
+}
 
 #navigation:target .close {
   display: block;
@@ -129,7 +130,7 @@ ul.nav-items {
   clear: both;
   height: 0;
   overflow: hidden;
-  transition: height 0.4s ease-in-out 0s, background-color 2s ease 0s; 
+  transition: height 0.4s ease-in-out 0s, background-color 2s ease 0s;
 
   li {
     display: block;
@@ -161,7 +162,7 @@ ul.nav-items {
 footer {
   padding: 15px;
   height: 45px;
-  background: #5592c3;  
+  background: #5592c3;
 }
 
 .footer-icons {
@@ -170,7 +171,7 @@ footer {
   div {
     display: inline-block;
     padding: 5px;
-    
+
     img {
       height: 35px;
     }
@@ -188,7 +189,6 @@ footer {
     text-decoration: none;
   }
 }
-
 
 // Error messages
 
@@ -216,7 +216,6 @@ footer {
 .dangerMessages {
   color: violet;
 }
-
 
 // Home page
 
@@ -417,8 +416,6 @@ button {
   }
 }
 
-
-
 .button {
   border-radius: 15px;
   border: none;
@@ -454,8 +451,95 @@ button {
   }
   p {
     font-size: 25px;
-    text-align: center; 
+    text-align: center;
   }
 }
+// Buttons
 
+.btn-block {
+  display: block;
+  margin: 0 auto;
+  width: 100%;
+}
 
+.button-blue {
+  width: 25%;
+  font-size: 15px;
+  font-weight: 700;
+  color: #fff !important;
+  text-transform: uppercase;
+  text-decoration: none;
+  background: #5592c3;
+  padding: 10px;
+  border-radius: 20px;
+  display: inline-block;
+  border: none;
+  transition: all 0.4s ease 0s;
+}
+
+.button-blue:hover {
+  text-shadow: 0px 0px 6px rgba(255, 255, 255, 1);
+  -webkit-box-shadow: 0px 5px 40px -10px rgba(0, 0, 0, 0.57);
+  -moz-box-shadow: 0px 5px 40px -10px rgba(0, 0, 0, 0.57);
+  transition: all 0.4s ease 0s;
+}
+
+.button-grey {
+  width: 25%;
+  font-size: 15px;
+  font-weight: 700;
+  color: #fff !important;
+  text-transform: uppercase;
+  text-decoration: none;
+  background: #999999;
+  padding: 10px;
+  border-radius: 20px;
+  display: inline-block;
+  border: none;
+  transition: all 0.4s ease 0s;
+}
+
+.button-grey:hover {
+  text-shadow: 0px 0px 6px rgba(255, 255, 255, 1);
+  -webkit-box-shadow: 0px 5px 40px -10px rgba(0, 0, 0, 0.57);
+  -moz-box-shadow: 0px 5px 40px -10px rgba(0, 0, 0, 0.57);
+  transition: all 0.4s ease 0s;
+}
+
+.button-red {
+  width: 25%;
+  font-size: 15px;
+  font-weight: 700;
+  color: #fff !important;
+  text-transform: uppercase;
+  text-decoration: none;
+  background: #f44336;
+  padding: 10px;
+  border-radius: 20px;
+  display: inline-block;
+  border: none;
+  transition: all 0.4s ease 0s;
+}
+
+.button-red:hover {
+  text-shadow: 0px 0px 6px rgba(255, 255, 255, 1);
+  -webkit-box-shadow: 0px 5px 40px -10px rgba(0, 0, 0, 0.57);
+  -moz-box-shadow: 0px 5px 40px -10px rgba(0, 0, 0, 0.57);
+  transition: all 0.4s ease 0s;
+}
+
+// Pets view
+.container-view {
+  background-color: #f3f3f3;
+  padding: 0 10px;
+}
+
+.input-font {
+  font-size: 1.3rem;
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 600;
+}
+
+.input-container {
+  padding: 10px;
+}
