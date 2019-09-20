@@ -13,17 +13,18 @@
   <p>Secondary Phone:{{user.secondaryPhone}}</p>
 
   {{#if enabled}}
-  <a class="button" href="profile/update">Edit Profile</a>
-  <a class="button" href="/events/myevents">My tasks</a>
-  <a class="button" href="/events/enrolledin">Enrolled in</a>
-  <a class="button" href="/pets/new">Add a pet</a>
-  <a class="button" href="/events/new">Add a task</a>
-  <a class="button" href="/events/">See all tasks</a>
+  <button><a href="/profile/update">Edit profile</button>
+  <button><a href="/events/myevents">My tasks</button>
+  <button><a href="/events/enrolledin">Enrolled in</button>
+  <button><a href="/pets/new">Add a pet</button>
+  <button><a href="/events/new">Add a task</button>
+  <button><a href="/events/">See all tasks</button>
   {{/if}}
 
-  <a class="button" href="/keepers">See Keepers</a>
-  <a class="button" href="/logout">LOGOUT</a>
+  <button><a href="/keepers">See Keepers</button>
+  <button><a href="/logout">LOGOUT</button>
+  
   {{#unless enabled}}
-  <a class="button" href="/profile">General Profile</a>
+  <button><a href="/profile">My profile</button>
   {{/unless}}
 </div>
