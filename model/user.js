@@ -15,7 +15,7 @@ const userSchema = new Schema(
       {
         street: { type: String },
         number: Number,
-        zipcode: Number,
+        zipcode: { type: String },
         location: { type: String },
       },
     ],

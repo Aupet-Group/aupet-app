@@ -1,0 +1,14 @@
+<h1>List of keeper searched by zip code.</h1>
+{{#if keepers}}
+<h1>found {{../keepers.length}} keeper near your ZIP code.</h1>
+{{#each keepers}}
+    {{this.name}}
+{{/each}}
+
+
+{{#else}}
+<h1>We are sorry but we have not located any pet keeper near you.</h1>
+{{/if}}
+<h2>Log in or register on our website to enjoy all its options</h2>
+<a class="button" href="/login">Log in</a>
+<a class="button" href="/signup">Sign up</a>
