@@ -454,3 +454,92 @@ button {
     text-align: center;
   }
 }
+// Buttons
+
+.btn-block {
+  display: block;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.button-blue {
+  width: 25%;
+  font-size: 15px;
+  font-weight: 700;
+  color: #fff !important;
+  text-transform: uppercase;
+  text-decoration: none;
+  background: #5592c3;
+  padding: 10px;
+  border-radius: 20px;
+  display: inline-block;
+  border: none;
+  transition: all 0.4s ease 0s;
+}
+
+.button-blue:hover {
+  text-shadow: 0px 0px 6px rgba(255, 255, 255, 1);
+  -webkit-box-shadow: 0px 5px 40px -10px rgba(0, 0, 0, 0.57);
+  -moz-box-shadow: 0px 5px 40px -10px rgba(0, 0, 0, 0.57);
+  transition: all 0.4s ease 0s;
+}
+
+.button-grey {
+  width: 25%;
+  font-size: 15px;
+  font-weight: 700;
+  color: #fff !important;
+  text-transform: uppercase;
+  text-decoration: none;
+  background: #999999;
+  padding: 10px;
+  border-radius: 20px;
+  display: inline-block;
+  border: none;
+  transition: all 0.4s ease 0s;
+}
+
+.button-grey:hover {
+  text-shadow: 0px 0px 6px rgba(255, 255, 255, 1);
+  -webkit-box-shadow: 0px 5px 40px -10px rgba(0, 0, 0, 0.57);
+  -moz-box-shadow: 0px 5px 40px -10px rgba(0, 0, 0, 0.57);
+  transition: all 0.4s ease 0s;
+}
+
+.button-red {
+  width: 25%;
+  font-size: 15px;
+  font-weight: 700;
+  color: #fff !important;
+  text-transform: uppercase;
+  text-decoration: none;
+  background: #f44336;
+  padding: 10px;
+  border-radius: 20px;
+  display: inline-block;
+  border: none;
+  transition: all 0.4s ease 0s;
+}
+
+.button-red:hover {
+  text-shadow: 0px 0px 6px rgba(255, 255, 255, 1);
+  -webkit-box-shadow: 0px 5px 40px -10px rgba(0, 0, 0, 0.57);
+  -moz-box-shadow: 0px 5px 40px -10px rgba(0, 0, 0, 0.57);
+  transition: all 0.4s ease 0s;
+}
+
+// Pets view
+.container-view {
+  background-color: #f3f3f3;
+  padding: 0 10px;
+}
+
+.input-font {
+  font-size: 1.3rem;
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 600;
+}
+
+.input-container {
+  padding: 10px;
+}
