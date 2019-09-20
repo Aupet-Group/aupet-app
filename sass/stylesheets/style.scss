@@ -398,7 +398,7 @@ footer {
 
   .home-button {
     display: flex;
-    justify-content:center;
+    justify-content: center;
   }
 
   .home-joinus-background {
@@ -433,9 +433,52 @@ footer {
     button {
       min-width: 100px;
     }
-
   }
-    
+}
+
+.candidates {
+  display: inline-flex;
+  justify-content: space-around;
+  width: 100%;
+  margin-left: -20px;
+  padding: 20px;
+
+  div {
+    width: 50%;
+    align-items: center;
+        
+    button {
+      min-width: 100px;
+    }
+  }
+}
+
+.left {
+  width: 10%;
+}
+
+.middle {
+  width: 60%;
+}
+
+.right {
+  width: 30%;
+  float: right;
+
+  
+}
+
+.bottom-img {
+  display: block;
+  margin: auto;
+  max-width: 450px;
+}
+
+.centred-btn {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding-bottom: 20px;
 }
 
 

@@ -1,57 +1,88 @@
 <h1>{{ event.title }} </h1>
+<div class="subtitle">
+<p class="paw">🐾🐾🐾🐾🐾🐾</p>
+</div>
 <section>
-<p>{{ event.description }}</p>
-<ul><p>Pet(s):</p>
-   {{#each pets}}
-   <li>
-     <p id="paw">🐾</p>
-     <p>Type: {{ this.petType }} <p/>
-     <p>Name: {{ this.petName }}</p>
-     <p>Age: {{ this.petAge }} </p>
-     <p>Weight: {{ this.petWeight }} </p>
-    
-   </li>
-   {{/each}}
-</ul>
-<p>Location: {{ event.address.location }}</p>
-<p>Starts: {{ event.initialDateTime }} </p>
-<p>Ends: {{ event.finalDateTime }} </p>
-<p>Owner: {{ event.owner.name }}</p>
-
-
-
-{{!-- {{#unless ownEvents}} --}}
-<button class="enroll"><a href="/events/{{event._id}}/enroll">Enroll</button>
-{{!-- {{/unless}} --}}
-<div></div>
-<button class="edit"><a href="/events/{{event._id}}/update">Edit</button>
-<form action="/events/{{event._id}}/delete" method="POST">
-  <button type="submit" value="Delete">Delete</button>
-</form>
-</section>
-
-<div></div>
-
-<section>
-  <ul><p>Candidates:</p>
-  
-    {{#each candidates}}
-    <li>      
-      {{#if ../allocated}}
-      <p id="ok">🆗</p>
-      {{else}}
-      <p id="whiteCheck">✅</p>
-      {{/if}}
-      <p>Name: {{ this.name }}</p>
-      <p>Email: {{ this.email }} </p>
-      <p>Phone: {{ this.phone }} </p>
-      <button class="accept"><a href="/events/{{../event._id}}/accept/{{this._id}}">Accept keeper</button>
+  <p>{{ event.description }}</p>
+  <ul class="events">
+    {{#each pets}}
+    <li>
+      <p id="paw">🐾</p>
+      <p>Type: {{ this.petType }} <p/>
+      <p>Name: {{ this.petName }}</p>
+      <p>Age: {{ this.petAge }} </p>
+      <p>Weight: {{ this.petWeight }} </p>    
     </li>
     {{/each}}
   </ul>
+  <p>Location: {{ event.address.location }}</p>
+  <p>Starts: {{ event.initialDateTime }} </p>
+  <p>Ends: {{ event.finalDateTime }} </p>
+  <p>Owner: {{ event.owner.name }}</p>
+
+  <div class="events-btns-inline">
+    <div class="left-btn">
+       <button class="edit button-grey"><a href="/events/{{event._id}}/update">Edit</button>
+    </div>
+    <div class="right-btn">
+      <form action="/events/{{event._id}}/delete" method="POST">
+         <button class="button-red" type="submit" value="Delete">Delete</button>
+     </form>
+    </div>
+  </div>
+
+
+  <div class="centred-btn">
+{{!-- {{#unless ownEvents}} --}}
+     <button id="enroll" class="home-button button-grey"><a href="/events/{{event._id}}/enroll">Enroll</button>
+{{!-- {{/unless}} --}}
+  </div>
+   
 </section>
 
-<button class="events"><a href="/events/myevents">Back to my tasks</button>
 <div></div>
-<button class="events"><a href="/events">All tasks</button>
+
+<section>
+  {{#if candidates}}
+  <ul class="events"><h3>Candidates:</h3>  
+    {{#each candidates}}
+      <li>
+        <div class="candidates">     
+
+           <div class="left">
+              {{#if ../allocated}}
+                <p id="ok">🆗</p>
+              {{else}}
+                <p id="whiteCheck">✅</p>
+              {{/if}}
+           </div>     
+
+           <div class="middle">
+              
+               <p>Name: {{ this.name }}</p>
+               <p>Email: {{ this.email }} </p>
+               <p>Phone: {{ this.phone }} </p>
+            
+           </div>                  
+               
+          <div class="right">
+             <button class="button-grey"><a href="/events/{{../event._id}}/accept/{{this._id}}">Accept keeper</button>
+          </div>  
+
+       </div>
+      </li>       
+    {{/each}}
+  </ul>
+ {{/if}} 
+</section>
+
+<div>
+  <img class="bottom-img" src="/images/pets1.png">
+</div>
+<div class="events-btns-inline">
+  <div class="left-btn"><button class="button-blue"><a href="/events/myevents">Back to my tasks</button></div>
+  <div></div>
+  <div class="right-btn"><button class="button-blue"><a href="/events">All tasks</button></div>
+</div>
+
 
