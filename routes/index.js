@@ -9,6 +9,8 @@ router.get('/', (req, res, next) => {
   res.render('index', { title: 'Express' });
 });
 
+//you don't need to be loged in
+
 router.post('/searchbar', (req, res, next) => {
   const { zipcode } = req.body;
   const keepers = User.find({ zipcode, keeper: true });
@@ -16,8 +18,10 @@ router.post('/searchbar', (req, res, next) => {
   res.redirect('/list');
 });
 
+//you don't need to be loged in
 router.get('/list', (req,res, next)=>{
   const { keepers} = res.locals.currentUser;
+  
   console.log(keepers);
 });
 module.exports = router;

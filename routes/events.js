@@ -59,7 +59,9 @@ router.get('/enrolledin', checkIfLoggedIn, async (req, res, next) => {
 
 // POST new event
 router.post('/', checkIfLoggedIn, async (req, res, next) => {
-  const { title, description, selectedPet, initialDateTime, finalDateTime, location } = req.body;
+  const {
+    title, description, selectedPet, initialDateTime, finalDateTime, location,
+  } = req.body;
   const owner = res.locals.currentUser._id;
   try {
     if (selectedPet === 'All') {
@@ -88,9 +90,11 @@ router.get('/:eventId', isValidID('eventId'), async (req, res, next) => {
   const { eventId } = req.params;
   try {
     const event = await Event.findById(eventId).populate('pet candidates');
-    const pets = event.pet;   
-    const {candidates} = event;
-    res.render('events/eventDetails', { event, pets, candidates, ownEvents });
+    const pets = event.pet;
+    const { candidates } = event;
+    res.render('events/eventDetails', {
+      event, pets, candidates, ownEvents,
+    });
   } catch (error) {
     next(error);
   }
@@ -118,7 +122,9 @@ router.get('/:eventId/update', checkIfLoggedIn, isValidID('eventId'), async (req
 router.post('/:eventId', checkIfLoggedIn, isValidID('eventId'), async (req, res, next) => {
   const { eventId } = req.params;
   const owner = res.locals.currentUser._id;
-  const { title, description, selectedPet, initialDateTime, finalDateTime, location } = req.body;
+  const {
+    title, description, selectedPet, initialDateTime, finalDateTime, location,
+  } = req.body;
   try {
     if (selectedPet === 'All') {
       pet = await Pet.find({ owner });
@@ -204,7 +210,7 @@ router.get('/:eventId/accept/:userId', checkIfLoggedIn, async (req, res, next) =
   try {
     let event = await Event.findById(eventId).populate('keeper pet candidates');
     const pets = event.pet;
-    const {candidates} = event;
+    const { candidates } = event;
     let allocated = false;
 
     if (event.keeper) {
@@ -214,11 +220,10 @@ router.get('/:eventId/accept/:userId', checkIfLoggedIn, async (req, res, next) =
       event = await Event.findByIdAndUpdate(eventId, { $set: { keeper: userId } }, { new: true });
       allocated = true;
       req.flash('success', "You've just accepted a keeper for your task.");
-      
     }
-    
-  res.render('events/eventDetails', { event, pets, candidates, allocated });
-    
+    res.render('events/eventDetails', {
+      event, pets, candidates, allocated,
+    });
   } catch (error) {
     next(error);
   }
