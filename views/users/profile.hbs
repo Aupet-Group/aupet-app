@@ -1,12 +1,11 @@
 <div class="home-container">
   {{#if enabled}}
-  <h1>View your profile</h1>
+  <h1>My profile</h1>
   {{else}}
-  <h1>View the keeper profile detail</h1>
+  <h1>{{user.name}}'s profile detail</h1>
   {{/if}}
-
-  <p>Name: {{user.name}}</p>
   <img src="{{user.img}}">
+  <p>Name: {{user.name}}</p>
   <p>Last Name: {{user.lastName}}</p>
   <p>email: {{user.email}}</p>
   <p>Phone: {{user.phone}}</p>
@@ -15,11 +14,11 @@
 
   {{#if enabled}}
   <a class="button" href="profile/update">Edit Profile</a>
-  <a class="button" href="/events/myevents">My events</a>
+  <a class="button" href="/events/myevents">My tasks</a>
   <a class="button" href="/events/enrolledin">Enrolled in</a>
-  <a class="button" href="/pets/new">Add pet</a>
-  <a class="button" href="/events/new">Add Event</a>
-  <a class="button" href="/events/">See events</a>
+  <a class="button" href="/pets/new">Add a pet</a>
+  <a class="button" href="/events/new">Add a task</a>
+  <a class="button" href="/events/">See all tasks</a>
   {{/if}}
 
   <a class="button" href="/keepers">See Keepers</a>

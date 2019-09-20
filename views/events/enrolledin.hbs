@@ -1,4 +1,4 @@
-<h1>EVENTS ENROLLED IN</h1>
+<h1>TASKS I'M ENROLLED IN</h1>
 
 <ul>
     {{#each events}}
@@ -10,8 +10,9 @@
         {{#ifequal _id this.keeper}}
          <h2>You are the keeper selectec</h2>
         {{/ifequal}}
-        <a class="button" href="/events/{{this._id}}">Details</button>
+        <button><a href="/events/{{this._id}}">Details</button>
     </li>
     {{/each}}
 </ul>
-<a class="button" href="/profile">Back to profile</a>
+<button><a href="/profile">Back to profile</button>
+<button class="events"><a href="/events">All tasks</button>
