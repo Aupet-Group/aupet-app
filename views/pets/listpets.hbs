@@ -1,8 +1,12 @@
 <h1>PETS</h1>
+<div class="pets-container">
 
-<button class=""><a href="/pets/new">Add a pet</button>
-<ul>
-    {{#each pets}}
+    <button class=""><a href="/pets/new">Add a pet</button>
+    <ul>
+        {{#each pets}}
+</div> <img class="img-rounded" src="{{this.img}}" width="140" height="140">
+<div>
+
     <li>
         <a href="/pets/{{pet._id}}">Pet name:{{ this.petName }} </a>
         <p> Pet type: {{this.petType }}</p>
@@ -16,5 +20,6 @@
 
     </li>
     {{/each}}
-</ul>
-<button><a href="/profile">Back to profile</button>
+    </ul>
+    <button><a href="/profile">Back to profile</button>
+</div>
