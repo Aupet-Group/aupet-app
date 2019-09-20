@@ -266,6 +266,11 @@ button {
   color: white;
   font-size: 1.2rem;
   margin: 3% 30%;
+
+  a {
+    text-decoration: none;
+    color: white;
+  }
 }
 
 .home-services {
@@ -391,23 +396,10 @@ button {
   }
 
   .home-button {
-    display: block;
-    background: #5592c3;
-    margin: 4% 35%;
-    border-radius: 15px;
-    border: none;
-
-    a,
-    a:visited {
-      padding: 8% 8%;
-      display: block;
-      text-align: center;
-      text-decoration: none;
-      color: white;
-      font-size: 1.2rem;
-      border-radius: 15px;
-    }
+    display: flex;
+    justify-content:center;
   }
+
   .home-joinus-background {
     height: 30vh;
     background-image: url('../images/buttom_img.png');
@@ -416,22 +408,6 @@ button {
   }
 }
 
-.button {
-  border-radius: 15px;
-  border: none;
-  background: #5592c3;
-  margin: 1% 30% 1% 30%;
-  text-align: center;
-  font-size: 2.4rem;
-  a,
-  a:visited {
-    padding: 10%;
-    display: block;
-    color: white;
-    text-decoration: none;
-    text-align: center;
-  }
-}
 
 // Error pages 404 & 500
 
