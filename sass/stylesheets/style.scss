@@ -59,7 +59,7 @@ p {
 
 .subtitle {
   display: flex;
-  justify-content:center;
+  justify-content: center;
   padding-bottom: 15px;
 }
 
@@ -398,7 +398,7 @@ footer {
 
   .home-button {
     display: flex;
-    justify-content:center;
+    justify-content: center;
   }
 
   .home-joinus-background {
@@ -429,15 +429,12 @@ footer {
   div {
     width: 50%;
     align-items: center;
-        
+
     button {
       min-width: 100px;
     }
-
   }
-    
 }
-
 
 // Error pages 404 & 500
 
@@ -564,4 +561,13 @@ button {
 
 .input-container {
   padding: 10px;
+}
+
+.pets-container {
+  display: flex;
+  width: 100%;
+}
+
+.img-rounded {
+  border-radius: 50%;
 }

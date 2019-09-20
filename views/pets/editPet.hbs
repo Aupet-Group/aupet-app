@@ -1,21 +1,31 @@
-<h1>Edit pet:</h1>
-<form id="form" action="/pets/{{_id}}" method="POST">
+<div class="container-view">
+    <h1>Edit pet:</h1>
+    <form id="form" action="/pets/{{_id}}" method="POST">
+        <div class="input-container">
+            <label for="petType">Type</label>
+            <input class="input-font" type="text" name="petType" value="{{petType}}">
+        </div>
 
-    <label for="petType">TYPE</label>
-    <input type="text" name="petType" value="{{petType}}"><br>
+        <div class="input-container">
+            <label for="petWeight">Weight</label>
+            <input class="input-font" type="number" name="petWeight" value="{{petWeight}}">
+        </div>
 
-    <label for="petWeight">WEIGHT</label>
-    <input type="number" name="petWeight" value="{{petWeight}}"><br>
-
-    <label for="petAge">AGE</label>
-    <input type="number" name="petAge" value="{{petAge}}"><br>
-
-    <label for="petName">NAME</label>
-    <input type="text" name="petName" value="{{petName}}">
-
-
-    <button type="submit">UPDATE</button>
-
-</form>
-
-<button><a href="/pets">All my pets</button>
+        <div class="input-container">
+            <label for="petAge">Age</label>
+            <input class="input-font" type="number" name="petAge" value="{{petAge}}">
+        </div>
+        <div class="input-container">
+            <label for="petName">Name</label>
+            <input class="input-font" type="text" name="petName" value="{{petName}}">
+        </div>
+        <div class="btn-block">
+            <button class="button-blue" type="submit">UPDATE</button>
+        </div>
+    </form>
+    <div>
+    </div>
+    <div class="btn-block">
+        <a class="button-grey" href="/pets">All my pets</a>
+    </div>
+</div>
