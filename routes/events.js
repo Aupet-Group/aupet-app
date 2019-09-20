@@ -9,7 +9,7 @@ const router = express.Router();
 let ownEvents = false;
 
 // GET all events listing
-router.get('/', async (req, res, next) => {
+router.get('/', checkIfLoggedIn, async (req, res, next) => {
   try {
     const events = await Event.find({});
     res.render('events/events', { events, ownEvents });
@@ -47,10 +47,8 @@ router.get('/new', checkIfLoggedIn, async (req, res, next) => {
 
 router.get('/enrolledin', checkIfLoggedIn, async (req, res, next) => {
   try {
-    console.log(req.session.currentUser._id);
     const { _id } = req.session.currentUser;
     const events = await Event.find({ $or: [{ candidates: _id }, { keeper: _id }] });
-    console.log(events);
     res.render('events/enrolledin', { events, _id });
   } catch (error) {
     next(error);
@@ -59,6 +57,7 @@ router.get('/enrolledin', checkIfLoggedIn, async (req, res, next) => {
 
 // POST new event
 router.post('/', checkIfLoggedIn, async (req, res, next) => {
+  let pet;
   const {
     title, description, selectedPet, initialDateTime, finalDateTime, location,
   } = req.body;
@@ -69,7 +68,7 @@ router.post('/', checkIfLoggedIn, async (req, res, next) => {
     } else {
       pet = await Pet.find({ owner, petName: selectedPet });
     }
-    const event = await Event.create({
+    await Event.create({
       owner,
       title,
       description,
@@ -93,7 +92,10 @@ router.get('/:eventId', isValidID('eventId'), async (req, res, next) => {
     const pets = event.pet;
     const { candidates } = event;
     res.render('events/eventDetails', {
-      event, pets, candidates, ownEvents,
+      event,
+      pets,
+      candidates,
+      ownEvents,
     });
   } catch (error) {
     next(error);
@@ -108,7 +110,7 @@ router.get('/:eventId/update', checkIfLoggedIn, isValidID('eventId'), async (req
     const event = await Event.findById(eventId).populate('pet');
     const pets = event.pet;
     const enabled = true;
-    if (userId == event.owner) {
+    if (userId === event.owner) {
       res.render('events/edit', { event, pets, enabled });
     } else {
       req.flash('error', "You can't edit this event.");
@@ -120,6 +122,7 @@ router.get('/:eventId/update', checkIfLoggedIn, isValidID('eventId'), async (req
 
 // POST event update
 router.post('/:eventId', checkIfLoggedIn, isValidID('eventId'), async (req, res, next) => {
+  let pet;
   const { eventId } = req.params;
   const owner = res.locals.currentUser._id;
   const {
@@ -131,7 +134,7 @@ router.post('/:eventId', checkIfLoggedIn, isValidID('eventId'), async (req, res,
     } else {
       pet = await Pet.find({ owner, petName: selectedPet });
     }
-    const event = await Event.findByIdAndUpdate(eventId, {
+    await Event.findByIdAndUpdate(eventId, {
       owner,
       title,
       description,
@@ -152,8 +155,8 @@ router.post('/:eventId/delete', checkIfLoggedIn, isValidID('eventId'), async (re
   const userId = res.locals.currentUser._id;
   try {
     const event = await Event.findById(eventId);
-    if (userId == event.owner) {
-      const delEvent = await Event.findByIdAndDelete(eventId);
+    if (userId === event.owner) {
+      await Event.findByIdAndDelete(eventId);
       res.redirect('/events');
     } else {
       res.redirect('/events');
@@ -180,7 +183,7 @@ router.get('/:eventId/enroll', checkIfLoggedIn, isValidID('eventId'), async (req
         allocated = true;
       }
       event.candidates.forEach((candidate) => {
-        if (candidate.email == user.email) {
+        if (candidate.email === user.email) {
           enrolled = true;
         }
       });
@@ -203,30 +206,39 @@ router.get('/:eventId/enroll', checkIfLoggedIn, isValidID('eventId'), async (req
 });
 
 // GET accept a keeper
-router.get('/:eventId/accept/:userId', checkIfLoggedIn, async (req, res, next) => {
-  const { userId } = req.params;
-  const { eventId } = req.params;
+router.get(
+  '/:eventId/accept/:userId',
+  checkIfLoggedIn,
+  isValidID('eventId'),
+  isValidID('userId'),
+  async (req, res, next) => {
+    const { userId } = req.params;
+    const { eventId } = req.params;
 
-  try {
-    let event = await Event.findById(eventId).populate('keeper pet candidates');
-    const pets = event.pet;
-    const { candidates } = event;
-    let allocated = false;
+    try {
+      let event = await Event.findById(eventId).populate('keeper pet candidates');
+      const pets = event.pet;
+      const { candidates } = event;
+      let allocated = false;
 
-    if (event.keeper) {
-      req.flash('error', 'Sorry. This task is already allocated.');
-      allocated = true;
-    } else {
-      event = await Event.findByIdAndUpdate(eventId, { $set: { keeper: userId } }, { new: true });
-      allocated = true;
-      req.flash('success', "You've just accepted a keeper for your task.");
+      if (event.keeper) {
+        req.flash('error', 'Sorry. This task is already allocated.');
+        allocated = true;
+      } else {
+        event = await Event.findByIdAndUpdate(eventId, { $set: { keeper: userId } }, { new: true });
+        allocated = true;
+        req.flash('success', "You've just accepted a keeper for your task.");
+      }
+      res.render('events/eventDetails', {
+        event,
+        pets,
+        candidates,
+        allocated,
+      });
+    } catch (error) {
+      next(error);
     }
-    res.render('events/eventDetails', {
-      event, pets, candidates, allocated,
-    });
-  } catch (error) {
-    next(error);
-  }
-});
+  },
+);
 
 module.exports = router;
