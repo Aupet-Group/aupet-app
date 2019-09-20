@@ -13,18 +13,19 @@
   <p>Secondary Phone:{{user.secondaryPhone}}</p>
 
   {{#if enabled}}
-  <button><a href="/profile/update">Edit profile</button>
-  <button><a href="/events/myevents">My tasks</button>
-  <button><a href="/events/enrolledin">Enrolled in</button>
-  <button><a href="/pets/new">Add a pet</button>
-  <button><a href="/events/new">Add a task</button>
-  <button><a href="/events/">See all tasks</button>
+  <button class="button-blue"><a href="/profile/update">Edit profile</button>
+  <button class="button-grey"><a href="/events/myevents">My tasks</button>
+  <button class="button-grey"><a href="/events/enrolledin">Enrolled in</button>
+  <button class="button-blue"><a href="/pets/new">Add a pet</button>
+  <button class="button-grey"><a href="/pets">All my pets</button>
+  <button class="button-blue"><a href="/events/new">Add a task</button>
+  <button class="button-grey"><a href="/events/">See all tasks</button>
   {{/if}}
 
-  <button><a href="/keepers">See keepers</button>
-  <button><a href="/logout">LOGOUT</button>
-  
+  <button class="button-grey"><a href="/keepers">See keepers</button>
+  <button class="button-grey"><a href="/logout">LOGOUT</button>
+
   {{#unless enabled}}
-  <button><a href="/profile">My profile</button>
+  <button class="button-blue"><a href="/profile">My profile</button>
   {{/unless}}
 </div>
