@@ -1,11 +1,14 @@
-<h1>{{ pet.petName }} </h1>
-<img class="img-rounded" src="{{pet.img}}" width="140" height="140">
-<p> Pet type: {{pet.petType }}</p>
-<p> Pet weight: {{ pet.petWeight }}</p>
-<p> Pet age: {{ pet.petAge }} </p>
+<div>
+
+    <h1>{{ pet.petName }} </h1>
+    <img class="img-rounded" src="{{pet.img}}" width="140" height="140">
+    <p> Pet type: {{pet.petType }}</p>
+    <p> Pet weight: {{ pet.petWeight }}</p>
+    <p> Pet age: {{ pet.petAge }} </p>
 
 
-<button><a href="/pets/{{pet._id}}/update">Edit my pet</button>
+    <button><a href="/pets/{{pet._id}}/update">Edit my pet</button>
 
 
-<button><a href="/pets">All my pets</button>
+    <button><a href="/pets">All my pets</button>
+</div>
