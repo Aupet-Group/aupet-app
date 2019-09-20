@@ -8,16 +8,21 @@
   <li>
     <a href="/events/{{this._id}}">{{ this.title }} </a>
     <p>Where: {{ this.address.location }}</p>
-    <p>Starts {{ this.initialDateTime }} </p>
-    <p>Ends {{ this.finalDateTime }} </p>
-    {{#unless ../ownEvents}}
-    <button class="button-grey"><a href="/events/{{this._id}}/enroll">Enroll</button>
-    {{/unless}}
-    <button class="button-grey"><a href="/events/{{this._id}}">Details</button>
-
+    <p>Starts: {{ this.initialDateTime }} </p>
+    <p>Ends: {{ this.finalDateTime }} </p>
+    <div class="events-btns-inline">
+      {{#unless ../ownEvents}}
+       <div class="left-btn"><button class="button-grey"><a href="/events/{{this._id}}/enroll">Enroll</button></div>
+     {{/unless}}
+       <div class="right-btn"><button class="button-grey"><a href="/events/{{this._id}}">Details</button></div>
+    </div>
+    
   </li>
   {{/each}}
 </ul>
-<button class="button-blue"><a href="/events/new">Add a new task</button>
-<div></div>
-<button class="button-blue"><a href="/profile">Go to profile</button>
+<div class="events-btns-inline">
+  <div class="left-btn"><button class="button-blue"><a href="/events/new">Add a new task</button></div>
+  <div class="right-btn"><button class="button-blue"><a href="/profile">Go to profile</button></div>
+</div>
+
+

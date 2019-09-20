@@ -419,6 +419,40 @@ footer {
   }
 }
 
+.events-btns-inline {
+  display: inline-flex;
+  justify-content: space-around;
+  width: 100%;
+  margin: -10px;
+  padding: 20px;
+
+  div {
+    width: 50%;
+    vertical-align: bottom;
+    // vertical-align: top;
+    align-items: center;
+    
+   
+    
+    button {
+      min-width: 100px;
+      vertical-align: bottom;
+      // vertical-align: top;
+    }
+
+  }
+    
+}
+
+// .left-btn {
+//   float: left;    
+// }
+
+// .right-btn {
+//   float: right;
+  
+// }
+
 // Error pages 404 & 500
 
 .error-500-404 {
