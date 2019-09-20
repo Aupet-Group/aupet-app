@@ -9,6 +9,7 @@ const petSchema = new Schema(
     petWeight: Number,
     petName: { type: String },
     petAge: Number,
+    img: { type: String, default: '/images/default-pet.png' },
     petImg: [{ type: String }],
   },
   {
