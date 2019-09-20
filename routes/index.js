@@ -11,7 +11,13 @@ router.get('/', (req, res, next) => {
 
 router.post('/searchbar', (req, res, next) => {
   const { zipcode } = req.body;
-  const events = Event.find({}).populate('user'.address )
+  const keepers = User.find({ zipcode, keeper: true });
+  res.locals.currentUser.keepers = keepers;
+  res.redirect('/list');
 });
 
+router.get('/list', (req,res, next)=>{
+  const { keepers} = res.locals.currentUser;
+  console.log(keepers);
+});
 module.exports = router;
