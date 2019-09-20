@@ -34,21 +34,42 @@ router.get('/profile/update', checkIfLoggedIn, async (req, res, next) => {
 
 router.post('/', async (req, res, next) => {
   const { _id } = req.session.currentUser;
-  const { email, name, lastName, phone, mobile, secondaryPhone, owner: ownerString, keeper: keeperString } = req.body;
+  const {
+    email,
+    name,
+    lastName,
+    phone,
+    mobile,
+    secondaryPhone,
+    owner: ownerString,
+    keeper: keeperString,
+    street,
+    number,
+    zipcode,
+  } = req.body;
 
   const owner = ownerString === 'checked';
   const keeper = keeperString === 'checked';
   try {
-    const user = await User.findByIdAndUpdate(_id, {
-      email,
-      name,
-      lastName,
-      phone,
-      mobile,
-      secondaryPhone,
-      owner,
-      keeper,
-    });
+    const user = await User.findByIdAndUpdate(
+      { _id },
+      {
+        $set: {
+          email,
+          name,
+          lastName,
+          phone,
+          mobile,
+          secondaryPhone,
+          owner,
+          keeper,
+          'address.0.street': street,
+          'address.0.number': number,
+          'address.0.zipcode': zipcode,
+        },
+      },
+    );
+    console.log(user);
     req.session.currentUser = user;
     res.redirect('/profile');
   } catch (error) {
@@ -61,7 +82,7 @@ router.get('/keepers', checkIfLoggedIn, async (req, res, next) => {
   try {
     const keepersWithoutUser = await User.find({ keeper: true });
     const users = keepersWithoutUser.filter(
-      keeperFilter => keeperFilter._id.toString() !== req.session.currentUser._id,
+      (keeperFilter) => keeperFilter._id.toString() !== req.session.currentUser._id,
     );
     res.render('users/users', { users });
   } catch (error) {

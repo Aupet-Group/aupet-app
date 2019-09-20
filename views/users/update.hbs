@@ -1,6 +1,6 @@
 <h1>Edit Profile</h1>
 <form action="/" method="POST" id="form">
-   
+
     <div>
         <label for="name">Name</label>
         <input type="text" name="name" value="{{user.name}}">
@@ -26,6 +26,20 @@
         <input type="tel" name="secondaryPhone" value="{{user.secondaryPhone}}">
     </div>
     <div>
+        <label for="street">Street:</label>
+        <input type="text" name="street" value="{{user.address.[0].street}}">
+    </div>
+
+    <div>
+        <label for="number">number:</label>
+        <input type="number" name="number" value="{{user.address.[0].number}}">
+    </div>
+
+    <div>
+        <label for="zipcode">ZIP code:</label>
+        <input type="text" name="zipcode" value="{{user.address.[0].zipcode}}">
+    </div>
+    <div>
         <label for="owner"><input type="checkbox" name="owner" value="checked" {{owner}}>Owner</label>
     </div>
 
@@ -40,4 +54,4 @@
     </div>
     <button class="button" type="submit">Update</button>
 </form>
- <a class="button" href="/profile">Back to profile w/o update</a>
+<a class="button" href="/profile">Back to profile w/o update</a>
