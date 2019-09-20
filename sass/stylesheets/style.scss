@@ -14,14 +14,16 @@ body {
   margin: 0 auto;
   max-width: 500px;
   width: 100%;
-  background-color: #f3f3f3;
+  border-left: 2px solid;
+  border-right: 2px solid;
+  border-color: #dddbdb; 
+  
 }
 
 .main-container {
   padding: 10px;
-  border-left: 2px solid;
-  border-right: 2px solid;
-  border-color: #dddbdb;  
+  min-height: 900px;
+  background-color: #f3f3f3; 
 }
 
 h2 {
@@ -41,6 +43,154 @@ p {
   font-size: 1rem;
   font-weight: lighter;
 }
+
+// Header & Nav bar
+
+header {
+  padding-top: 15px;
+  background-color: #ffffff;
+
+  div {
+    float: left;
+    padding: 0 0 0.2em;
+  }
+
+  a {
+    color: #222;
+    text-decoration: none;
+  }
+
+  ul, li {
+    list-style: outside none none;
+  }
+
+  div#logo img {
+    height: 40px;
+    margin-left: 0.5em;
+  }
+
+}
+
+.control-menu {
+  background-color: transparent;
+  background-position: center center;
+  display: block;
+  float: right;
+  height: 40px;
+  margin-right: 0.5em;
+  width: 40px;
+
+  a span {
+    display: inline-block;
+    height: 40px;
+    text-indent: -9999px;
+    width: 40px;
+  }
+
+  .close {
+    background-image: url("../images/close.png");
+    background-size: contain;
+    background-position: center center;
+    background-repeat: no-repeat;
+    display: none;
+  }
+
+  .open {
+    background-image: url("../images/open.png");
+    background-size: contain;
+    background-position: center center;
+    background-repeat: no-repeat;
+    display: block;
+  }
+}
+
+#navigation:target ul.nav-items {
+  font-family: "Raleway",Arial,sans-serif;
+  background: #f0f0f0 none repeat scroll 0 0;
+  height: 15.8em;
+  transition: height 0.4s ease-in-out 0s, background-color 0.9s ease 0s; 
+
+}
+
+.close { 
+  display:none;
+}
+      
+#navigation:target .open {
+  display: none;
+}
+
+
+#navigation:target .close {
+  display: block;
+}
+
+ul.nav-items {
+  clear: both;
+  height: 0;
+  overflow: hidden;
+  transition: height 0.4s ease-in-out 0s, background-color 2s ease 0s; 
+
+  li {
+    display: block;
+  }
+
+  a {
+    border-top: 2px dotted #dddbdb;
+    color: #333;
+    display: block;
+    height: 3em;
+    line-height: 3em;
+    margin: 0 1.3em;
+  }
+
+  li:first-child a {
+    border-top: 2px solid transparent;
+  }
+
+  li a span {
+    border-left: 3px solid;
+    height: 3.2em;
+    padding: 0.4em 0.5em;
+    border-color: #f44336;
+  }
+}
+
+// Footer
+
+footer {
+  padding: 15px;
+  height: 45px;
+  background: #5592c3;  
+}
+
+.footer-icons {
+  float: left;
+
+  div {
+    display: inline-block;
+    padding: 5px;
+    
+    img {
+      height: 35px;
+    }
+  }
+}
+
+.about {
+  float: right;
+  margin-right: 0.6em;
+
+  a,
+  a:visited {
+    color: white;
+    font-size: 1.5rem;
+    text-decoration: none;
+  }
+}
+
+
+// Error messages
 
 .errorMessages {
   color: red;
@@ -66,6 +216,7 @@ p {
 .dangerMessages {
   color: violet;
 }
+
 
 // Home page
 
@@ -99,6 +250,7 @@ p {
   margin-bottom: 40%;
 
   input {
+    background-color: #f3f3f3;
     border: 1px solid #000000;
     border-radius: 30px;
     margin: 0 22%;
@@ -265,38 +417,6 @@ button {
   }
 }
 
-.home-footer {
-  display: flex;
-  flex-direction: row;
-  justify-content: start;
-  background: #5592c3;
-  padding-top: 2%;
-  .home-icon {
-    margin: 2%;
-  }
-}
-
-.home-footer-icons {
-  display: flex;
-  flex-direction: row;
-  align-content: start;
-}
-
-.home-icon.fb {
-  width: 4%;
-}
-
-.contact {
-  margin-right: 5%;
-
-  a,
-  a:visited {
-    color: white;
-    font-size: 1.1rem;
-    text-align: left;
-    text-decoration: none;
-  }
-}
 
 
 .button {
@@ -326,7 +446,6 @@ button {
 }
 
 .errors {
-  
   text-align: center;
 
   h1 {
@@ -340,114 +459,3 @@ button {
 }
 
 
-// Header & Nav bar
-
-header {
-  padding-top: 15px;
-  background-color: #ffffff;
-
-  div {
-    float: left;
-    padding: 0 0 0.2em;
-  }
-
-  a {
-    color: #222;
-    text-decoration: none;
-  }
-
-  ul, li {
-    list-style: outside none none;
-  }
-
-  div#logo img {
-    height: 40px;
-    margin-left: 0.5em;
-  }
-
-}
-
-.control-menu {
-  background-color: transparent;
-  background-position: center center;
-  display: block;
-  float: right;
-  height: 40px;
-  margin-right: 0.5em;
-  width: 40px;
-
-  a span {
-    display: inline-block;
-    height: 40px;
-    text-indent: -9999px;
-    width: 40px;
-  }
-
-  .close {
-    background-image: url("../images/close.png");
-    background-size: contain;
-    background-position: center center;
-    background-repeat: no-repeat;
-    display: none;
-  }
-
-  .open {
-    background-image: url("../images/open.png");
-    background-size: contain;
-    background-position: center center;
-    background-repeat: no-repeat;
-    display: block;
-  }
-}
-
-#navigation:target ul.nav-items {
-  font-family: "Raleway",Arial,sans-serif;
-  background: #f0f0f0 none repeat scroll 0 0;
-  height: 15.8em;
-  transition: height 0.4s ease-in-out 0s, background-color 0.9s ease 0s; 
-
-}
-
-.close { 
-  display:none;
-}
-      
-#navigation:target .open {
-  display: none;
-}
-
-
-#navigation:target .close {
-  display: block;
-}
-
-ul.nav-items {
-  clear: both;
-  height: 0;
-  overflow: hidden;
-  transition: height 0.4s ease-in-out 0s, background-color 2s ease 0s; 
-
-  li {
-    display: block;
-  }
-
-  a {
-    border-top: 2px dotted #dddbdb;
-    color: #333;
-    display: block;
-    height: 3em;
-    line-height: 3em;
-    margin: 0 1.3em;
-  }
-
-  li:first-child a {
-    border-top: 2px solid transparent;
-  }
-
-  li a span {
-    border-left: 3px solid;
-    height: 3.2em;
-    padding: 0.4em 0.5em;
-    border-color: #f44336;
-  }
-}
