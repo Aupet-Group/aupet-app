@@ -1,4 +1,4 @@
-<h1>ADD EVENT</h1>
+<h1>ADD A NEW TASK</h1>
 <form  id="eventform" action="/events" method="POST">
    <label for="title">Title</label>
    <select name="title">
@@ -24,11 +24,11 @@
     <input type="text" name="location" placeholder="Location" required><br>
 
     <label for="startdate">Start date</label>
-    <input type="datetime-local" name="initialDateTime" placeholder="Starts" required><br>
+    <input type="date" name="initialDateTime" placeholder="Starts" required><br>
 
     <label for="enddate">End date</label>
-    <input type="datetime-local" name="finalDateTime" placeholder="Ends" required><br>
+    <input type="date" name="finalDateTime" placeholder="Ends" required><br>
 
-    <button type="submit">ADD EVENT</button>
+    <button type="submit">ADD TASK</button>
 
 </form>
