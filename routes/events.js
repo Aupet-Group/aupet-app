@@ -58,9 +58,7 @@ router.get('/enrolledin', checkIfLoggedIn, async (req, res, next) => {
 // POST new event
 router.post('/', checkIfLoggedIn, async (req, res, next) => {
   let pet;
-  const {
-    title, description, selectedPet, initialDateTime, finalDateTime, location,
-  } = req.body;
+  const { title, description, selectedPet, initialDateTime, finalDateTime, location } = req.body;
   const owner = res.locals.currentUser._id;
   try {
     if (selectedPet === 'All') {
@@ -110,7 +108,7 @@ router.get('/:eventId/update', checkIfLoggedIn, isValidID('eventId'), async (req
     const event = await Event.findById(eventId).populate('pet');
     const pets = event.pet;
     const enabled = true;
-    if (userId === event.owner) {
+    if (userId === event.owner.toString()) {
       res.render('events/edit', { event, pets, enabled });
     } else {
       req.flash('error', "You can't edit this event.");
@@ -125,9 +123,7 @@ router.post('/:eventId', checkIfLoggedIn, isValidID('eventId'), async (req, res,
   let pet;
   const { eventId } = req.params;
   const owner = res.locals.currentUser._id;
-  const {
-    title, description, selectedPet, initialDateTime, finalDateTime, location,
-  } = req.body;
+  const { title, description, selectedPet, initialDateTime, finalDateTime, location } = req.body;
   try {
     if (selectedPet === 'All') {
       pet = await Pet.find({ owner });
@@ -155,10 +151,13 @@ router.post('/:eventId/delete', checkIfLoggedIn, isValidID('eventId'), async (re
   const userId = res.locals.currentUser._id;
   try {
     const event = await Event.findById(eventId);
-    if (userId === event.owner) {
+    if (userId === event.owner.toString()) {
+      // const delEvent = await Event.findByIdAndDelete(eventId);
+      console.log ()
       await Event.findByIdAndDelete(eventId);
       res.redirect('/events');
     } else {
+      req.flash('error', "This task is not yours, you can't delete");
       res.redirect('/events');
     }
   } catch (error) {
@@ -174,7 +173,7 @@ router.get('/:eventId/enroll', checkIfLoggedIn, isValidID('eventId'), async (req
     const user = await User.findById(userId);
     let event = await Event.findById(eventId).populate('owner candidates keeper');
     if (user._id.equals(event.owner._id)) {
-      req.flash('error', "The owner can't enroll in his/her own event.");
+      req.flash('error', 'You didn\'t create this task you can\'t delete it');
     } else {
       let enrolled = false;
       let allocated = false;
@@ -182,7 +181,7 @@ router.get('/:eventId/enroll', checkIfLoggedIn, isValidID('eventId'), async (req
       if (event.keeper) {
         allocated = true;
       }
-      event.candidates.forEach((candidate) => {
+      event.candidates.forEach(candidate => {
         if (candidate.email === user.email) {
           enrolled = true;
         }
