@@ -210,6 +210,22 @@ footer {
   }
 }
 
+// General 
+
+.bottom-img {
+  display: block;
+  margin: auto;
+  max-width: 450px;
+}
+
+// Div style for centred button
+
+.centred-btn {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding-bottom: 10px;
+}
 // Error messages
 
 .errorMessages {
@@ -400,8 +416,7 @@ footer {
   }
 
   .home-button {
-    display: flex;
-    justify-content: center;
+    padding-bottom: 0;
   }
 
   .home-joinus-background {
@@ -424,6 +439,7 @@ footer {
 
 .events-btns-inline {
   display: inline-flex;
+  flex-direction: row;
   justify-content: space-around;
   width: 100%;
   margin-left: -20px;
@@ -469,6 +485,7 @@ footer {
   float: right;
 }
 
+<<<<<<< HEAD
 // General
 
 .bottom-img {
@@ -477,6 +494,8 @@ footer {
   max-width: 450px;
 }
 
+=======
+>>>>>>> dev
 // Set up & Log in
 
 .auth {
@@ -504,14 +523,7 @@ footer {
   }
 }
 
-// Div style for centred button
 
-.centred-btn {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  padding-bottom: 20px;
-}
 
 // Buttons
 

@@ -6,7 +6,7 @@
 <ul class="events">
   {{#each events}}
   <li>
-    <a href="/events/{{this._id}}">{{ this.title }} </a> <a  class="event-review"href="/reviews/{{this._id}}"><img class="home-icon" src="/images/review.png"></a></button>
+    <a href="/events/{{this._id}}">{{ this.title }} </a> <a class="event-review"href="/reviews/{{this._id}}"><img class="home-icon" src="/images/review.png" /></a></button>
     <p>Where: {{ this.address.location }}</p>
     <p>Starts: {{ this.initialDateTime }} </p>
     <p>Ends: {{ this.finalDateTime }} </p>
@@ -15,12 +15,10 @@
        <div class="left-btn"><button class="button-grey"><a href="/events/{{this._id}}/enroll">Enroll</button></div>
      {{/unless}}
        <div class="right-btn"><button class="button-grey"><a href="/events/{{this._id}}">Details</button></div>
-    </div>
-    
+    </div>    
   </li>
   {{/each}}
 </ul>
-
 <div>
   <img class="bottom-img" src="/images/pets2.png">
 </div>
