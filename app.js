@@ -28,6 +28,7 @@ const usersRouter = require('./routes/users');
 const authRouter = require('./routes/auth');
 const eventRouter = require('./routes/events');
 const petsRouter = require('./routes/pets');
+const reviewsRouter = require('./routes/reviews');
 
 const app = express();
 
@@ -37,7 +38,7 @@ mongoose.connect(process.env.MONGODB_URI, {
   reconnectTries: Number.MAX_VALUE,
   useCreateIndex: true,
   useFindAndModify: false,
-  });
+});
 
 app.use(
   sassMiddleware({
@@ -89,6 +90,7 @@ app.use('/', usersRouter);
 app.use('/', authRouter);
 app.use('/pets', petsRouter);
 app.use('/events', eventRouter);
+app.use('/reviews', reviewsRouter);
 
 // catch 404 and forward to error handler
 app.use((req, res) => {
