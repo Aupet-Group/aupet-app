@@ -1,19 +1,38 @@
-<h1>Add pet:</h1>
-<form id="form" action="/pets" method="POST">
+<div class="container-view">
 
-    <label for="petType">Type</label>
-    <input type="text" name="petType" placeholder="Type of your pet" required>
-    <br>
-    <label for="petWeight">Weight</label>
-    <input type="number" name="petWeight" placeholder="Weight of your pet" required>
-    <br>
-    <label for="petAge">Age</label>
-    <input type="number" name="petAge" placeholder="Age of your pet" required>
-    <br>
-    <label for="petName">Name</label>
-    <input type="text" name="petName" placeholder="Name of your pet" required>
-    <br>
+    <h1>Add pet:</h1>
+    <form id="form" action="/pets" method="POST">
+        <div class="input-container">
+            <label for="petType">Type</label>
+            <br>
+            <input class="input-font" style="width:16.5em" type="text" name="petType" placeholder="Type of your pet"
+                required>
+        </div>
+        <div class="input-container">
+            <label for="petWeight">Weight</label>
+            <br>
+            <input class="input-font" style="width:16.5em" type="number" name="petWeight"
+                placeholder="Weight of your pet" required>
+        </div>
 
-    <button type="submit">Submit</button>
+        <div class="input-container">
 
-</form>
+            <label for="petAge">Age</label>
+            <br>
+            <input class="input-font" style="width:16.5em" type="number" name="petAge" placeholder="Age of your pet"
+                required>
+        </div>
+
+        <div class="input-container">
+
+            <label for="petName">Name</label>
+            <br>
+            <input class="input-font" style="width:16.5em" type="text" name="petName" placeholder="Name of your pet"
+                required>
+        </div>
+        <div class="btn-block">
+            <button class="button-blue" type="submit">Submit</button>
+        </div>
+
+    </form>
+</div>
