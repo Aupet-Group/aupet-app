@@ -22,7 +22,7 @@
 
   <div class="events-btns-inline">
     <div class="left-btn">
-       <button class="edit button-grey"><a href="/events/{{event._id}}/update">Edit</button>
+       <button class="edit button-grey"><a href="/events/{{event._id}}/update">Edit</a></button>
     </div>
     <div class="right-btn">
       <form action="/events/{{event._id}}/delete" method="POST">
@@ -34,17 +34,15 @@
 
   <div class="centred-btn">
 {{!-- {{#unless ownEvents}} --}}
-     <button id="enroll" class="home-button button-grey"><a href="/events/{{event._id}}/enroll">Enroll</button>
+     <button id="enroll" class="home-button button-blue"><a href="/events/{{event._id}}/enroll">Enroll</a></button>
 {{!-- {{/unless}} --}}
   </div>
    
 </section>
 
-<div></div>
-
 <section>
   {{#if candidates}}
-  <ul class="events"><h3>Candidates:</h3>  
+  <ul class="events"><h2>Candidates:</h2>  
     {{#each candidates}}
       <li>
         <div class="candidates">     
@@ -66,7 +64,7 @@
            </div>                  
                
           <div class="right">
-             <button class="button-grey"><a href="/events/{{../event._id}}/accept/{{this._id}}">Accept keeper</button>
+             <button class="button-grey"><a href="/events/{{../event._id}}/accept/{{this._id}}">Accept keeper</a></button>
           </div>  
 
        </div>
@@ -80,9 +78,8 @@
   <img class="bottom-img" src="/images/pets1.png">
 </div>
 <div class="events-btns-inline">
-  <div class="left-btn"><button class="button-blue"><a href="/events/myevents">Back to my tasks</button></div>
-  <div></div>
-  <div class="right-btn"><button class="button-blue"><a href="/events">All tasks</button></div>
+  <div class="left-btn"><button class="button-blue"><a href="/events/myevents">My tasks</a></button></div>
+  <div class="right-btn"><button class="button-blue"><a href="/events">All tasks</a></button></div>
 </div>
 
 
