@@ -14,19 +14,15 @@
 
 body {
   font: 28px 'Raleway', sans-serif;
-  box-sizing: border-box;
+  box-sizing: border-box;  
   margin: 0 auto;
-  max-width: 500px;
-  width: 100%;
-  border-left: 2px solid;
-  border-right: 2px solid;
-  border-color: #dddbdb;
+  background-color: #f3f3f3;
 }
 
 .main-container {
-  padding: 10px;
-  min-height: 900px;
-  background-color: #f3f3f3;
+  padding: 10px 15px 75px 15px;
+  max-width: 540px;
+  width: 100%;  
 }
 
 h1 {
@@ -57,9 +53,11 @@ p {
   font-size: 1rem;
   font-weight: lighter;
 }
+
 ul {
   list-style-type: none;
 }
+
 .subtitle {
   display: flex;
   justify-content: center;
@@ -69,6 +67,8 @@ ul {
 // Header & Nav bar
 
 header {
+  max-width: 570px;
+  width: 100%;
   padding-top: 15px;
   background-color: #ffffff;
 
@@ -179,8 +179,12 @@ ul.nav-items {
 // Footer
 
 footer {
-  padding: 15px;
-  height: 45px;
+  position: fixed;
+  bottom: 0;
+  max-width: 550px;
+  width: 100%;
+  padding: 10px;
+  height: 40px;
   background: #5592c3;
 }
 
@@ -192,7 +196,7 @@ footer {
     padding: 5px;
 
     img {
-      height: 35px;
+      height: 30px;
     }
   }
 }
@@ -258,7 +262,8 @@ footer {
 .home-container {
   display: flex;
   flex-direction: column;
-  margin: -10px;
+  margin: -15px;
+  max-width: 570px;
 }
 
 .home-event-finder {
@@ -285,7 +290,7 @@ footer {
   margin-bottom: 40%;
 
   input {
-    background-color: #f3f3f3;
+    background-color: #f0f0f0;
     border: 1px solid #000000;
     border-radius: 30px;
     margin: 0 22%;
@@ -345,6 +350,7 @@ footer {
 .home-how-does-it-work {
   width: 100%;
   background-color: #5592c3;
+  border-bottom: 1px solid #5592c3;
   p {
     color: #ffffff;
   }
@@ -385,6 +391,7 @@ footer {
 
 .home-testimonials {
   background: linear-gradient(#5592c3, #ffffff);
+  border-top: 1px solid #5592c3;
 }
 
 .home-testimonial-title {
@@ -403,6 +410,12 @@ footer {
   p {
     text-align: center;
     margin: 3% auto;
+    font-style: italic;
+    font-size: 20px;
+  }
+
+  #star {
+    font-style: normal;
   }
 }
 
@@ -419,12 +432,6 @@ footer {
     padding-bottom: 0;
   }
 
-  .home-joinus-background {
-    height: 30vh;
-    background-image: url('../images/buttom_img.png');
-    background-size: contain;
-    background-repeat: no-repeat;
-  }
 }
 
 // Events pages
@@ -514,7 +521,7 @@ footer {
 // Set up & Log in
 
 .auth {
-  padding-top: 50px;
+  padding-top: 20px;
 }
 
 // Error pages 404 & 500
