@@ -530,7 +530,24 @@ button {
     color: white;
   }
 }
+.conteiner-two-wrap {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-evenly;
+}
 
+.pet-wrap {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  p {
+    font-size: 1.3rem;
+  }
+}
+
+.font-bold {
+  font-weight: 600;
+}
 .btn-block {
   padding-top: 10px;
   display: flex;
