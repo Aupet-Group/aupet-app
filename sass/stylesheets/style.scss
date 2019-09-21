@@ -57,7 +57,9 @@ p {
   font-size: 1rem;
   font-weight: lighter;
 }
-
+ul {
+  list-style-type: none;
+}
 .subtitle {
   display: flex;
   justify-content: center;
@@ -447,7 +449,7 @@ footer {
   div {
     width: 50%;
     align-items: center;
-        
+
     button {
       min-width: 100px;
     }
@@ -465,11 +467,9 @@ footer {
 .right {
   width: 30%;
   float: right;
-
-  
 }
 
-// General 
+// General
 
 .bottom-img {
   display: block;
@@ -482,7 +482,6 @@ footer {
 .auth {
   padding-top: 50px;
 }
-
 
 // Error pages 404 & 500
 
@@ -613,6 +612,9 @@ button {
 .container-view {
   background-color: #f3f3f3;
   padding: 0 10px;
+  a {
+    text-decoration: none;
+  }
 }
 
 .input-font {

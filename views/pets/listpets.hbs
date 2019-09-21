@@ -1,25 +1,27 @@
-<h1>PETS</h1>
-<div class="pets-container">
-
-    <button class=""><a href="/pets/new">Add a pet</button>
+<div class="container-view">
+    <h1>PETS</h1>
+    <div class="subtitle">
+        <p class="paw">🐾🐾🐾🐾🐾🐾</p>
+    </div>
+    <div class="btn-block">
+        <button class="button-blue"><a href="/pets/new">Add a pet</button>
+    </div>
     <ul>
         {{#each pets}}
-</div> <img class="img-rounded" src="{{this.img}}" width="140" height="140">
-<div>
+        <img class="img-rounded" src="{{this.img}}" width="140" height="140">
 
-    <li>
-        <a href="/pets/{{pet._id}}">Pet name:{{ this.petName }} </a>
-        <p> Pet type: {{this.petType }}</p>
-        <p> Pet weight: {{ this.petWeight }}</p>
-        <p> Pet age: {{ this.petAge }} </p>
-
-        <div>
-            <button class=""><a href="/pets/{{this._id}}">Details</button>
-            <button><a href="/pets/{{this._id}}/update">Edit my pet</button>
-        </div>
-
-    </li>
-    {{/each}}
+        <li>
+            <a href="/pets/{{pet._id}}">{{ this.petName }} </a>
+            <p> Pet type: {{this.petType }}</p>
+            <p> Pet weight: {{ this.petWeight }}</p>
+            <p> Pet age: {{ this.petAge }} </p>
+            <div class="btn-block">
+                <button class="button-grey"><a href="/pets/{{this._id}}">Details</button>
+                <button class="button-blue"><a href="/pets/{{this._id}}/update">Edit my pet</button>
+            </div>
+        </li>
+        {{/each}}
     </ul>
-    <button><a href="/profile">Back to profile</button>
+
+    <button class="button-grey"><a href="/profile">Back to profile</button>
 </div>
