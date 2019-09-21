@@ -4,22 +4,37 @@
   {{else}}
   <h1>{{user.name}}'s profile detail</h1>
   {{/if}}
-  <img src="{{user.img}}">
-  <p>Name: {{user.name}}</p>
-  <p>Last Name: {{user.lastName}}</p>
-  <p>email: {{user.email}}</p>
-  <p>Phone: {{user.phone}}</p>
-  <p>Mobile: {{user.mobile}}</p>
-  <p>Secondary Phone:{{user.secondaryPhone}}</p>
+  <div class="conteiner-two-wrap-center">
+    <div class="image-wrap-center">
+      <img class="img-rounded" src="{{user.img}}" width="140" height="140">
+    </div>
+    <div class="width-50">
+      {{#if enabled}}
+      <button class="button-grey-large"><a href="/pets">All my pets</a></button>
+      <button class="button-grey-large"><a href="/events/">See all tasks</a></button>
+      <button class="button-grey-large"><a href="/events/enrolledin">Enrolled in</a></button>
+      {{/if}}
+    </div>
+  </div>
+  <br>
+  <hr>
+  <div class="p-wrap">
+    <p>Name: {{user.name}}</p>
+    <p>Last Name: {{user.lastName}}</p>
+    <p>email: {{user.email}}</p>
+    <p>Phone: {{user.phone}}</p>
+    <p>Mobile: {{user.mobile}}</p>
+    <p>Secondary Phone:{{user.secondaryPhone}}</p>
+  </div>
 
   {{#if enabled}}
+  <div class="">
+    <button class="button-blue-large"><a href="/pets/new">Add a pet</a></button>
+    <button class="button-blue-large"><a href="/events/new">Add a task</a></button>>
+  </div>
+
   <button class="button-blue"><a href="/profile/update">Edit profile</a></button>
   <button class="button-grey"><a href="/events/myevents">My tasks</a></button>
-  <button class="button-grey"><a href="/events/enrolledin">Enrolled in</a></button>
-  <button class="button-blue"><a href="/pets/new">Add a pet</a></button>
-  <button class="button-grey"><a href="/pets">All my pets</a></button>
-  <button class="button-blue"><a href="/events/new">Add a task</a></button>
-  <button class="button-grey"><a href="/events/">See all tasks</a></button>
   {{/if}}
 
   <button class="button-grey"><a href="/keepers">See keepers</a></button>
