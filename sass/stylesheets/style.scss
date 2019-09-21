@@ -533,12 +533,15 @@ button {
 }
 
 .btn-block {
-  display: block;
+  padding-top: 10px;
+  display: flex;
+  justify-content: center;
   margin: 0 auto;
   width: 100%;
 }
 
 .button-blue {
+  text-align: center;
   width: 25%;
   font-size: 15px;
   font-weight: 700;
@@ -561,6 +564,7 @@ button {
 }
 
 .button-grey {
+  text-align: center;
   width: 25%;
   font-size: 15px;
   font-weight: 700;
@@ -583,6 +587,7 @@ button {
 }
 
 .button-red {
+  text-align: center;
   width: 25%;
   font-size: 15px;
   font-weight: 700;
