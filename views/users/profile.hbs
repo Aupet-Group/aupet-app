@@ -11,7 +11,8 @@
     <div class="width-50">
       {{#if enabled}}
       <button class="button-grey-large"><a href="/pets">All my pets</a></button>
-      <button class="button-grey-large"><a href="/events/">See all tasks</a></button>
+      <button class="button-grey-large"><a href="/events/myevents">My tasks</a></button>
+
       <button class="button-grey-large"><a href="/events/enrolledin">Enrolled in</a></button>
       {{/if}}
     </div>
@@ -28,17 +29,18 @@
   </div>
 
   {{#if enabled}}
-  <div class="">
+  <div class="large-btn-wrap">
     <button class="button-blue-large"><a href="/pets/new">Add a pet</a></button>
-    <button class="button-blue-large"><a href="/events/new">Add a task</a></button>>
+    <button class="button-blue-large"><a href="/events/new">Add a task</a></button>
+    <button class="button-blue-large"><a href="/profile/update">Edit profile</a></button>
+    <button class="button-grey-large"><a href="/events/">See all tasks</a></button>
+
   </div>
-
-  <button class="button-blue"><a href="/profile/update">Edit profile</a></button>
-  <button class="button-grey"><a href="/events/myevents">My tasks</a></button>
   {{/if}}
-
-  <button class="button-grey"><a href="/keepers">See keepers</a></button>
-  <button class="button-grey"><a href="/logout">LOGOUT</a></button>
+  <div class="large-btn-wrap">
+    <button class="button-grey-large"><a href="/keepers">See keepers</a></button>
+    <button class="button-red"><a href="/logout">LOGOUT</a></button>
+  </div>
 
   {{#unless enabled}}
   <button class="button-blue"><a href="/profile">My profile</a></button>

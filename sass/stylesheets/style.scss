@@ -718,3 +718,11 @@ button {
     font-weight: 600;
   }
 }
+
+.large-btn-wrap {
+  padding-top: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+}
