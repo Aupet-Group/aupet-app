@@ -478,6 +478,39 @@ footer {
   padding-right: 30px;
 }
 
+.review {
+  display: inline-flex;
+  width: 100%;
+  margin-left: -20px;
+  padding: 20px;    
+}
+
+#title {
+  width: 55%;
+}
+
+#review-icon {
+  width: 15%;
+
+  img {
+    width: 40px;
+    cursor: pointer;
+  }
+}
+
+#write-review {
+  width: 30%;
+  padding-right: 10px;
+
+  a {
+    text-decoration: none;
+    font-size: 0.9rem;
+    color: black;
+
+  }
+}
+
+
 // Set up & Log in
 
 .auth {
@@ -504,6 +537,7 @@ footer {
     text-align: center;
   }
 }
+
 
 // Buttons
 
