@@ -1,25 +1,43 @@
-<h1>PETS</h1>
-<div class="pets-container">
+<div class="container-view">
+    <h1>PETS</h1>
 
-    <button class=""><a href="/pets/new">Add a pet</button>
+    <div class="subtitle">
+        <p class="paw">🐾🐾🐾🐾🐾🐾</p>
+    </div>
+
     <ul>
         {{#each pets}}
-</div> <img class="img-rounded" src="{{this.img}}" width="140" height="140">
-<div>
 
-    <li>
-        <a href="/pets/{{pet._id}}">Pet name:{{ this.petName }} </a>
-        <p> Pet type: {{this.petType }}</p>
-        <p> Pet weight: {{ this.petWeight }}</p>
-        <p> Pet age: {{ this.petAge }} </p>
+        <li>
+            <div class="conteiner-two-wrap">
+                <div>
+                    <img class="img-rounded" src="{{this.img}}" width="140" height="140" />
+                </div>
+                <div class="pet-wrap">
+                    <p class="font-bold">{{ this.petName }}</p>
+                    <p> Pet type: {{this.petType }}</p>
+                    <p> Pet weight: {{ this.petWeight }}</p>
+                    <p> Pet age: {{ this.petAge }} </p>
+                </div>
+            </div>
 
-        <div>
-            <button class=""><a href="/pets/{{this._id}}">Details</button>
-            <button><a href="/pets/{{this._id}}/update">Edit my pet</button>
-        </div>
-
-    </li>
-    {{/each}}
+            <div class="events-btns-inline">
+                <div class="left-btn">
+                    <button class="button-grey"><a href="/pets/{{this._id}}">Pet details</a></button>
+                </div>
+                <div class="right-btn">
+                    <button class="button-blue"><a href="/pets/{{this._id}}/update">Edit my pet</a></button>
+                </div>
+            </div>
+        </li>
+        {{/each}}
     </ul>
-    <button><a href="/profile">Back to profile</button>
+
+    <div class="btn-block">
+        <button class="button-grey"><a href="/profile">Back to profile</a></button>
+    </div>
+    <div class="btn-block">
+        <button class="button-blue"><a href="/pets/new">Add a pet</a></button>
+
+    </div>
 </div>

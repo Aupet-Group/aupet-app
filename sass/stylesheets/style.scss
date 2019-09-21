@@ -57,7 +57,9 @@ p {
   font-size: 1rem;
   font-weight: lighter;
 }
-
+ul {
+  list-style-type: none;
+}
 .subtitle {
   display: flex;
   justify-content: center;
@@ -208,7 +210,7 @@ footer {
   }
 }
 
-// General 
+// General
 
 .bottom-img {
   display: block;
@@ -482,7 +484,6 @@ footer {
   padding-top: 50px;
 }
 
-
 // Error pages 404 & 500
 
 .error-500-404 {
@@ -504,8 +505,6 @@ footer {
   }
 }
 
-
-
 // Buttons
 
 button {
@@ -523,7 +522,24 @@ button {
     color: white;
   }
 }
+.conteiner-two-wrap {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-evenly;
+}
 
+.pet-wrap {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  p {
+    font-size: 1.3rem;
+  }
+}
+
+.font-bold {
+  font-weight: 600;
+}
 .btn-block {
   padding-top: 10px;
   display: flex;
@@ -605,6 +621,9 @@ button {
 .container-view {
   background-color: #f3f3f3;
   padding: 0 10px;
+  a {
+    text-decoration: none;
+  }
 }
 
 .input-font {
