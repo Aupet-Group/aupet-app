@@ -25,7 +25,7 @@
       
       <ul class="nav-items">
         <li><a href="/profile"><span>Profile</span></a></li>
-        {{#if enabled}}
+        {{#if currentUser}}
         <li><a href="/events/myevents"><span>See my own tasks</span></a></li>
         <li><a href="/logout"><span>Log out</span></a></li>
         {{else}}
