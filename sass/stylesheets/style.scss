@@ -437,7 +437,6 @@ footer {
 
 .events-btns-inline {
   display: inline-flex;
-  flex-direction: row;
   justify-content: space-around;
   width: 100%;
   margin-left: -20px;
@@ -455,19 +454,13 @@ footer {
 
 .candidates {
   display: inline-flex;
-  justify-content: space-around;
   width: 100%;
   margin-left: -20px;
   padding: 20px;
-
-  div {
-    width: 50%;
-    align-items: center;
-        
+ 
     button {
       min-width: 100px;
     }
-  }
 }
 
 .left {
@@ -480,9 +473,7 @@ footer {
 
 .right {
   width: 30%;
-  float: right;
-
-  
+  padding-right: 30px;
 }
 
 // Set up & Log in

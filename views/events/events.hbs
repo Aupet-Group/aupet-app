@@ -6,15 +6,15 @@
 <ul class="events">
   {{#each events}}
   <li>
-    <a href="/events/{{this._id}}">{{ this.title }} </a> <a class="event-review"href="/reviews/{{this._id}}"><img class="home-icon" src="/images/review.png" /></a></button>
+    <h2>{{ this.title }}</h2> <a class="event-review"href="/reviews/{{this._id}}"><img class="home-icon" src="/images/review.png" /></a></button>
     <p>Where: {{ this.address.location }}</p>
     <p>Starts: {{ this.initialDateTime }} </p>
     <p>Ends: {{ this.finalDateTime }} </p>
     <div class="events-btns-inline">
       {{#unless ../ownEvents}}
-       <div class="left-btn"><button class="button-grey"><a href="/events/{{this._id}}/enroll">Enroll</button></div>
+       <div class="left-btn"><button class="button-grey"><a href="/events/{{this._id}}/enroll">Enroll</a></button></div>
      {{/unless}}
-       <div class="right-btn"><button class="button-grey"><a href="/events/{{this._id}}">Details</button></div>
+       <div class="right-btn"><button class="button-grey"><a href="/events/{{this._id}}">Details</a></button></div>
     </div>    
   </li>
   {{/each}}
@@ -24,8 +24,8 @@
 </div>
 
 <div class="events-btns-inline">
-  <div class="left-btn"><button class="button-blue"><a href="/events/new">Add a new task</button></div>
-  <div class="right-btn"><button class="button-blue"><a href="/profile">Go to profile</button></div>
+  <div class="left-btn"><button class="button-blue"><a href="/events/new">Add a new task</a></button></div>
+  <div class="right-btn"><button class="button-blue"><a href="/profile">Go to profile</a></button></div>
 </div>
 
 
