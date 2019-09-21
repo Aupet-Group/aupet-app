@@ -5,9 +5,26 @@
 
 <ul class="events">
   {{#each events}}
+<<<<<<< HEAD
   <li>
     <h2>{{ this.title }}</h2> <a class="event-review" href="/reviews/{{this._id}}"><img class="home-icon"
         src="/images/review.png" /></a></button>
+=======
+  <li>    
+    <div class="review">
+      <div id="title">
+        <h2>{{ this.title }}</h2>
+      </div>
+      <div id="review-icon">
+        <a class="event-review"href="/reviews/{{this._id}}"><img class="home-icon" src="/images/review2.png" /></a>         
+      </div>
+      <div id="write-review">
+        <a class="event-review"href="/reviews/{{this._id}}">Write a review</a> 
+        {{!-- <p>Write a review</p> --}}
+      </div>
+    </div>   
+    
+>>>>>>> dev
     <p>Where: {{ this.address.location }}</p>
     <p>Starts: {{ this.initialDateTime }} </p>
     <p>Ends: {{ this.finalDateTime }} </p>
