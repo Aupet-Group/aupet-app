@@ -153,7 +153,7 @@ router.post('/:eventId/delete', checkIfLoggedIn, isValidID('eventId'), async (re
     const event = await Event.findById(eventId);
     if (userId === event.owner.toString()) {
       // const delEvent = await Event.findByIdAndDelete(eventId);
-      console.log ()
+      console.log();
       await Event.findByIdAndDelete(eventId);
       res.redirect('/events');
     } else {
@@ -173,7 +173,7 @@ router.get('/:eventId/enroll', checkIfLoggedIn, isValidID('eventId'), async (req
     const user = await User.findById(userId);
     let event = await Event.findById(eventId).populate('owner candidates keeper');
     if (user._id.equals(event.owner._id)) {
-      req.flash('error', 'You didn\'t create this task you can\'t delete it');
+      req.flash('error', "You didn't create this task you can't delete it");
     } else {
       let enrolled = false;
       let allocated = false;
