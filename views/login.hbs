@@ -1,15 +1,27 @@
-<h1>LOGIN</h1>
-<form  id="form" action="/login" method="POST">
+<h1>LOG IN</h1>
+<div class="subtitle">
+<p class="paw">🐾🐾🐾🐾🐾🐾</p>
+</div>
+<form  class="form-auth" action="/login" method="POST">
 
     <label for="email">email</label>
     <input type="email" name="email" placeholder="Your email" required>
     <br>
     <label for="password">password</label>
     <input type="password" name="password" placeholder="********" required>
-
-    <button type="submit">LOG IN</button>
+    <div class="centred-btn">
+        <button class="button-blue" type="submit">LOG IN</button>
+    </div>    
 
 </form>
-<br>
+
 <p>Don't have an account?</p>
-<button><a href="/signup">SIGN UP</button>
+
+<div class="centred-btn">
+    <button class="button-red"><a href="/signup">SIGN UP</button>
+</div>
+
+<div class="auth">
+  <img class="bottom-img" src="/images/pets3.png">
+</div>
+
