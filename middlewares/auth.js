@@ -26,8 +26,19 @@ const checkIfLoggedIn = (req, res, next) => {
   }
 };
 
+const checkIfNoLoggedIn = (req, res, next) => {
+  if (!req.session.currentUser) {
+    next();
+  } else {
+    req.flash('error', 'you are already logged in you cannot sign up or login again');
+    console.log(req.currentUrl);
+    res.redirect(req.currentUrl);
+  }
+};
+
 module.exports = {
   notifications,
   checkEmailAndPasswordNotEmpty,
   checkIfLoggedIn,
+  checkIfNoLoggedIn
 };

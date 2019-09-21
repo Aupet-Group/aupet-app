@@ -8,9 +8,9 @@ const User = require('../model/user');
 
 const bcryptSalt = 10;
 
-const { checkEmailAndPasswordNotEmpty, checkIfLoggedIn } = require('../middlewares/auth');
+const { checkEmailAndPasswordNotEmpty, checkIfLoggedIn, checkIfNoLoggedIn } = require('../middlewares/auth');
 
-router.get('/signup', (req, res, next) => {
+router.get('/signup', checkIfNoLoggedIn, (req, res, next) => {
   res.render('signup');
 });
 
