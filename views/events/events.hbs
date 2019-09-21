@@ -6,7 +6,7 @@
 <ul class="events">
   {{#each events}}
   <li>
-    <a href="/events/{{this._id}}">{{ this.title }} </a>
+    <a href="/events/{{this._id}}">{{ this.title }} </a> <a  class="event-review"href="/reviews/{{this._id}}"><img class="home-icon" src="/images/review.png"></a></button>
     <p>Where: {{ this.address.location }}</p>
     <p>Starts: {{ this.initialDateTime }} </p>
     <p>Ends: {{ this.finalDateTime }} </p>
@@ -20,6 +20,11 @@
   </li>
   {{/each}}
 </ul>
+
+<div>
+  <img class="bottom-img" src="/images/pets2.png">
+</div>
+
 <div class="events-btns-inline">
   <div class="left-btn"><button class="button-blue"><a href="/events/new">Add a new task</button></div>
   <div class="right-btn"><button class="button-blue"><a href="/profile">Go to profile</button></div>

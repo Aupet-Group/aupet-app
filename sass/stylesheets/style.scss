@@ -34,6 +34,7 @@ h1 {
   color: #2c6ea5;
   font-weight: bolder;
   text-align: center;
+  padding-top: 10px;
 }
 
 h2 {
@@ -60,7 +61,7 @@ p {
 .subtitle {
   display: flex;
   justify-content: center;
-  padding-bottom: 15px;
+  padding-bottom: 25px;
 }
 
 // Header & Nav bar
@@ -436,6 +437,53 @@ footer {
   }
 }
 
+.candidates {
+  display: inline-flex;
+  justify-content: space-around;
+  width: 100%;
+  margin-left: -20px;
+  padding: 20px;
+
+  div {
+    width: 50%;
+    align-items: center;
+        
+    button {
+      min-width: 100px;
+    }
+  }
+}
+
+.left {
+  width: 10%;
+}
+
+.middle {
+  width: 60%;
+}
+
+.right {
+  width: 30%;
+  float: right;
+
+  
+}
+
+// General 
+
+.bottom-img {
+  display: block;
+  margin: auto;
+  max-width: 450px;
+}
+
+// Set up & Log in
+
+.auth {
+  padding-top: 50px;
+}
+
+
 // Error pages 404 & 500
 
 .error-500-404 {
@@ -455,6 +503,15 @@ footer {
     font-size: 25px;
     text-align: center;
   }
+}
+
+// Div style for centred button
+
+.centred-btn {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding-bottom: 20px;
 }
 
 // Buttons
