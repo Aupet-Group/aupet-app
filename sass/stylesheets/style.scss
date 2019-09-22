@@ -586,7 +586,7 @@ button {
 
 .button-blue {
   text-align: center;
-  width: 25%;
+  width: 35%;
   font-size: 15px;
   font-weight: 700;
   color: #fff !important;
@@ -609,7 +609,7 @@ button {
 
 .button-grey {
   text-align: center;
-  width: 25%;
+  width: 35%;
   font-size: 15px;
   font-weight: 700;
   color: #fff !important;
@@ -736,6 +736,13 @@ button {
   display: flex;
   flex-direction: column;
   width: 50%;
+  align-items: center;
+}
+
+.list-center {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
   align-items: center;
 }
 
