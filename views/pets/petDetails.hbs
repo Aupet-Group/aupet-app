@@ -4,14 +4,21 @@
     <div class="subtitle">
         <p class="paw">🐾🐾🐾🐾🐾🐾</p>
     </div>
-    <img class="img-rounded" src="{{pet.img}}" width="140" height="140">
-    <p> Pet type: {{pet.petType }}</p>
-    <p> Pet weight: {{ pet.petWeight }}</p>
-    <p> Pet age: {{ pet.petAge }} </p>
+    <div class="image-wrap-center">
+        <img class="img-rounded" src="{{pet.img}}" width="140" height="140">
+    </div>
+    <div class="list-center">
+        <p> Pet type: {{pet.petType }}</p>
+        <p> Pet weight: {{ pet.petWeight }}</p>
+        <p> Pet age: {{ pet.petAge }} </p>
+    </div>
+
+    <div class="btn-block">
+        <button class="button-blue"><a href="/pets/{{pet._id}}/update">Edit my pet</button>
+    </div>
+    <div class="btn-block">
+        <button class="button-grey"><a href="/pets">All my pets</button>
+    </div>
 
 
-    <button><a href="/pets/{{pet._id}}/update">Edit my pet</button>
-
-
-    <button><a href="/pets">All my pets</button>
 </div>

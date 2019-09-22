@@ -54,7 +54,7 @@ h3 {
 p {
   font-family: 'Raleway', Arial, sans-serif;
   text-align: left;
-  font-size: 1rem;
+  font-size: 1.3rem;
   font-weight: lighter;
 }
 ul {
@@ -482,7 +482,7 @@ footer {
   display: inline-flex;
   width: 100%;
   margin-left: -20px;
-  padding: 20px;    
+  padding: 20px;
 }
 
 #title {
@@ -506,10 +506,8 @@ footer {
     text-decoration: none;
     font-size: 0.9rem;
     color: black;
-
   }
 }
-
 
 // Set up & Log in
 
@@ -537,7 +535,6 @@ footer {
     text-align: center;
   }
 }
-
 
 // Buttons
 
@@ -589,7 +586,7 @@ button {
 
 .button-blue {
   text-align: center;
-  width: 25%;
+  width: 35%;
   font-size: 15px;
   font-weight: 700;
   color: #fff !important;
@@ -612,7 +609,7 @@ button {
 
 .button-grey {
   text-align: center;
-  width: 25%;
+  width: 35%;
   font-size: 15px;
   font-weight: 700;
   color: #fff !important;
@@ -739,6 +736,13 @@ button {
   display: flex;
   flex-direction: column;
   width: 50%;
+  align-items: center;
+}
+
+.list-center {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
   align-items: center;
 }
 
