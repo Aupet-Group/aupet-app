@@ -9,7 +9,7 @@ const router = express.Router();
 let ownEvents = false;
 
 // GET all events listing
-router.get('/', checkIfLoggedIn, async (req, res, next) => {
+router.get('/', async (req, res, next) => {
   try {
     const events = await Event.find({}).populate('owner');
     const { owner } = events;
@@ -32,19 +32,7 @@ router.get('/myevents', checkIfLoggedIn, async (req, res, next) => {
   }
 });
 
-// GET form to create new event
-router.get('/new', checkIfLoggedIn, async (req, res, next) => {
-  const owner = res.locals.currentUser._id;
-  try {
-    const pets = await Pet.find({ owner });
-    const enabled = true;
-    res.render('events/newevent', { pets, enabled });
-  } catch (error) {
-    next(error);
-  }
-});
-
-// Get de list where de user are enrolled in as a keeper or as a candidate
+// GET list events where the user is enrolled in as a keeper or as a candidate
 
 router.get('/enrolledin', checkIfLoggedIn, async (req, res, next) => {
   try {
@@ -56,11 +44,26 @@ router.get('/enrolledin', checkIfLoggedIn, async (req, res, next) => {
   }
 });
 
+// GET form to create new event
+router.get('/new', checkIfLoggedIn, async (req, res, next) => {
+  const owner = res.locals.currentUser._id;
+  const today = new Date().toISOString().slice(0, 10);
+  try {
+    const pets = await Pet.find({ owner });
+    const enabled = true;
+    res.render('events/newevent', { pets, today, enabled });
+  } catch (error) {
+    next(error);
+  }
+});
+
 // POST new event
 router.post('/', checkIfLoggedIn, async (req, res, next) => {
   let pet;
   const { title, description, selectedPet, initialDateTime, finalDateTime, location } = req.body;
   const owner = res.locals.currentUser._id;
+  const start = initialDateTime;
+  const end = finalDateTime;
   try {
     if (selectedPet === 'All') {
       pet = await Pet.find({ owner });
@@ -73,7 +76,9 @@ router.post('/', checkIfLoggedIn, async (req, res, next) => {
       description,
       creationEventDate: Date.now(),
       initialDateTime,
+      start,
       finalDateTime,
+      end,
       address: { location },
       pet,
     });
@@ -127,6 +132,8 @@ router.post('/:eventId', checkIfLoggedIn, isValidID('eventId'), async (req, res,
   const { eventId } = req.params;
   const owner = res.locals.currentUser._id;
   const { title, description, selectedPet, initialDateTime, finalDateTime, location } = req.body;
+  const start = initialDateTime;
+  const end = finalDateTime;
   try {
     if (selectedPet === 'All') {
       pet = await Pet.find({ owner });
@@ -138,7 +145,9 @@ router.post('/:eventId', checkIfLoggedIn, isValidID('eventId'), async (req, res,
       title,
       description,
       initialDateTime,
+      start,
       finalDateTime,
+      end,
       address: { location },
       pet,
     });
@@ -155,12 +164,10 @@ router.post('/:eventId/delete', checkIfLoggedIn, isValidID('eventId'), async (re
   try {
     const event = await Event.findById(eventId);
     if (userId === event.owner.toString()) {
-      // const delEvent = await Event.findByIdAndDelete(eventId);
-      console.log ()
       await Event.findByIdAndDelete(eventId);
       res.redirect('/events');
     } else {
-      req.flash('error', "This task is not yours, you can't delete");
+      req.flash('error', 'You didn\'t create this task, you can\'t delete it.');
       res.redirect('/events');
     }
   } catch (error) {
@@ -176,7 +183,7 @@ router.get('/:eventId/enroll', checkIfLoggedIn, isValidID('eventId'), async (req
     const user = await User.findById(userId);
     let event = await Event.findById(eventId).populate('owner candidates keeper');
     if (user._id.equals(event.owner._id)) {
-      req.flash('error', 'You didn\'t create this task you can\'t delete it');
+      req.flash('error', "You can't enroll. It's your own event.");
     } else {
       let enrolled = false;
       let allocated = false;
@@ -184,7 +191,7 @@ router.get('/:eventId/enroll', checkIfLoggedIn, isValidID('eventId'), async (req
       if (event.keeper) {
         allocated = true;
       }
-      event.candidates.forEach(candidate => {
+      event.candidates.forEach((candidate) => {
         if (candidate.email === user.email) {
           enrolled = true;
         }
