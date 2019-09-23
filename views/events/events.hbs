@@ -19,8 +19,8 @@
     </div>
 
     <p>Where: {{ this.address.location }}</p>
-    <p>Starts: {{ this.initialDateTime }} </p>
-    <p>Ends: {{ this.finalDateTime }} </p>
+    <p>Starts: {{ this.start }} </p>
+    <p>Ends: {{ this.end }} </p>
     <p>Owner: <a href="/users/{{this.owner._id}}">{{ this.owner.name }} </a></p> 
     <div class="events-btns-inline">
       {{!-- {{#unless ../ownEvents}} --}}

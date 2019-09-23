@@ -9,17 +9,10 @@ const router = express.Router();
 let ownEvents = false;
 
 // GET all events listing
-router.get('/', checkIfLoggedIn, async (req, res, next) => {
+router.get('/', async (req, res, next) => {
   try {
     const events = await Event.find({}).populate('owner');
     const { owner } = events;
-    events.map((event) => {
-     return event.initialDateTime.toISOString().slice(0, 10);
-    });
-    events.map((event) => {
-      return event.finalDateTime.toISOString().slice(0, 10);
-     });
-
     res.render('events/events', { events, owner, ownEvents });
   } catch (error) {
     next(error);
@@ -69,6 +62,8 @@ router.post('/', checkIfLoggedIn, async (req, res, next) => {
   let pet;
   const { title, description, selectedPet, initialDateTime, finalDateTime, location } = req.body;
   const owner = res.locals.currentUser._id;
+  const start = initialDateTime;
+  const end = finalDateTime;
   try {
     if (selectedPet === 'All') {
       pet = await Pet.find({ owner });
@@ -81,7 +76,9 @@ router.post('/', checkIfLoggedIn, async (req, res, next) => {
       description,
       creationEventDate: Date.now(),
       initialDateTime,
+      start,
       finalDateTime,
+      end,
       address: { location },
       pet,
     });
@@ -98,15 +95,11 @@ router.get('/:eventId', isValidID('eventId'), async (req, res, next) => {
     const event = await Event.findById(eventId).populate('owner pet candidates');
     const { owner } = event;
     const pets = event.pet;
-    const start = event.initialDateTime.toISOString().slice(0, 10);
-    const end = event.finalDateTime.toISOString().slice(0, 10);
     const { candidates } = event;
     res.render('events/eventDetails', {
       event,
       owner,
       pets,
-      start,
-      end,
       candidates,
       ownEvents,
     });
@@ -139,6 +132,8 @@ router.post('/:eventId', checkIfLoggedIn, isValidID('eventId'), async (req, res,
   const { eventId } = req.params;
   const owner = res.locals.currentUser._id;
   const { title, description, selectedPet, initialDateTime, finalDateTime, location } = req.body;
+  const start = initialDateTime;
+  const end = finalDateTime;
   try {
     if (selectedPet === 'All') {
       pet = await Pet.find({ owner });
@@ -150,7 +145,9 @@ router.post('/:eventId', checkIfLoggedIn, isValidID('eventId'), async (req, res,
       title,
       description,
       initialDateTime,
+      start,
       finalDateTime,
+      end,
       address: { location },
       pet,
     });
@@ -167,12 +164,10 @@ router.post('/:eventId/delete', checkIfLoggedIn, isValidID('eventId'), async (re
   try {
     const event = await Event.findById(eventId);
     if (userId === event.owner.toString()) {
-      // const delEvent = await Event.findByIdAndDelete(eventId);
-      console.log ()
       await Event.findByIdAndDelete(eventId);
       res.redirect('/events');
     } else {
-      req.flash('error', "This task is not yours, you can't delete");
+      req.flash('error', 'You didn\'t create this task, you can\'t delete it.');
       res.redirect('/events');
     }
   } catch (error) {
@@ -188,7 +183,7 @@ router.get('/:eventId/enroll', checkIfLoggedIn, isValidID('eventId'), async (req
     const user = await User.findById(userId);
     let event = await Event.findById(eventId).populate('owner candidates keeper');
     if (user._id.equals(event.owner._id)) {
-      req.flash('error', 'You didn\'t create this task you can\'t delete it');
+      req.flash('error', "You can't enroll. It's your own event.");
     } else {
       let enrolled = false;
       let allocated = false;
@@ -196,7 +191,7 @@ router.get('/:eventId/enroll', checkIfLoggedIn, isValidID('eventId'), async (req
       if (event.keeper) {
         allocated = true;
       }
-      event.candidates.forEach(candidate => {
+      event.candidates.forEach((candidate) => {
         if (candidate.email === user.email) {
           enrolled = true;
         }

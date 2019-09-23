@@ -8,9 +8,11 @@ const eventSchema = new Schema(
     owner: { type: Schema.Types.ObjectId, ref: User },
     title: { type: String },
     description: { type: String },
-    creationEventDate: { type: Date, default: Date.now() },
+    creationEventDate: { type: Date, default: Date.now },
     initialDateTime: Date,
+    start: String,
     finalDateTime: Date,
+    end: String,
     pet: [{ type: Schema.Types.ObjectId, ref: Pet }],
     address: {
       street: String,
