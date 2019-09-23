@@ -18,7 +18,7 @@
   <p>Location: {{ event.address.location }}</p>
   <p>Starts: {{ event.initialDateTime }} </p>
   <p>Ends: {{ event.finalDateTime }} </p>
-  <p>Owner: {{ event.owner.name }}</p>
+  <p>Owner: <a href="/users/{{event.owner._id}}">{{ event.owner.name }} </a></p>  
 
   <div class="events-btns-inline">
     <div class="left-btn">

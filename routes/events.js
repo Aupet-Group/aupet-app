@@ -11,8 +11,9 @@ let ownEvents = false;
 // GET all events listing
 router.get('/', checkIfLoggedIn, async (req, res, next) => {
   try {
-    const events = await Event.find({});
-    res.render('events/events', { events, ownEvents });
+    const events = await Event.find({}).populate('owner');
+    const { owner } = events;
+    res.render('events/events', { events, owner, ownEvents });
   } catch (error) {
     next(error);
   }
@@ -86,11 +87,13 @@ router.post('/', checkIfLoggedIn, async (req, res, next) => {
 router.get('/:eventId', isValidID('eventId'), async (req, res, next) => {
   const { eventId } = req.params;
   try {
-    const event = await Event.findById(eventId).populate('pet candidates');
+    const event = await Event.findById(eventId).populate('owner pet candidates');
+    const { owner } = event;
     const pets = event.pet;
     const { candidates } = event;
     res.render('events/eventDetails', {
       event,
+      owner,
       pets,
       candidates,
       ownEvents,
