@@ -1,16 +1,17 @@
 {{!-- List of all users --}}
 <h1>Keepers list</h1>
-<button><a href="/profile">My profile</a></button>
 {{#if users}}
 {{#each users}}
-{{#if this.email}}
+<div class="image-wrap-center">
+    <div class="mage-wrap-center"></div>
+        <img class="img-rounded " src="{{this.img}}" width="18%" height="18%">
+    </div>
+</div>
+<p>Name: {{this.name}}</p>
+<p>Last name: {{this.lastName}}</p>
 <p>email: {{this.email}}</p>
-{{/if}}
-{{#if users.img}}
-<img src="users.img">
-{{/if}}
-<a href="users/{{this._id}}">Details</a>
-
+<button class="button-grey"><a href="users/{{this._id}}">Details</a></button>
 {{/each}}
 
 {{/if}}
+<button class="button-blue"><a href="/profile">My profile</a></button>
