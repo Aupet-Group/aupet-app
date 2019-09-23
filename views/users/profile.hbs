@@ -1,12 +1,19 @@
-<div class="home-container">
+{{!-- <div class="home-container"> --}}
   {{#if enabled}}
   <h1>My profile</h1>
   {{else}}
-  <h1>{{user.name}}'s profile detail</h1>
+  {{#if users.name}}<h1>{{users.name}}'s profile detail</h1>
+  {{else }}
+  <h1>Keeper's profile detail</h1>
+  {{/if}}
   {{/if}}
   <div class="conteiner-two-wrap-center">
     <div class="image-wrap-center">
+      {{#if enabled}}
       <img class="img-rounded" src="{{user.img}}" width="140" height="140">
+      {{else }}
+      <img class="img-rounded" src="{{users.img}}" width="140" height="140">
+      {{/if}}
     </div>
     <div class="width-50">
       {{#if enabled}}
@@ -19,6 +26,7 @@
   </div>
   <br>
   <hr>
+  {{#if user}}
   <div class="p-wrap">
     <p>Name: {{user.name}}</p>
     <p>Last Name: {{user.lastName}}</p>
@@ -26,7 +34,18 @@
     <p>Phone: {{user.phone}}</p>
     <p>Mobile: {{user.mobile}}</p>
     <p>Secondary Phone:{{user.secondaryPhone}}</p>
+    <br>
   </div>
+  {{else}}
+  <div class="p-wrap">
+    <p>Name: {{users.name}}</p>
+    <p>Last Name: {{users.lastName}}</p>
+    <p>email: {{users.email}}</p>
+    <p>Phone: {{users.phone}}</p>
+    <p>Mobile: {{users.mobile}}</p>
+    <p>Secondary Phone:{{users.secondaryPhone}}</p>
+  </div>
+  {{/if}}
 
   {{#if enabled}}
   <div class="large-btn-wrap">
@@ -34,15 +53,17 @@
     <button class="button-blue-large"><a href="/events/new">Add a task</a></button>
     <button class="button-blue-large"><a href="/profile/update">Edit profile</a></button>
     <button class="button-grey-large"><a href="/events/">See all tasks</a></button>
-
   </div>
-  {{/if}}
   <div class="large-btn-wrap">
     <button class="button-grey-large"><a href="/keepers">See keepers</a></button>
     <button class="button-red"><a href="/logout">LOGOUT</a></button>
   </div>
+  {{/if}}
+  {{!-- <div class="large-btn-wrap">
+    <button class="button-grey-large"><a href="/keepers">See Keepers</a></button>
+  </div> --}}
 
   {{#unless enabled}}
   <button class="button-blue"><a href="/profile">My profile</a></button>
   {{/unless}}
-</div>
+{{!-- </div> --}}

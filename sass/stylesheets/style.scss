@@ -22,7 +22,7 @@ body {
 .main-container {
   padding: 10px 15px 75px 15px;
   max-width: 540px;
-  width: 100%;  
+  width: 100%;    
 }
 
 h1 {
@@ -53,11 +53,9 @@ p {
   font-size: 1.2rem;
   font-weight: lighter;
 }
-
 ul {
   list-style-type: none;
 }
-
 .subtitle {
   display: flex;
   justify-content: center;
@@ -196,7 +194,7 @@ footer {
     padding: 5px;
 
     img {
-      height: 30px;
+      height: 35px;
     }
   }
 }
@@ -231,7 +229,7 @@ footer {
   padding-bottom: 10px;
 }
 
-// Messages
+// Messages 
 
 .error, .info{
   margin-bottom:4%;
@@ -293,7 +291,7 @@ footer {
   margin-bottom: 40%;
 
   input {
-    background-color: #f0f0f0;
+    background-color: #f3f3f3;
     border: 1px solid #000000;
     border-radius: 30px;
     margin: 0 22%;
@@ -391,6 +389,7 @@ footer {
 }
 
 .home-testimonials {
+  margin-top: -2px;
   background: linear-gradient(#5592c3, #ffffff);
   border-top: 1px solid #5592c3;
 }
@@ -412,7 +411,7 @@ footer {
     text-align: center;
     margin: 3% auto;
     font-style: italic;
-    font-size: 20px;
+    font-size: 1.3rem;
   }
 
   #star {
@@ -520,7 +519,7 @@ footer {
 // Set up & Log in
 
 .auth {
-  padding-top: 20px;
+  padding-top: 50px;
 }
 
 // Error pages 404 & 500
@@ -772,3 +771,5 @@ button {
   justify-content: space-evenly;
   align-items: center;
 }
+
+
