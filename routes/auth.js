@@ -61,10 +61,6 @@ router.post('/login', checkIfNoLoggedIn, checkEmailAndPasswordNotEmpty, async (r
   }
 });
 
-router.get('/created', (req, res, next) => {
-  res.render('created');
-});
-
 router.get('/profile', checkIfLoggedIn, (req, res, next) => {
   res.render('profile');
 });
