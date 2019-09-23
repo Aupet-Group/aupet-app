@@ -30,7 +30,7 @@ const checkIfLoggedIn = (req, res, next) => {
 
 const checkIfNoLoggedIn = (req, res, next) => {
   if (req.session.currentUser) {
-    req.flash('error', 'you are already logged in you cannot sign up or login again');
+    req.flash('error', 'you are already logged in. You cannot sign up or login again');
     res.redirect('/');
   } else {
     next();
