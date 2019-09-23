@@ -14,7 +14,7 @@ router.get('/signup', checkIfNoLoggedIn, (req, res, next) => {
   res.render('signup');
 });
 
-router.post('/signup', checkEmailAndPasswordNotEmpty, async (req, res, next) => {
+router.post('/signup', checkIfNoLoggedIn, checkEmailAndPasswordNotEmpty, async (req, res, next) => {
   /* retrieves information from req.body */
   const { email, password } = req.body;
   try {
@@ -36,18 +36,18 @@ router.post('/signup', checkEmailAndPasswordNotEmpty, async (req, res, next) => 
   }
 });
 
-router.get('/login', (req, res, next) => {
+router.get('/login', checkIfNoLoggedIn, (req, res, next) => {
   res.render('login');
 });
 
-router.post('/login', checkEmailAndPasswordNotEmpty, async (req, res, next) => {
+router.post('/login', checkIfNoLoggedIn, checkEmailAndPasswordNotEmpty, async (req, res, next) => {
   const { email, password } = req.body;
   const user = await User.findOne({ email });
   try {
     if (user) {
       if (bcrypt.compareSync(password, user.hashedPassword)) {
         req.session.currentUser = user;
-        res.redirect('/profile');
+        res.redirect(req.session.backTo || '/profile');
       } else {
         req.flash('error', 'User or password incorret');
         res.redirect('/login');
