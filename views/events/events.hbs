@@ -15,13 +15,13 @@
       </div>
       <div id="write-review">
         <a class="event-review" href="/reviews/{{this._id}}">Write a review</a>
-        {{!-- <p>Write a review</p> --}}
       </div>
     </div>
 
     <p>Where: {{ this.address.location }}</p>
     <p>Starts: {{ this.initialDateTime }} </p>
     <p>Ends: {{ this.finalDateTime }} </p>
+    <p>Owner: <a href="/users/{{this.owner._id}}">{{ this.owner.name }} </a></p> 
     <div class="events-btns-inline">
       {{!-- {{#unless ../ownEvents}} --}}
       <div class="left-btn"><button class="button-grey"><a href="/events/{{this._id}}/enroll">Enroll</a></button></div>
