@@ -1,29 +1,29 @@
 <div class="infoMessage">
   {{#if infoMessages}}
-    <p class="info">{{infoMessages}}</p>
+  <p class="info">{{infoMessages}}</p>
   {{/if}}
 </div>
 
-<div class="errorMessages">
+<div class="errorMessages ">
   {{#if errorMessages }}
-    <p class="error">{{ errorMessages }}</p>
-  {{/if }}
-</div>
+      <p class="error">{{ errorMessages }}</p>
+    {{/if }}
+  </div>
 
-<div class="dangerMessages">
-  {{#if dangerMessages}}
+  <div class="dangerMessages messages">
+    {{#if dangerMessages}}
     <p class="info">{{dangerMessages}}</p>
-  {{/if}}
-</div>
+    {{/if}}
+  </div>
 
-<div class="successMessages">
-  {{#if successMessages}}
+  <div class="successMessages messages">
+    {{#if successMessages}}
     <p class="info">{{successMessages}}</p>
-  {{/if}}
-</div>
+    {{/if}}
+  </div>
 
-<div class="warningMessages">
-  {{#if warningMessages}}
+  <div class="warningMessages messages">
+    {{#if warningMessages}}
     <p class="info">{{warningMessages}}</p>
-  {{/if}}
-</div>
+    {{/if}}
+  </div>
