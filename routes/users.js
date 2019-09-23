@@ -4,17 +4,7 @@ const User = require('../model/user');
 
 const router = express.Router();
 
-// Show profile of User
-router.get('/profile', checkIfLoggedIn, async (req, res, next) => {
-  const { _id } = req.session.currentUser;
-  try {
-    const user = await User.findOne({ _id });
-    const enabled = true;
-    res.render('users/profile', { user, enabled });
-  } catch (error) {
-    next(error);
-  }
-});
+
 
 // Show the profile prepared to update
 
@@ -90,6 +80,8 @@ router.get('/keepers', checkIfLoggedIn, async (req, res, next) => {
   }
 });
 
+//Shoe details of keepers
+
 router.get('/users/:_id', checkIfLoggedIn, async (req, res, next) => {
   const { _id } = req.params;
   try {
@@ -101,4 +93,15 @@ router.get('/users/:_id', checkIfLoggedIn, async (req, res, next) => {
   }
 });
 
+// Show profile of User
+router.get('/profile', checkIfLoggedIn, async (req, res, next) => {
+  const { _id } = req.session.currentUser;
+  try {
+    const user = await User.findOne({ _id });
+    const enabled = true;
+    res.render('users/profile', { user, enabled });
+  } catch (error) {
+    next(error);
+  }
+});
 module.exports = router;
