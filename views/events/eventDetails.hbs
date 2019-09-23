@@ -15,9 +15,9 @@
     </li>
     {{/each}}
   </ul>
-  <p>Location: {{ event.address.location }}</p>
-  <p>Starts: {{ event.initialDateTime }} </p>
-  <p>Ends: {{ event.finalDateTime }} </p>
+  <p>Where: {{ event.address.location }}</p>
+  <p>Starts: {{ start }} </p>
+  <p>Ends: {{ end }} </p>
   <p>Owner: <a href="/users/{{event.owner._id}}">{{ event.owner.name }} </a></p>  
 
   <div class="events-btns-inline">

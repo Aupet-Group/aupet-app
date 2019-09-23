@@ -13,6 +13,13 @@ router.get('/', checkIfLoggedIn, async (req, res, next) => {
   try {
     const events = await Event.find({}).populate('owner');
     const { owner } = events;
+    events.map((event) => {
+     return event.initialDateTime.toISOString().slice(0, 10);
+    });
+    events.map((event) => {
+      return event.finalDateTime.toISOString().slice(0, 10);
+     });
+
     res.render('events/events', { events, owner, ownEvents });
   } catch (error) {
     next(error);
@@ -32,25 +39,26 @@ router.get('/myevents', checkIfLoggedIn, async (req, res, next) => {
   }
 });
 
-// GET form to create new event
-router.get('/new', checkIfLoggedIn, async (req, res, next) => {
-  const owner = res.locals.currentUser._id;
-  try {
-    const pets = await Pet.find({ owner });
-    const enabled = true;
-    res.render('events/newevent', { pets, enabled });
-  } catch (error) {
-    next(error);
-  }
-});
-
-// Get de list where de user are enrolled in as a keeper or as a candidate
+// GET list events where the user is enrolled in as a keeper or as a candidate
 
 router.get('/enrolledin', checkIfLoggedIn, async (req, res, next) => {
   try {
     const { _id } = req.session.currentUser;
     const events = await Event.find({ $or: [{ candidates: _id }, { keeper: _id }] });
     res.render('events/enrolledin', { events, _id });
+  } catch (error) {
+    next(error);
+  }
+});
+
+// GET form to create new event
+router.get('/new', checkIfLoggedIn, async (req, res, next) => {
+  const owner = res.locals.currentUser._id;
+  const today = new Date().toISOString().slice(0, 10);
+  try {
+    const pets = await Pet.find({ owner });
+    const enabled = true;
+    res.render('events/newevent', { pets, today, enabled });
   } catch (error) {
     next(error);
   }
@@ -90,11 +98,15 @@ router.get('/:eventId', isValidID('eventId'), async (req, res, next) => {
     const event = await Event.findById(eventId).populate('owner pet candidates');
     const { owner } = event;
     const pets = event.pet;
+    const start = event.initialDateTime.toISOString().slice(0, 10);
+    const end = event.finalDateTime.toISOString().slice(0, 10);
     const { candidates } = event;
     res.render('events/eventDetails', {
       event,
       owner,
       pets,
+      start,
+      end,
       candidates,
       ownEvents,
     });
