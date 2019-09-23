@@ -19,10 +19,21 @@ const checkEmailAndPasswordNotEmpty = (req, res, next) => {
 };
 
 const checkIfLoggedIn = (req, res, next) => {
+  if (req.session.backTo) delete req.session.backTo; //if exist delete
   if (req.session.currentUser) {
     next();
   } else {
+    req.session.backTo = req.originalUrl; //Copy the current url to comeback later next to login
     res.redirect('/login');
+  }
+};
+
+const checkIfNoLoggedIn = (req, res, next) => {
+  if (req.session.currentUser) {
+    req.flash('error', 'you are already logged in you cannot sign up or login again');
+    res.redirect('/');
+  } else {
+    next();
   }
 };
 
@@ -30,4 +41,5 @@ module.exports = {
   notifications,
   checkEmailAndPasswordNotEmpty,
   checkIfLoggedIn,
+  checkIfNoLoggedIn,
 };
