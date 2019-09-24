@@ -128,14 +128,19 @@ router.post('/', checkIfLoggedIn, async (req, res, next) => {
 // GET event details
 router.get('/:eventId', isValidID('eventId'), async (req, res, next) => {
   const { eventId } = req.params;
+  const { _id } = req.session.currentUser;
   try {
-    const event = await Event.findById(eventId).populate('owner pet candidates');
-    console.log(event);
+    let user = false;
+    const event = await Event.findById(eventId).populate('owner pet candidates');    
     const { owner } = event;
     const pets = event.pet;
     const { candidates } = event;
+    if (_id === event.owner._id.toString()) {      
+      user = true;
+    }
     res.render('events/eventDetails', {
       event,
+      user,
       owner,
       pets,
       candidates,
