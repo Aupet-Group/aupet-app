@@ -4,8 +4,6 @@ const User = require('../model/user');
 
 const router = express.Router();
 
-
-
 // Show the profile prepared to update
 
 router.get('/profile/update', checkIfLoggedIn, async (req, res, next) => {
@@ -59,7 +57,6 @@ router.post('/', async (req, res, next) => {
         },
       },
     );
-    console.log(user);
     req.session.currentUser = user;
     res.redirect('/profile');
   } catch (error) {
@@ -72,7 +69,7 @@ router.get('/keepers', checkIfLoggedIn, async (req, res, next) => {
   try {
     const keepersWithoutUser = await User.find({ keeper: true });
     const users = keepersWithoutUser.filter(
-      (keeperFilter) => keeperFilter._id.toString() !== req.session.currentUser._id,
+      (keeperFilter) => keeperFilter.id.toString() !== req.session.currentUser.id,
     );
     res.render('users/users', { users });
   } catch (error) {
@@ -80,7 +77,7 @@ router.get('/keepers', checkIfLoggedIn, async (req, res, next) => {
   }
 });
 
-//Shoe details of keepers
+// Shoe details of keepers
 
 router.get('/users/:_id', checkIfLoggedIn, async (req, res, next) => {
   const { _id } = req.params;
