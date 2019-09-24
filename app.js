@@ -13,7 +13,7 @@ const { notifications } = require('./middlewares/auth.js');
 require('dotenv').config();
 
 hbs.registerPartials(path.join(__dirname, '/views/partials'));
-hbs.registerHelper('ifequal', (firstValue, secondValue, options) =>  {
+hbs.registerHelper('ifequal', (firstValue, secondValue, options) => {
   if (firstValue === secondValue) { return options.fn(this); }
   return options.inverse(this);
 });

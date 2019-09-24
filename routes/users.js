@@ -1,19 +1,19 @@
 const express = require('express');
 const { checkIfLoggedIn } = require('../middlewares/auth');
+const { checkIfNameisEmpty, checkIfNameInDatabaseIsEmpty } = require('../middlewares/help');
 const User = require('../model/user');
 
 const router = express.Router();
 
-
-
 // Show the profile prepared to update
 
-router.get('/profile/update', checkIfLoggedIn, async (req, res, next) => {
+router.get('/profile/update', checkIfLoggedIn,  async (req, res, next) => {
   const { _id } = req.session.currentUser;
   try {
     const user = await User.findOne({ _id });
     const owner = user.owner ? 'checked' : '';
     const keeper = user.keeper ? 'checked' : '';
+    console.log(user);
     res.render('users/update', { user, owner, keeper });
   } catch (error) {
     next(error);
@@ -22,7 +22,7 @@ router.get('/profile/update', checkIfLoggedIn, async (req, res, next) => {
 
 // Saves the user profile updated
 
-router.post('/', async (req, res, next) => {
+router.post('/', checkIfNameisEmpty, async (req, res, next) => {
   const { _id } = req.session.currentUser;
   const {
     email,
@@ -59,7 +59,6 @@ router.post('/', async (req, res, next) => {
         },
       },
     );
-    console.log(user);
     req.session.currentUser = user;
     res.redirect('/profile');
   } catch (error) {
@@ -68,11 +67,11 @@ router.post('/', async (req, res, next) => {
 });
 
 // Show all of user that are keepers //
-router.get('/keepers', checkIfLoggedIn, async (req, res, next) => {
+router.get('/keepers', checkIfLoggedIn,  async (req, res, next) => {
   try {
     const keepersWithoutUser = await User.find({ keeper: true });
     const users = keepersWithoutUser.filter(
-      (keeperFilter) => keeperFilter._id.toString() !== req.session.currentUser._id,
+      (keeperFilter) => keeperFilter.id.toString() !== req.session.currentUser.id,
     );
     res.render('users/users', { users });
   } catch (error) {
@@ -80,9 +79,9 @@ router.get('/keepers', checkIfLoggedIn, async (req, res, next) => {
   }
 });
 
-//Shoe details of keepers
+// Shoe details of keepers
 
-router.get('/users/:_id', checkIfLoggedIn, async (req, res, next) => {
+router.get('/users/:_id', checkIfLoggedIn, checkIfNameInDatabaseIsEmpty, async (req, res, next) => {
   const { _id } = req.params;
   try {
     const users = await User.findOne({ _id });
@@ -94,7 +93,7 @@ router.get('/users/:_id', checkIfLoggedIn, async (req, res, next) => {
 });
 
 // Show profile of User
-router.get('/profile', checkIfLoggedIn, async (req, res, next) => {
+router.get('/profile', checkIfLoggedIn, checkIfNameInDatabaseIsEmpty, async (req, res, next) => {
   const { _id } = req.session.currentUser;
   try {
     const user = await User.findOne({ _id });
@@ -104,4 +103,5 @@ router.get('/profile', checkIfLoggedIn, async (req, res, next) => {
     next(error);
   }
 });
+
 module.exports = router;
