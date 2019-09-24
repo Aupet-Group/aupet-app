@@ -28,7 +28,7 @@ router.post('/signup', checkIfNoLoggedIn, checkEmailAndPasswordNotEmpty, async (
       req.session.currentUser = await User.create({ email, hashedPassword });
       // const user2 = await User.findOne({ email });
       // req.session.currentUser = user2;
-      res.redirect('/profile');
+      res.redirect('/profile/update');
     }
   } catch (error) {
     req.flash('error', 'Please try again');
