@@ -13,7 +13,7 @@ router.get('/', async (req, res, next) => {
   try {
     const events = await Event.find({}).populate('owner');
     const { owner } = events;
-    res.render('events/events', { events, owner, ownEvents });
+    res.render('events/events', { events, owner });
   } catch (error) {
     next(error);
   }
@@ -32,13 +32,50 @@ router.get('/myevents', checkIfLoggedIn, async (req, res, next) => {
   }
 });
 
+// // GET all events listing
+// router.get('/', async (req, res, next) => {
+//   try {
+//     const events = await Event.find({}).populate('owner');
+//     const { owner } = events;
+   
+//     console.log(events);
+//     const eventsWithPets = events.map(async (event) => {
+//       const { pet } = event;
+//       event.pet = await Pet.findById(pet);
+//       // console.log(eventPet);
+//       // return eventPet;      
+//     });
+//     console.log(eventsWithPets);
+//     res.render('events/events', { events, owner, eventsWithPets });
+//   } catch (error) {
+//     next(error);
+//   }
+// });
+
+// // GET list user's own events
+// router.get('/myevents', checkIfLoggedIn, async (req, res, next) => {
+//   const owner = res.locals.currentUser._id;
+//   try {
+//     const events = await Event.find({ owner }).populate('pet');
+//     const [{ pet }] = events;
+//     console.log(pet);
+//     const enabled = true;
+//     ownEvents = true;
+//     res.render('events/events', { events, pet, enabled, ownEvents });
+//   } catch (error) {
+//     next(error);
+//   }
+// });
+
+
 // GET list events where the user is enrolled in as a keeper or as a candidate
 
 router.get('/enrolledin', checkIfLoggedIn, async (req, res, next) => {
   try {
     const { _id } = req.session.currentUser;
-    const events = await Event.find({ $or: [{ candidates: _id }, { keeper: _id }] });
-    res.render('events/enrolledin', { events, _id });
+    const events = await Event.find({ $or: [{ candidates: _id }, { keeper: _id }] }).populate('owner');
+    const { owner } = events;
+    res.render('events/enrolledin', { events, owner, _id });
   } catch (error) {
     next(error);
   }
@@ -93,6 +130,7 @@ router.get('/:eventId', isValidID('eventId'), async (req, res, next) => {
   const { eventId } = req.params;
   try {
     const event = await Event.findById(eventId).populate('owner pet candidates');
+    console.log(event);
     const { owner } = event;
     const pets = event.pet;
     const { candidates } = event;

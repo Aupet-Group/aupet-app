@@ -444,6 +444,13 @@ footer {
   }
 }
 
+.event-form {
+
+  button {
+    margin-top: 30px;
+  }
+}
+
 .events-btns-inline {
   display: inline-flex;
   justify-content: space-around;
@@ -488,12 +495,11 @@ footer {
 .review {
   display: inline-flex;
   width: 100%;
-  margin-left: -20px;
-  padding: 20px;
+  padding: 20px 0 20px 0;
 }
 
 #title {
-  width: 55%;
+  width: 60%;
 }
 
 #review-icon {
@@ -506,14 +512,21 @@ footer {
 }
 
 #write-review {
-  width: 30%;
-  padding-right: 10px;
+  width: 25%;
 
   a {
     text-decoration: none;
     font-size: 0.9rem;
     color: black;
   }
+}
+
+#me {
+  color: red;
+}
+
+#bird {
+  height: 150px;
 }
 
 // Set up & Log in

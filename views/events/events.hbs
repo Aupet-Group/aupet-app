@@ -1,4 +1,10 @@
-<h1>TASKS</h1>
+<h1>
+  {{#if ownEvents}}
+    My tasks
+  {{else}}
+    Tasks
+  {{/if}}
+</h1>
 <div class="subtitle">
   <p class="paw">🐾🐾🐾🐾🐾🐾</p>
 </div>
@@ -17,11 +23,22 @@
         <a class="event-review" href="/reviews/{{this._id}}">Write a review</a>
       </div>
     </div>
-
+    
+    <p>Pet: 
+      {{!-- {{#each ../pets}}
+        {{this.petType}}
+      {{/each}} --}}
+    </p>
     <p>Where: {{ this.address.location }}</p>
     <p>Starts: {{ this.start }} </p>
     <p>Ends: {{ this.end }} </p>
-    <p>Owner: <a href="/users/{{this.owner._id}}">{{ this.owner.name }} </a></p> 
+    <p>Owner: 
+      {{#if ../ownEvents}}
+        <span id="me">Me</span>
+      {{else}}
+        <a href="/users/{{this.owner._id}}">{{ this.owner.name }} </a>
+      {{/if}}
+      </p> 
     <div class="events-btns-inline">
       {{!-- {{#unless ../ownEvents}} --}}
       <div class="left-btn"><button class="button-grey"><a href="/events/{{this._id}}/enroll">Enroll</a></button></div>
