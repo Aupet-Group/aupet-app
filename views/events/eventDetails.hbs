@@ -3,6 +3,12 @@
 <p class="paw">🐾🐾🐾🐾🐾🐾</p>
 </div>
 <section>
+  <p>Owner: <a href="/users/{{event.owner._id}}">
+  {{#if event.owner.name}}
+    {{ event.owner.name }} 
+  {{else}}
+    {{ event.owner.email}}
+  {{/if}} </a></p>  
   <p>{{ event.description }}</p>
   <ul class="events">
     {{#each pets}}
@@ -18,18 +24,13 @@
   <p>Where: {{ event.address.location }}</p>
   <p>Starts: {{ event.start }} </p>
   <p>Ends: {{ event.end }} </p>
-  <p>Owner: <a href="/users/{{event.owner._id}}">
-  {{#if event.owner.name}}
-    {{ event.owner.name }} 
-  {{else}}
-    {{ event.owner.email}}
-  {{/if}} </a></p>  
+  
 
 
  {{#if user}}
   <div class="events-btns-inline">
     <div class="left-btn">
-       <button class="edit button-grey"><a href="/events/{{event._id}}/update">Edit</a></button>
+       <button class="edit button-blue"><a href="/events/{{event._id}}/update">Edit</a></button>
     </div>
     <div class="right-btn">
       <form action="/events/{{event._id}}/delete" method="POST">
@@ -41,9 +42,9 @@
 
 
   <div class="centred-btn">
-{{!-- {{#unless ownEvents}} --}}
+{{#unless user}}
      <button id="enroll" class="home-button button-blue"><a href="/events/{{event._id}}/enroll">Enroll</a></button>
-{{!-- {{/unless}} --}}
+{{/unless}}
   </div>
    
 </section>
