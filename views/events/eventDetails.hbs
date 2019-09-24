@@ -10,15 +10,20 @@
       <p id="paw">🐾</p>
       <p>Type: {{ this.petType }} <p/>
       <p>Name: {{ this.petName }}</p>
-      <p>Age: {{ this.petAge }} </p>
-      <p>Weight: {{ this.petWeight }} </p>    
+      <p>Age: {{ this.petAge }} yo</p>
+      <p>Weight: {{ this.petWeight }} kg</p>    
     </li>
     {{/each}}
   </ul>
   <p>Where: {{ event.address.location }}</p>
   <p>Starts: {{ event.start }} </p>
   <p>Ends: {{ event.end }} </p>
-  <p>Owner: <a href="/users/{{event.owner._id}}">{{ event.owner.name }} </a></p>  
+  <p>Owner: <a href="/users/{{event.owner._id}}">
+  {{#if event.owner.name}}
+    {{ event.owner.name }} 
+  {{else}}
+    {{ event.owner.email}}
+  {{/if}} </a></p>  
 
   <div class="events-btns-inline">
     <div class="left-btn">
@@ -57,7 +62,7 @@
 
            <div class="middle">
               
-               <p>Name: {{ this.name }}</p>
+               <p>Name: <a href="/users/{{this._id}}">{{ this.name }}</a></p>
                <p>Email: {{ this.email }} </p>
                <p>Phone: {{ this.phone }} </p>
             
