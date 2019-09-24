@@ -11,21 +11,9 @@ let ownEvents = false;
 // GET all events listing
 router.get('/', async (req, res, next) => {
   try {
-    const events = await Event.find({}).populate('owner pet');
+    const events = await Event.find({}).populate('owner');
     const { owner } = events;
-    console.log(events);
-    // const [{ pet }] = events;
-    const pets = events.forEach((event) => {
-
-      return { pet } = event;
-      // return event.pet;
-      // .forEach((pet) => {
-      //   return pet.petType;
-      // });      
-    });
-
-    console.log(pets);
-    res.render('events/events', { events, owner, pets });
+    res.render('events/events', { events, owner });
   } catch (error) {
     next(error);
   }
@@ -35,24 +23,58 @@ router.get('/', async (req, res, next) => {
 router.get('/myevents', checkIfLoggedIn, async (req, res, next) => {
   const owner = res.locals.currentUser._id;
   try {
-    const events = await Event.find({ owner }).populate('pet');
-    const [{ pet }] = events;
-    console.log(pet);
+    const events = await Event.find({ owner });
     const enabled = true;
     ownEvents = true;
-    res.render('events/events', { events, pet, enabled, ownEvents });
+    res.render('events/events', { events, enabled, ownEvents });
   } catch (error) {
     next(error);
   }
 });
+
+// // GET all events listing
+// router.get('/', async (req, res, next) => {
+//   try {
+//     const events = await Event.find({}).populate('owner');
+//     const { owner } = events;
+   
+//     console.log(events);
+//     const eventsWithPets = events.map(async (event) => {
+//       const { pet } = event;
+//       event.pet = await Pet.findById(pet);
+//       // console.log(eventPet);
+//       // return eventPet;      
+//     });
+//     console.log(eventsWithPets);
+//     res.render('events/events', { events, owner, eventsWithPets });
+//   } catch (error) {
+//     next(error);
+//   }
+// });
+
+// // GET list user's own events
+// router.get('/myevents', checkIfLoggedIn, async (req, res, next) => {
+//   const owner = res.locals.currentUser._id;
+//   try {
+//     const events = await Event.find({ owner }).populate('pet');
+//     const [{ pet }] = events;
+//     console.log(pet);
+//     const enabled = true;
+//     ownEvents = true;
+//     res.render('events/events', { events, pet, enabled, ownEvents });
+//   } catch (error) {
+//     next(error);
+//   }
+// });
 
 // GET list events where the user is enrolled in as a keeper or as a candidate
 
 router.get('/enrolledin', checkIfLoggedIn, async (req, res, next) => {
   try {
     const { _id } = req.session.currentUser;
-    const events = await Event.find({ $or: [{ candidates: _id }, { keeper: _id }] });
-    res.render('events/enrolledin', { events, _id });
+    const events = await Event.find({ $or: [{ candidates: _id }, { keeper: _id }] }).populate('owner');
+    const { owner } = events;
+    res.render('events/enrolledin', { events, owner, _id });
   } catch (error) {
     next(error);
   }
