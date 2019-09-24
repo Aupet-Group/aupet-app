@@ -1,13 +1,15 @@
 const express = require('express');
 const Pet = require('../model/pet');
+
 const router = express.Router();
 const User = require('../model/user');
 const { checkIfLoggedIn } = require('../middlewares/auth');
 
-// Get list all my pets
-router.get('/', async (req, res, next) => {
+// Get list all user's own pets
+router.get('/', checkIfLoggedIn, async (req, res, next) => {
+  const owner = res.locals.currentUser._id;
   try {
-    const pets = await Pet.find({});
+    const pets = await Pet.find({ owner });
     res.render('pets/listpets', { pets });
   } catch (error) {
     next(error);
@@ -17,14 +19,13 @@ router.get('/', async (req, res, next) => {
 // GET form to create new pet
 
 router.get('/new', checkIfLoggedIn, (req, res, next) => {
-  res.render('addPet');
+  res.render('pets/addPet');
 });
 
 //  POST new pet
 
 router.post('/', async (req, res, next) => {
   const { petType, petWeight, petName, petAge, petImg } = req.body;
-  console.log(req.session.currentUser);
 
   const { petId } = req.params;
   const owner = req.session.currentUser._id;
