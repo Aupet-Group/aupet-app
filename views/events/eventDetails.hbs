@@ -25,6 +25,8 @@
     {{ event.owner.email}}
   {{/if}} </a></p>  
 
+
+ {{#if user}}
   <div class="events-btns-inline">
     <div class="left-btn">
        <button class="edit button-grey"><a href="/events/{{event._id}}/update">Edit</a></button>
@@ -35,6 +37,7 @@
      </form>
     </div>
   </div>
+  {{/if}}
 
 
   <div class="centred-btn">
@@ -69,7 +72,9 @@
            </div>                  
                
           <div class="right">
+            {{#if ../user}}
              <button class="button-grey"><a href="/events/{{../event._id}}/accept/{{this._id}}">Accept keeper</a></button>
+             {{/if}}
           </div>  
 
        </div>

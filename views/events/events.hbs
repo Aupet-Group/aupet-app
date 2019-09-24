@@ -36,10 +36,17 @@
       {{#if ../ownEvents}}
         <span id="me">Me</span>
       {{else}}
-        <a href="/users/{{this.owner._id}}">{{ this.owner.name }} </a>
+        <a href="/users/{{this.owner._id}}">
+        {{#if this.owner.name}}
+           {{ this.owner.name }}
+        {{else}}        
+           {{ this.owner.email }}
+        {{/if}}
+        </a>
       {{/if}}
       </p> 
-    <div class="events-btns-inline">
+
+      <div class="events-btns-inline">
       {{!-- {{#unless ../ownEvents}} --}}
       <div class="left-btn"><button class="button-grey"><a href="/events/{{this._id}}/enroll">Enroll</a></button></div>
       {{!-- {{/unless}} --}}
