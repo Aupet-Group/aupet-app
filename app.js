@@ -7,6 +7,7 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const mongoose = require('mongoose');
 const MongoStore = require('connect-mongo')(session);
+
 const flash = require('connect-flash');
 const { notifications } = require('./middlewares/auth.js');
 require('dotenv').config();
