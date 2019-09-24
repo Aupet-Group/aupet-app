@@ -10,8 +10,16 @@ let ownEvents = false;
 
 // GET all events listing
 router.get('/', async (req, res, next) => {
+  let events;
   try {
-    const events = await Event.find({}).populate('owner');
+    const allEvents = await Event.find({}).populate('owner');
+    if (req.session.currentUser) {
+      events = allEvents.filter(
+        event => event.owner._id.toString() !== req.session.currentUser._id.toString()
+      );
+    } else {
+      events = allEvents;
+    }    
     const { owner } = events;
     res.render('events/events', { events, owner });
   } catch (error) {
@@ -31,6 +39,9 @@ router.get('/myevents', checkIfLoggedIn, async (req, res, next) => {
     next(error);
   }
 });
+
+
+// WIP Detalle del Pet en el listado
 
 // // GET all events listing
 // router.get('/', async (req, res, next) => {
@@ -140,11 +151,10 @@ router.get('/:eventId', isValidID('eventId'), async (req, res, next) => {
     }
     res.render('events/eventDetails', {
       event,
-      user,
       owner,
+      user,
       pets,
-      candidates,
-      ownEvents,
+      candidates      
     });
   } catch (error) {
     next(error);
