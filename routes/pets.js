@@ -1,4 +1,8 @@
 const express = require('express');
+
+const formidable = require('formidable');
+const path = require('path');
+
 const Pet = require('../model/pet');
 
 const router = express.Router();
@@ -29,6 +33,7 @@ router.post('/', async (req, res, next) => {
 
   const { petId } = req.params;
   const owner = req.session.currentUser._id;
+  await User.findByIdAndUpdate({ _id: owner }, { $set: { owner: true } });
 
   try {
     const pet = await Pet.create({
@@ -45,7 +50,7 @@ router.post('/', async (req, res, next) => {
   }
 });
 
-//GET pet details
+// GET pet details
 
 router.get('/:petId', async (req, res, next) => {
   const { petId } = req.params;
