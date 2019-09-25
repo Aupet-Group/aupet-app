@@ -108,10 +108,7 @@ add geolocation to events when creating - show event in a map in event
     hashedPassword: { type: String, required: true },
     name: { type: String },
     lastName: { type: String },
-  
     phone: { type: String },
-    mobile: { type: String },
-    secondaryPhone: { type: String },
     address: [
       {
         street: { type: String },

@@ -9,8 +9,6 @@ const userSchema = new Schema(
     lastName: { type: String },
 
     phone: { type: String },
-    mobile: { type: String },
-    secondaryPhone: { type: String },
     address: [
       {
         street: { type: String },

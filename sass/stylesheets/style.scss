@@ -22,7 +22,7 @@ body {
 .main-container {
   padding: 10px 15px 75px 15px;
   max-width: 540px;
-  width: 100%;    
+  width: 100%;
 }
 
 h1 {
@@ -290,6 +290,29 @@ button {
   transition: all 0.4s ease 0s;
 }
 
+.button-blue-little {
+  text-align: center;
+  width: 20%;
+  font-size: 15px;
+  font-weight: 700;
+  color: #fff !important;
+  text-transform: uppercase;
+  text-decoration: none;
+  background: #5592c3;
+  padding: 8px;
+  border-radius: 20px;
+  display: inline-block;
+  border: none;
+  transition: all 0.4s ease 0s;
+  margin: 0;
+}
+
+.button-blue-little:hover {
+  text-shadow: 0px 0px 6px rgba(255, 255, 255, 1);
+  -webkit-box-shadow: 0px 5px 40px -10px rgba(0, 0, 0, 0.57);
+  -moz-box-shadow: 0px 5px 40px -10px rgba(0, 0, 0, 0.57);
+  transition: all 0.4s ease 0s;
+}
 .button-grey {
   text-align: center;
   width: 35%;
@@ -382,7 +405,6 @@ button {
   transition: all 0.4s ease 0s;
 }
 
-
 .centred-btn {
   width: 100%;
   display: flex;
@@ -390,10 +412,16 @@ button {
   padding-bottom: 10px;
 }
 
-// Messages 
+.little-button-edit-profile {
+  width: 100%;
+  padding: 0 0% 0 18%;
+}
 
-.error, .info{
-  margin-bottom:4%;
+// Messages
+
+.error,
+.info {
+  margin-bottom: 4%;
 }
 .errorMessages {
   color: red;
@@ -592,7 +620,6 @@ button {
   .home-button {
     padding-bottom: 0;
   }
-
 }
 
 // Events pages
@@ -606,7 +633,6 @@ button {
 }
 
 .event-form {
-
   button {
     margin-top: 30px;
   }
@@ -632,7 +658,7 @@ button {
 .candidates {
   width: 100% +20px;
   margin-left: -20px;
-  padding: 20px;;
+  padding: 20px;
   align-items: center;
   display: flex;
   justify-content: center;
@@ -710,7 +736,8 @@ button {
   font-size: 0.8rem;
 }
 
-#me, #add-pet-warning {
+#me,
+#add-pet-warning {
   color: red;
 }
 
@@ -750,9 +777,6 @@ button {
   }
 }
 
-
-
-
 // Pets view
 
 .container-view {
@@ -786,6 +810,7 @@ button {
   align-items: center;
   display: flex;
   justify-content: center;
+  margin-top: 5%;
 }
 .width-50 {
   display: flex;
@@ -820,7 +845,6 @@ button {
   align-items: center;
 }
 
-
 .conteiner-two-wrap-center {
   margin-top: 20px;
   display: flex;
@@ -837,5 +861,25 @@ button {
 
 .font-bold {
   font-weight: 600;
+}
+
+.form-group-userphoto {
+  margin-top: 10%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  input , label[for='file']{
+    margin: 5% auto;
+  }
+  position:relative;
+}
+
+input[type='file']#userupload {
+  width: 100%;
+  overflow: hidden;
+  position: absolute;
+  left:0;
+  top:0;
+  opacity:0;
 }
 

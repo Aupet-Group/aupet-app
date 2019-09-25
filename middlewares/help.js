@@ -9,15 +9,13 @@ const isValidID = id => (req, res, next) => {
 
 const checkIfNameisEmpty = (req, res, next) => {
   const { name } = req.body;
-  if (name.match(/^[0-9a-zA-Z]{4,25}$/)) {
+  if (name.match(/^[0-9a-zA-Z]{3,25}$/)) {
     next();
   } else {
     const {
       email,
       lastName,
       phone,
-      mobile,
-      secondaryPhone,
       owner: ownerString,
       keeper: keeperString,
       street,
@@ -32,8 +30,6 @@ const checkIfNameisEmpty = (req, res, next) => {
         name,
         lastName,
         phone,
-        mobile,
-        secondaryPhone,
         owner: ownerString,
         keeper: keeperString,
         street,
@@ -53,7 +49,7 @@ const checkIfNameInDatabaseIsEmpty = async (req, res, next) => {
     if (!user.name) {
       req.flash('error', 'A name is required');
       res.redirect('/profile/update');
-    } else if (user.name.match(/^[0-9a-zA-Z]{4,25}$/)) {
+    } else if (user.name.match(/^[0-9a-zA-Z]{3,25}$/)) {
       next();
     } else {
       req.flash('error', 'A name is required');

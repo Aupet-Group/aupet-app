@@ -18,12 +18,11 @@
 <form action="/imageUpload" method="post" enctype="multipart/form-data">
     <div class="form-group">
         <div class="image-wrap-center">
-            <img class="img-rounded " src="{{user.img}}" width="18%" height="18%">
+            <img src="{{user.img}}" margin-top="10%" width="50%">
         </div>
     </div>
-    <div class="form-group">
-        <label for="photo">Image</label>
-        <input class="button-blue" type="file" name="photo">
-        <input class="button-blue" type="submit" value="SAVE">
+    <div class="form-group-userphoto">
+        <label for="file" class="button-blue">UPLOAD<input id="userupload" type="file" name="photo"></label>
+        <input id="usersave" class="button-blue" type="submit" value="SAVE">
     </div>
 </form>
