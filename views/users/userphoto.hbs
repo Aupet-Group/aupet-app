@@ -1,0 +1,29 @@
+{{!-- <h1>Photo upload</h1>
+<div class="image-wrap-center">
+    <img src="{{user.img}}" alt="" width="50%" height="25%" class="img-rounded">
+</div>
+
+<form action="/imageUpload" enctype="multipart/form-data" method="post">
+    <!-- Field to choose the files to be uploaded -->
+    <div>
+        <input type="file" name="upload" for="img" multiple />
+    </div>
+        <br>
+    <div >
+        <button class="button-blue" type="submit" >UPLOAD IMAGE</button>
+    </div>
+
+</form> --}}
+<h1>Upload an Image</h1>
+<form action="/imageUpload" method="post" enctype="multipart/form-data">
+    <div class="form-group">
+        <div class="image-wrap-center">
+            <img class="img-rounded " src="{{user.img}}" width="18%" height="18%">
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="photo">Image</label>
+        <input class="button-blue" type="file" name="photo">
+        <input class="button-blue" type="submit" value="SAVE">
+    </div>
+</form>
