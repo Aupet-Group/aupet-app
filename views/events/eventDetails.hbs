@@ -17,7 +17,7 @@
   <ul class="events">
     {{#each pets}}
     <li>
-      <div class="events-btns-inline">
+      <div class="two-divs-inline">
         <div>
           <p>Type: {{ this.petType }} </p>
           <p>Name: {{ this.petName }}</p>
@@ -59,6 +59,31 @@
 </section>
 
 <section>
+  {{#if keeper}}
+  <h2>Keeper:</h2>  
+        <div class="candidates"> 
+           <div class="left">              
+                <p id="ok">🆗</p>              
+           </div>
+           <div class="middle">
+             <div>
+                <img class="img-rounded" src="{{event.keeper.img}}" />
+             </div>            
+           </div>    
+           <div class="middle2">              
+               <p>Name: <a href="/users/{{event.keeper._id}}">{{ event.keeper.name }}</a></p>
+               <p>Email: {{ event.keeper.email }} </p>
+               <p>Phone: {{ event.keeper.phone }} </p>            
+           </div>     
+             
+           <div class="right">            
+           </div>  
+
+       </div>
+ {{/if}} 
+</section>
+
+<section>
   {{#if candidates}}
   <ul class="events"><h2>Candidates:</h2>  
     {{#each candidates}}
@@ -66,11 +91,7 @@
         <div class="candidates">     
 
            <div class="left">
-              {{#if ../allocated}}
-                <p id="ok">🆗</p>
-              {{else}}
-                <p id="whiteCheck">✅</p>
-              {{/if}}
+                <p id="whiteCheck">✅</p>          
            </div>     
 
            <div class="middle">
@@ -90,8 +111,10 @@
                
            <div class="right">
             {{#if ../user}}
-             <button class="button-grey"><a href="/events/{{../event._id}}/accept/{{this._id}}">Accept</a></button>
-             {{/if}}
+              {{#unless ../keeper}}
+                <button class="button-grey"><a href="/events/{{../event._id}}/accept/{{this._id}}">Accept</a></button>
+              {{/unless}}
+            {{/if}}
            </div>  
 
        </div>
@@ -100,6 +123,7 @@
   </ul>
  {{/if}} 
 </section>
+
 
 <div>
   <img class="bottom-img" src="/images/pets1.png">
