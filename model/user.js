@@ -5,9 +5,9 @@ const userSchema = new Schema(
   {
     email: { type: String, required: true, unique: true },
     hashedPassword: { type: String, required: true },
-    name: { type: String},
+    name: { type: String },
     lastName: { type: String },
-  
+
     phone: { type: String },
     mobile: { type: String },
     secondaryPhone: { type: String },
@@ -19,7 +19,7 @@ const userSchema = new Schema(
         location: { type: String },
       },
     ],
-    img: { type: String, default:"/images/default-user.png" },
+    img: { type: String, default: '/images/default-user.png' },
     events: [{ type: Schema.Types.ObjectId, ref: 'Event' }],
     owner: { type: Boolean, default: false },
     keeper: { type: Boolean, default: false },

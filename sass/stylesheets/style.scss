@@ -632,6 +632,29 @@ button {
   transition: all 0.4s ease 0s;
 }
 
+.button-blue-little {
+  text-align: center;
+  width: 15%;
+  font-size: 15px;
+  font-weight: 700;
+  color: #fff !important;
+  text-transform: uppercase;
+  text-decoration: none;
+  background: #5592c3;
+  padding: 4px;
+  border-radius: 20px;
+  display: inline-block;
+  border: none;
+  transition: all 0.4s ease 0s;
+  margin:3% 18%;
+}
+.button-blue-little:hover {
+  text-shadow: 0px 0px 6px rgba(255, 255, 255, 1);
+  -webkit-box-shadow: 0px 5px 40px -10px rgba(0, 0, 0, 0.57);
+  -moz-box-shadow: 0px 5px 40px -10px rgba(0, 0, 0, 0.57);
+  transition: all 0.4s ease 0s;
+}
+
 .button-grey {
   text-align: center;
   width: 35%;
