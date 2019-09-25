@@ -25,7 +25,7 @@ router.post('/searchbar', async (req, res, next) => {
 // you don't need to be loged in
 router.get('/list', async (req, res, next) => {
   try {
-    res.render('keeperzone', { keepers });
+    res.render('users/keeperzone', { keepers });
   } catch (error) {
     next(error);
   }

@@ -25,8 +25,8 @@
   </div>
 
 </div>
-<div>
-  <button class="button-blue"><a href="/imageUpload">Edit image</a></button>
+<div class="little-button-edit-profile">
+  <button class="button-blue-little"><a href="/imageUpload">Edit</a></button>
 </div>
 <br>
 <hr>
@@ -35,20 +35,22 @@
 
   <p>Name: {{user.name}}</p>
   <p>Last Name: {{user.lastName}}</p>
-  <p>email: {{user.email}}</p>
+  <p>Email: {{user.email}}</p>
   <p>Phone: {{user.phone}}</p>
-  <p>Mobile: {{user.mobile}}</p>
-  <p>Secondary Phone:{{user.secondaryPhone}}</p>
+  <p>Adress: {{user.address.[0].street}} {{user.address.[0].number}} </p>
+  <p>Location: {{user.address.[0].location}}</p>
+  <p>Zipcode: {{user.address.[0].zipcode}}</p>
   <br>
 </div>
 {{else}}
 <div class="p-wrap">
   <p>Name: {{users.name}}</p>
   <p>Last Name: {{users.lastName}}</p>
-  <p>email: {{users.email}}</p>
+  <p>Email: {{users.email}}</p>
   <p>Phone: {{users.phone}}</p>
-  <p>Mobile: {{users.mobile}}</p>
-  <p>Secondary Phone:{{users.secondaryPhone}}</p>
+  <p>Adress: {{users.address.[0].street}} {{users.address.[0].number}} </p>
+  <p>Location: {{users.address.[0].location}}</p>
+  <p>Zipcode: {{users.address.[0].zipcode}}</p>
 </div>
 {{/if}}
 
