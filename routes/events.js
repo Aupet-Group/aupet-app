@@ -79,6 +79,7 @@ router.get('/myevents', checkIfLoggedIn, async (req, res, next) => {
 // });
 
 
+
 // GET list events where the user is enrolled in as a keeper or as a candidate
 
 router.get('/enrolledin', checkIfLoggedIn, async (req, res, next) => {
