@@ -17,12 +17,17 @@
   <ul class="events">
     {{#each pets}}
     <li>
-      <p id="paw">🐾</p>
-      <p>Type: {{ this.petType }} <p/>
-      <p>Name: {{ this.petName }}</p>
-      <p>Age: {{ this.petAge }} yo</p>
-      <p>Weight: {{ this.petWeight }} kg</p>    
-    </li>
+      <div class="events-btns-inline">
+        <div>
+          <p>Type: {{ this.petType }} </p>
+          <p>Name: {{ this.petName }}</p>
+        </div>
+        <div>
+          <p>Age: {{ this.petAge }} yo</p>
+          <p>Weight: {{ this.petWeight }} kg</p>
+        </div>
+      </div>          
+     </li>
     {{/each}}
   </ul>
   <p>Where: {{ event.address.location }}</p>
@@ -70,7 +75,7 @@
 
            <div class="middle">
              <div>
-                <img class="img-rounded" src="{{this.img}}" width="70" height="70" />
+                <img class="img-rounded" src="{{this.img}}" />
              </div>
             
            </div>    
