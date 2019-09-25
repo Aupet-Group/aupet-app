@@ -23,16 +23,18 @@
         <a class="event-review" href="/reviews/{{this._id}}">Write a review</a>
       </div>
     </div>
-    
-    <p>Pet: 
-      {{!-- {{#each ../pets}}
-        {{this.petType}}
-      {{/each}} --}}
-    </p>
-    <p>Where: {{ this.address.location }}</p>
-    <p>Starts: {{ this.start }} </p>
-    <p>Ends: {{ this.end }} </p>
-    <p>Owner: 
+
+    <div class="two-divs-inline">
+      <div id="event-data">
+        <p>Pet: 
+        {{!-- {{#each ../pets}}
+          {{this.petType}}
+        {{/each}} --}}
+       </p>
+       <p>Where: {{ this.address.location }}</p>
+       <p>Starts: {{ this.start }} </p>
+       <p>Ends: {{ this.end }} </p>
+       <p>Owner: 
       {{#if ../ownEvents}}
         <span id="me">Me</span>
       {{else}}
@@ -46,12 +48,24 @@
       {{/if}}
       </p> 
 
-      <div class="events-btns-inline">
-      {{#unless ../ownEvents}}
-      <div class="left-btn"><button class="button-grey"><a href="/events/{{this._id}}/enroll">Enroll</a></button></div>
-      {{/unless}}
-      <div class="right-btn"><button class="button-grey"><a href="/events/{{this._id}}">Details</a></button></div>
+      </div>
+        
+      <div>
+        {{#if this.keeper}}
+          <button class="button-blue" id="keeper-selected">Keeper already selected</button>
+        {{else}}
+          {{#unless ../ownEvents}}       
+            <button class="button-red"><a href="/events/{{this._id}}/enroll">Enroll</a></button>
+          {{/unless}}      
+        {{/if}}
+      </div>
+
+    </div> 
+      
+    <div class="centred-btn">
+      <button class="button-grey"><a href="/events/{{this._id}}">Details</a></button>
     </div>
+    
   </li>
   {{/each}}
 </ul>
