@@ -3,12 +3,16 @@
 <p class="paw">🐾🐾🐾🐾🐾🐾</p>
 </div>
 <section>
-  <p>Owner: <a href="/users/{{event.owner._id}}">
-  {{#if event.owner.name}}
-    {{ event.owner.name }} 
-  {{else}}
-    {{ event.owner.email}}
-  {{/if}} </a></p>  
+  {{#unless user}}
+    <p>Owner: <a href="/users/{{event.owner._id}}">
+  
+    {{#if event.owner.name}}
+      {{ event.owner.name }} 
+    {{else}}
+      {{ event.owner.email}}
+    {{/if}} </a></p>  
+
+  {{/unless}}
   <p>{{ event.description }}</p>
   <ul class="events">
     {{#each pets}}
@@ -65,18 +69,25 @@
            </div>     
 
            <div class="middle">
+             <div>
+                <img class="img-rounded" src="{{this.img}}" width="70" height="70" />
+             </div>
+            
+           </div>    
+           <div class="middle2">
               
                <p>Name: <a href="/users/{{this._id}}">{{ this.name }}</a></p>
                <p>Email: {{ this.email }} </p>
                <p>Phone: {{ this.phone }} </p>
             
-           </div>                  
+           </div>         
+
                
-          <div class="right">
+           <div class="right">
             {{#if ../user}}
-             <button class="button-grey"><a href="/events/{{../event._id}}/accept/{{this._id}}">Accept keeper</a></button>
+             <button class="button-grey"><a href="/events/{{../event._id}}/accept/{{this._id}}">Accept</a></button>
              {{/if}}
-          </div>  
+           </div>  
 
        </div>
       </li>       

@@ -130,7 +130,7 @@ router.post('/', checkIfLoggedIn, async (req, res, next) => {
       address: { location },
       pet,
     });
-    res.redirect('/events');
+    res.redirect('/events/myevents');
   } catch (error) {
     next(error);
   }
