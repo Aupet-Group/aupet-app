@@ -50,13 +50,17 @@
     <div>
         <label for="keeper"><input type="checkbox" name="keeper" value="checked" {{keeper}}>Keeper</label>
     </div>
-    
+
 
     <div>
         {{#if user.img}}
         <img src="{{user.img:}}">
         {{/if}}
     </div>
-    <button type="submit">Update</button>
+    <div class="btn-block">
+        <button class="button-blue" type="submit">Update</button>
+    </div>
 </form>
- <button><a href="/profile">Back to profile</a></button>
+<div class="btn-block">
+    <button class="button-grey"><a href="/profile">Back to profile</a></button>
+</div>
