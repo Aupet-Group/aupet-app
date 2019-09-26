@@ -27,17 +27,7 @@ router.get('/profile/update', checkIfLoggedIn, async (req, res, next) => {
 
 router.post('/', checkIfNameisEmpty, async (req, res, next) => {
   const { _id } = req.session.currentUser;
-  const {
-    email,
-    name,
-    lastName,
-    phone,
-    owner: ownerString,
-    keeper: keeperString,
-    street,
-    number,
-    zipcode,
-  } = req.body;
+  const { email, name, lastName, phone, owner: ownerString, keeper: keeperString, street, number, zipcode } = req.body;
 
   const owner = ownerString === 'checked';
   const keeper = keeperString === 'checked';
@@ -68,9 +58,7 @@ router.post('/', checkIfNameisEmpty, async (req, res, next) => {
 router.get('/keepers', checkIfLoggedIn, async (req, res, next) => {
   try {
     const keepersWithoutUser = await User.find({ keeper: true });
-    const users = keepersWithoutUser.filter(
-      (keeperFilter) => keeperFilter.id.toString() !== req.session.currentUser.id,
-    );
+    const users = keepersWithoutUser.filter(keeperFilter => keeperFilter.id.toString() !== req.session.currentUser.id);
     res.render('users/users', { users });
   } catch (error) {
     next(error);

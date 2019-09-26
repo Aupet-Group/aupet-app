@@ -1,7 +1,6 @@
 const express = require('express');
 
-const formidable = require('formidable');
-const path = require('path');
+const upload = require('../config/cloudinary');
 
 const Pet = require('../model/pet');
 
