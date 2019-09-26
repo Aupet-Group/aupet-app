@@ -6,6 +6,7 @@ const { checkIfLoggedIn } = require('../middlewares/auth');
 const { isValidID } = require('../middlewares/help');
 
 const router = express.Router();
+
 let ownEvents = false;
 const today = new Date().toISOString().slice(0, 10);
 
@@ -56,7 +57,22 @@ router.get('/myevents', checkIfLoggedIn, async (req, res, next) => {
   }
 });
 
-
+// GET list 3rd party user's events
+router.get('/userevents/:userId', checkIfLoggedIn, async (req, res, next) => {
+  const { userId } = req.params;
+  const thirdParty = true;  
+  try {
+    const user = await User.findById({ _id: userId })
+    const events = await Event.find({ owner: userId }).populate('owner keeper');
+    const currentEvents = await Event.find({ $and: [ { owner: userId }, { start: {$gte: today} }] }).populate('owner keeper');
+    const pastEvents = await Event.find({ $and: [ { owner: userId }, { start: {$lt: today} }] }).populate('owner keeper'); 
+    const { owner } = events;
+    const { keeper } = events;
+    res.render('events/events', { currentEvents, pastEvents, user, owner, keeper, thirdParty });
+  } catch (error) {
+    next(error);
+  }
+});
 
 // WIP Detalle del Pet en el listado
 

@@ -1,7 +1,9 @@
 <h1>
   {{#if ownEvents}}
     My tasks
-  {{else}}
+  {{else if thirdParty}}
+    {{user.name}}'s tasks
+  {{else}}  
     Tasks
   {{/if}}
 </h1>
