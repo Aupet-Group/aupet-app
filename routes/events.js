@@ -221,7 +221,7 @@ router.post('/:eventId/delete', checkIfLoggedIn, isValidID('eventId'), async (re
     const event = await Event.findById(eventId);
     if (userId === event.owner.toString()) {
       await Event.findByIdAndDelete(eventId);
-      res.redirect('/events');
+      res.redirect('/events/myevents');
     } else {
       req.flash('error', 'You didn\'t create this task, you can\'t delete it.');
       res.redirect('/events');
