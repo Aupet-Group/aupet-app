@@ -4,6 +4,7 @@
 //font-family: 'Quicksand', sans-serif;
 @import url('https://fonts.googleapis.com/css?family=Raleway&display=swap');
 //font-family: 'Raleway', sans-serif;
+@import 'normalize';
 
 // Layout
 
@@ -453,7 +454,6 @@ button {
 .home-container {
   display: flex;
   flex-direction: column;
-  margin: -15px;
 }
 
 .home-event-finder {
@@ -825,6 +825,8 @@ button {
 
 .img-rounded {
   border-radius: 50%;
+  width: 140px;
+  height: 140px;
 }
 
 .image-wrap-center {
@@ -889,18 +891,18 @@ button {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  input , label[for='file']{
+  input,
+  label[for='file'] {
     margin: 5% auto;
   }
-  position:relative;
+  position: relative;
 }
 
 input[type='file']#userupload {
   width: 100%;
   overflow: hidden;
   position: absolute;
-  left:0;
-  top:0;
-  opacity:0;
+  left: 0;
+  top: 0;
+  opacity: 0;
 }
-
