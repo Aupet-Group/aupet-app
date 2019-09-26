@@ -1,7 +1,9 @@
 <h1>
   {{#if ownEvents}}
     My tasks
-  {{else}}
+  {{else if thirdParty}}
+    {{user.name}}'s tasks
+  {{else}}  
     Tasks
   {{/if}}
 </h1>
@@ -10,11 +12,15 @@
 </div>
 
 <ul class="events">
-  {{#each events}}
+  <h2>Current tasks</h2>
+  {{#unless currentEvents}}
+  <p id="no-task">There is no current task</p>
+  {{/unless}}
+  {{#each currentEvents}}
   <li>
     <div class="review">
       <div id="title">
-        <h2>{{ this.title }}</h2>
+        <h3>{{ this.title }}</h3>
       </div>
       <div id="review-icon">
         <a class="event-review" href="/reviews/{{this._id}}"><img class="home-icon" src="/images/review2.png" /></a>
@@ -61,14 +67,94 @@
       </div>
 
     </div> 
-      
-    <div class="centred-btn">
-      <button class="button-grey"><a href="/events/{{this._id}}">Details</a></button>
-    </div>
+
+    {{#if ../ownEvents}}
+     <div class="events-btns-inline">
+       <div class="left-btn"><form action="/events/{{this._id}}/delete" method="POST">
+         <button class="button-red" type="submit" value="Delete">Delete</button>
+     </form></div>
+       <div class="right-btn"><button class="button-grey"><a href="/events/{{this._id}}">Details</a></button></div>
+     </div>
+    {{else}}
+     <div class="centred-btn">
+       <button class="button-grey"><a href="/events/{{this._id}}">Details</a></button>
+     </div>
+    {{/if}}
     
   </li>
   {{/each}}
 </ul>
+
+<ul class="events">
+  <h2>Past tasks</h2>
+  {{#unless pastEvents}}
+  <p id="no-task">There is no past task</p>
+  {{/unless}}
+  {{#each pastEvents}}
+  <li>
+    <div class="review">
+      <div id="title">
+        <h3>{{ this.title }}</h3>
+      </div>
+      <div id="review-icon">
+        <a class="event-review" href="/reviews/{{this._id}}"><img class="home-icon" src="/images/review2.png" /></a>
+      </div>
+      <div id="write-review">
+        <a class="event-review" href="/reviews/{{this._id}}">Write a review</a>
+      </div>
+    </div>
+
+    <div class="two-divs-inline">
+      <div id="event-data">
+        <p>Pet: 
+        {{!-- {{#each ../pets}}
+          {{this.petType}}
+        {{/each}} --}}
+       </p>
+       <p>Where: {{ this.address.location }}</p>
+       <p>Starts: {{ this.start }} </p>
+       <p>Ends: {{ this.end }} </p>
+       <p>Owner: 
+      {{#if ../ownEvents}}
+        <span id="me">Me</span>
+      {{else}}
+        <a href="/users/{{this.owner._id}}">
+        {{#if this.owner.name}}
+           {{ this.owner.name }}
+        {{else}}        
+           {{ this.owner.email }}
+        {{/if}}
+        </a>
+      {{/if}}
+      </p> 
+
+      </div>
+        
+      <div>
+        {{#if this.keeper}}
+          <button class="button-blue" id="keeper-selected">Keeper already selected</button>           
+        {{/if}}
+      </div>
+
+    </div> 
+
+    {{#if ../ownEvents}}
+     <div class="events-btns-inline">
+       <div class="left-btn"><form action="/events/{{this._id}}/delete" method="POST">
+         <button class="button-red" type="submit" value="Delete">Delete</button>
+     </form></div>
+       <div class="right-btn"><button class="button-grey"><a href="/events/{{this._id}}">Details</a></button></div>
+     </div>
+    {{else}}
+     <div class="centred-btn">
+       <button class="button-grey"><a href="/events/{{this._id}}">Details</a></button>
+     </div>
+    {{/if}}
+    
+  </li>
+  {{/each}}
+</ul>
+
 <div>
   <img class="bottom-img" src="/images/pets2.png">
 </div>
