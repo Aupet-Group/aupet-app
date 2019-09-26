@@ -17,18 +17,18 @@ router.get('/', async (req, res, next) => {
   let currentEvents;
   let pastEvents; 
   try {
-    const allEvents = await Event.find({}).populate('owner keeper').populate('owner keeper');
-    const currentAllEvents = await Event.find({start: {$gte: today}}).populate('owner keeper');
-    const pastAllEvents = await Event.find({start: {$lt: today}}).populate('owner keeper');    
+    const allEvents = await Event.find({}).populate('owner keeper').populate('owner keeper pet');
+    const currentAllEvents = await Event.find({ start: { $gte: today } }).populate('owner keeper pet');
+    const pastAllEvents = await Event.find({ start: { $lt: today } }).populate('owner keeper pet');    
     if (req.session.currentUser) {
       events = allEvents.filter(
         (event) => event.owner._id.toString() !== req.session.currentUser._id.toString(),
       );
       currentEvents = currentAllEvents.filter(
-        event => event.owner._id.toString() !== req.session.currentUser._id.toString()
+        (event) => event.owner._id.toString() !== req.session.currentUser._id.toString(),
       );
       pastEvents = pastAllEvents.filter(
-        event => event.owner._id.toString() !== req.session.currentUser._id.toString()
+        (event) => event.owner._id.toString() !== req.session.currentUser._id.toString()
       );
     } else {
       events = allEvents;
@@ -37,7 +37,9 @@ router.get('/', async (req, res, next) => {
     }    
     const { owner } = events;
     const { keeper } = events;
-    res.render('events/events', { events, currentEvents, pastEvents, owner, keeper });
+    const { pets } = events;
+    // console.log(currentEvents)
+    res.render('events/events', { events, currentEvents, pastEvents, owner, keeper, pets });
   } catch (error) {
     next(error);
   }
@@ -152,6 +154,7 @@ router.post('/', checkIfLoggedIn, async (req, res, next) => {
     } else {
       pet = await Pet.find({ owner, petName: selectedPet });
     }
+    console.log("pet", pet)
     await Event.create({
       owner,
       title,
