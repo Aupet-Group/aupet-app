@@ -50,6 +50,7 @@ router.post('/', checkIfNameisEmpty, async (req, res, next) => {
           name,
           lastName,
           phone,
+          owner,
           keeper,
           'address.0.street': street,
           'address.0.number': number,
@@ -121,7 +122,7 @@ router.post('/imageUpload', checkIfLoggedIn, upload.single('photo'), async (req,
   const { _id } = req.session.currentUser;
   try {
     console.log(_id);
-    res.locals.currentUser.fileName = `${_id}_user`;
+    req.session.currentUser.fileName = `${_id}_user`;
     await User.findByIdAndUpdate({ _id }, { $set: { img: req.file.url } });
     res.redirect('/profile');
   } catch (error) {
