@@ -63,13 +63,14 @@ router.get('/:petId', async (req, res, next) => {
 });
 
 // Get form to Edit Pet
-router.get('/:petId/update', checkIfLoggedIn, (req, res, next) => {
+router.get('/:petId/update', checkIfLoggedIn, async (req, res, next) => {
   const { petId } = req.params;
-  Pet.findById(petId)
-    .then(pet => {
-      res.render('pets/editPet', pet);
-    })
-    .catch(next);
+  try {
+    const pet = await Pet.findById(petId);
+    res.render('pets/editPet', pet);
+  } catch (error) {
+    next(error);
+  }
 });
 
 // Post update Pet
@@ -86,6 +87,23 @@ router.post('/:petId', checkIfLoggedIn, async (req, res, next) => {
       petName,
     });
     res.redirect(`/pets/${petId}`);
+  } catch (error) {
+    next(error);
+  }
+});
+
+// Upload pet Image
+
+router.get('/pets/imageUpload', checkIfLoggedIn, async (req, res, next) => {
+  try {
+    const { _id } = req.session.currentUser;
+    const pet = await Pet.findById(petId);
+    if (!pet.img) {
+      pet.img = '/images/default-pet.png';
+    }
+    delete res.locals.nameFile;
+    res.locals.nameFile = pet.id.toString();
+    res.render('pets/petImage', { pet });
   } catch (error) {
     next(error);
   }

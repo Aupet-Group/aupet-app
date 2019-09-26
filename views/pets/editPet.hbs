@@ -3,6 +3,13 @@
     <div class="subtitle">
         <p class="paw">🐾🐾🐾🐾🐾🐾</p>
     </div>
+    <div class="image-wrap-center">
+        <img class="img-rounded" src="{{this.img}}">
+    </div>
+
+    <div class="little-button-edit-profile">
+        {{!-- <button class="button-blue-little"><a href="/????????">Edit</a></button> --}}
+    </div>
     <form id="form" action="/pets/{{_id}}" method="POST">
         <div class="input-container">
             <label for="petType">Type</label>
@@ -25,11 +32,6 @@
             <label for="petName">Name</label>
             <br>
             <input class="input-font" type="text" name="petName" value="{{petName}}" style="width:16.5em">
-        </div>
-
-        <div class="input-container">
-            <input class="input-font" type="file" name="img" multiple>
-            {{!-- <input class="input-font" type="submit" value="Upload"> --}}
         </div>
 
         <div class="btn-block">
