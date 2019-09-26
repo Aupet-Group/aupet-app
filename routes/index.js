@@ -8,7 +8,7 @@ let keepers;
 /* GET home page. */
 // eslint-disable-next-line no-unused-vars
 router.get('/', (req, res, next) => {
-  res.render('index', { title: 'Express' });
+  res.render('index', { title: 'Aupet', layout: 'layouthome' });
 });
 // you don't need to be loged in
 
