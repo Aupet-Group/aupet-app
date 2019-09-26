@@ -13,8 +13,8 @@ const storage = cloudinaryStorage({
   use_filename: true,
   folder: 'aupet-app/images', // Cloudinary folder name
   allowedFormats: ['jpg', 'png'],
-  filename({req, res }, file, cb) {
-    cb(null, res.locals.currentUser.fileName);
+  filename(req, file, cb) {
+    cb(null, req.session.currentUser.fileName);
     // The file on cloudinary would have the same name as the original file name
   },
 });

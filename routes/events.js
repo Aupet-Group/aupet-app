@@ -4,6 +4,7 @@ const Pet = require('../model/pet');
 const User = require('../model/user');
 const { checkIfLoggedIn } = require('../middlewares/auth');
 const { isValidID } = require('../middlewares/help');
+
 const router = express.Router();
 let ownEvents = false;
 const today = new Date().toISOString().slice(0, 10);
@@ -20,7 +21,7 @@ router.get('/', async (req, res, next) => {
     const pastAllEvents = await Event.find({start: {$lt: today}}).populate('owner keeper');    
     if (req.session.currentUser) {
       events = allEvents.filter(
-        event => event.owner._id.toString() !== req.session.currentUser._id.toString()
+        (event) => event.owner._id.toString() !== req.session.currentUser._id.toString(),
       );
       currentEvents = currentAllEvents.filter(
         event => event.owner._id.toString() !== req.session.currentUser._id.toString()
@@ -64,13 +65,13 @@ router.get('/myevents', checkIfLoggedIn, async (req, res, next) => {
 //   try {
 //     const events = await Event.find({}).populate('owner');
 //     const { owner } = events;
-   
+
 //     console.log(events);
 //     const eventsWithPets = events.map(async (event) => {
 //       const { pet } = event;
 //       event.pet = await Pet.findById(pet);
 //       // console.log(eventPet);
-//       // return eventPet;      
+//       // return eventPet;
 //     });
 //     console.log(eventsWithPets);
 //     res.render('events/events', { events, owner, eventsWithPets });
@@ -123,7 +124,9 @@ router.get('/new', checkIfLoggedIn, async (req, res, next) => {
 // POST new event
 router.post('/', checkIfLoggedIn, async (req, res, next) => {
   let pet;
-  const { title, description, selectedPet, initialDateTime, finalDateTime, location } = req.body;
+  const {
+ title, description, selectedPet, initialDateTime, finalDateTime, location 
+} = req.body;
   const owner = res.locals.currentUser._id;
   const start = initialDateTime;
   const end = finalDateTime;
@@ -145,7 +148,7 @@ router.post('/', checkIfLoggedIn, async (req, res, next) => {
       address: { location },
       pet,
     });
-    res.redirect('/events/myevents');
+    res.redirect('/events');
   } catch (error) {
     next(error);
   }
@@ -157,12 +160,11 @@ router.get('/:eventId', isValidID('eventId'), async (req, res, next) => {
   const { _id } = req.session.currentUser;
   try {
     let user = false;
-    const event = await Event.findById(eventId).populate('owner pet candidates keeper');    
+    const event = await Event.findById(eventId).populate('owner pet candidates');
     const { owner } = event;
     const pets = event.pet;
     const { candidates } = event;
-    const { keeper } = event;
-    if (_id === event.owner._id.toString()) {      
+    if (_id === event.owner._id.toString()) {
       user = true;
     }
     res.render('events/eventDetails', {
@@ -171,7 +173,6 @@ router.get('/:eventId', isValidID('eventId'), async (req, res, next) => {
       user,
       pets,
       candidates,
-      keeper,      
     });
   } catch (error) {
     next(error);
@@ -201,7 +202,9 @@ router.post('/:eventId', checkIfLoggedIn, isValidID('eventId'), async (req, res,
   let pet;
   const { eventId } = req.params;
   const owner = res.locals.currentUser._id;
-  const { title, description, selectedPet, initialDateTime, finalDateTime, location } = req.body;
+  const {
+ title, description, selectedPet, initialDateTime, finalDateTime, location 
+} = req.body;
   const start = initialDateTime;
   const end = finalDateTime;
   try {
@@ -293,13 +296,11 @@ router.get(
   async (req, res, next) => {
     const { userId } = req.params;
     const { eventId } = req.params;
-    const { _id } = req.session.currentUser;
 
     try {
       let event = await Event.findById(eventId).populate('keeper pet candidates');
       const pets = event.pet;
       const { candidates } = event;
-      const { keeper } = event;
       let allocated = false;
 
       if (event.keeper) {
@@ -307,22 +308,15 @@ router.get(
         allocated = true;
       } else {
         event = await Event.findByIdAndUpdate(eventId, { $set: { keeper: userId } }, { new: true });
-        // event = await Event.findByIdAndUpdate(eventId, { $pull: { candidates: { userId } } }, { new: true });
         allocated = true;
         req.flash('success', "You've just accepted a keeper for your task.");
       }
-      if (_id === event.owner._id.toString()) {      
-        user = true;
-      }
-      // res.render('events/eventDetails', {
-      //   event,
-      //   pets,
-      //   candidates,
-      //   keeper,
-      //   allocated,
-      //   user,
-      // });
-      res.redirect(`/events/${eventId}`);
+      res.render('events/eventDetails', {
+        event,
+        pets,
+        candidates,
+        allocated,
+      });
     } catch (error) {
       next(error);
     }
