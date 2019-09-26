@@ -17,9 +17,9 @@ router.get('/', async (req, res, next) => {
   let currentEvents;
   let pastEvents; 
   try {
-    const allEvents = await Event.find({}).populate('owner keeper').populate('owner keeper pet');
-    const currentAllEvents = await Event.find({ start: { $gte: today } }).populate('owner keeper pet');
-    const pastAllEvents = await Event.find({ start: { $lt: today } }).populate('owner keeper pet');    
+    const allEvents = await Event.find({}).populate('owner').populate('keeper').populate('pet');
+    const currentAllEvents = await Event.find({ start: { $gte: today } }).populate('owner').populate('keeper').populate('pet');
+    const pastAllEvents = await Event.find({ start: { $lt: today } }).populate('owner').populate('keeper').populate('pet');    
     if (req.session.currentUser) {
       events = allEvents.filter(
         (event) => event.owner._id.toString() !== req.session.currentUser._id.toString(),
@@ -37,7 +37,7 @@ router.get('/', async (req, res, next) => {
     }    
     const { owner } = events;
     const { keeper } = events;
-    const { pets } = events;
+    const [{ pets }] = events;
     // console.log(currentEvents)
     res.render('events/events', { events, currentEvents, pastEvents, owner, keeper, pets });
   } catch (error) {
@@ -152,7 +152,8 @@ router.post('/', checkIfLoggedIn, async (req, res, next) => {
     if (selectedPet === 'All') {
       pet = await Pet.find({ owner });
     } else {
-      pet = await Pet.find({ owner, petName: selectedPet });
+      pet = await Pet.findOne({ $and: [ { owner }, { petName: selectedPet } ] });
+       
     }
     console.log("pet", pet)
     await Event.create({
@@ -230,7 +231,7 @@ router.post('/:eventId', checkIfLoggedIn, isValidID('eventId'), async (req, res,
     if (selectedPet === 'All') {
       pet = await Pet.find({ owner });
     } else {
-      pet = await Pet.find({ owner, petName: selectedPet });
+      pet = await Pet.findOne({ $and: [ { owner }, { petName: selectedPet } ] });
     }
     await Event.findByIdAndUpdate(eventId, {
       owner,
