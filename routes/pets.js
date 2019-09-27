@@ -1,6 +1,5 @@
 const express = require('express');
 
-const formidable = require('formidable');
 const path = require('path');
 
 const Pet = require('../model/pet');
@@ -29,7 +28,9 @@ router.get('/new', checkIfLoggedIn, (req, res, next) => {
 //  POST new pet
 
 router.post('/', async (req, res, next) => {
-  const { petType, petWeight, petName, petAge, petImg } = req.body;
+  const {
+    petType, petWeight, petName, petAge, petImg,
+  } = req.body;
 
   const { petId } = req.params;
   const owner = req.session.currentUser._id;
@@ -67,7 +68,7 @@ router.get('/:petId', async (req, res, next) => {
 router.get('/:petId/update', checkIfLoggedIn, (req, res, next) => {
   const { petId } = req.params;
   Pet.findById(petId)
-    .then(pet => {
+    .then((pet) => {
       res.render('pets/editPet', pet);
     })
     .catch(next);
@@ -78,7 +79,9 @@ router.get('/:petId/update', checkIfLoggedIn, (req, res, next) => {
 router.post('/:petId', checkIfLoggedIn, async (req, res, next) => {
   const { petId } = req.params;
   const pet = Pet.findById(petId);
-  const { petType, petWeight, petAge, petName } = req.body;
+  const {
+    petType, petWeight, petAge, petName,
+  } = req.body;
   try {
     await Pet.findByIdAndUpdate(petId, {
       petType,
@@ -87,6 +90,31 @@ router.post('/:petId', checkIfLoggedIn, async (req, res, next) => {
       petName,
     });
     res.redirect(`/pets/${petId}`);
+  } catch (error) {
+    next(error);
+  }
+});
+
+// Show 3rd-party profile's pets
+router.get('/userpets/pet/:_id', checkIfLoggedIn, async (req, res, next) => {
+  const { _id } = req.params;
+  const userpets = true;
+  try {
+    const pet = await Pet.findById(_id);
+    res.render('pets/petDetails', { pet, userpets });
+  } catch (error) {
+    next(error);
+  }
+});
+
+
+// Get a list of pets of a owner 3rd
+router.get('/userpets/:owner', checkIfLoggedIn, async (req, res, next) => {
+  const userpets = true;
+  const { owner } = req.params;
+  try {
+    const pets = await Pet.find({ owner });
+    res.render('pets/listpets', { pets, userpets, owner });
   } catch (error) {
     next(error);
   }
