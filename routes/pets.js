@@ -94,9 +94,9 @@ router.post('/:petId', checkIfLoggedIn, async (req, res, next) => {
 
 // Upload pet Image
 
-router.get('/pets/imageUpload', checkIfLoggedIn, async (req, res, next) => {
+router.get('/imageUpload/:petId', checkIfLoggedIn, async (req, res, next) => {
   try {
-    const { _id } = req.session.currentUser;
+    const { petId } = req.params;
     const pet = await Pet.findById(petId);
     if (!pet.img) {
       pet.img = '/images/default-pet.png';
@@ -104,6 +104,19 @@ router.get('/pets/imageUpload', checkIfLoggedIn, async (req, res, next) => {
     delete res.locals.nameFile;
     res.locals.nameFile = pet.id.toString();
     res.render('pets/petImage', { pet });
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.post('/imageUpload/:petId', checkIfLoggedIn, upload.single('photo'), async (req, res, next) => {
+  // const { _id } = req.session.currentUser;
+  const { petId } = req.params;
+  try {
+    console.log(petId);
+    // req.session.currentUser.fileName = `${petId}_pet`;  aqui como hago en pet?
+    await Pet.findByIdAndUpdate({ petId }, { $set: { img: req.file.url } });
+    res.redirect(`/pets/${petId}`);
   } catch (error) {
     next(error);
   }
