@@ -45,7 +45,6 @@ const checkIfNameInDatabaseIsEmpty = async (req, res, next) => {
   const { _id } = res.locals.currentUser;
   try {
     const user = await User.findById({ _id });
-    console.log(user.name);
     if (!user.name) {
       req.flash('error', 'A name is required');
       res.redirect('/profile/update');

@@ -8,10 +8,19 @@
         <img class="img-rounded" src="{{pet.img}}">
     </div>
     <div class="list-center">
-        <p> Pet type: {{pet.petType }}</p>
-        <p> Pet weight: {{ pet.petWeight }}</p>
-        <p> Pet age: {{ pet.petAge }} </p>
+        <p> Pet type: {{../pet.petType }}</p>
+        <p> Pet weight: {{ ../pet.petWeight }}</p>
+        <p> Pet age: {{../pet.petAge }} </p>
     </div>
+
+    {{#if userpets}}
+    <div class="btn-block">
+        <button class="button-grey"><a href="/pets/userpets/{{pet.owner}}">All my pets</button>
+    </div>
+    <div class="btn-block">
+        <button class="button-grey"><a href="/profile">Back to profile</a></button>
+    </div>
+    {{else}}
 
     <div class="btn-block">
         <button class="button-blue"><a href="/pets/{{pet._id}}/update">Edit my pet</button>
@@ -22,5 +31,5 @@
     <div class="btn-block">
         <button class="button-grey"><a href="/profile">Back to profile</a></button>
     </div>
-
+    {{/if}}
 </div>
