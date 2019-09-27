@@ -17,19 +17,42 @@ router.get('/', async (req, res, next) => {
   let currentEvents;
   let pastEvents;
   try {
-    const allEvents = await Event.find({}).populate('owner').populate('keeper').populate('pet');
-    const currentAllEvents = await Event.find({ start: { $gte: today } }).populate('owner').populate('keeper').populate('pet');
-    const pastAllEvents = await Event.find({ start: { $lt: today } }).populate('owner').populate('keeper').populate('pet');    
+    // const pets = await Pet.find({});
+    const allEvents = await Event.find({}).populate('owner keeper');
+    const currentAllEvents = await Event.find({ start: { $gte: today } });
+    const pastAllEvents = await Event.find({ start: { $lt: today } }).populate('owner keeper');   
     if (req.session.currentUser) {
       events = allEvents.filter(
         (event) => event.owner._id.toString() !== req.session.currentUser._id.toString(),
       );
-      currentEvents = currentAllEvents.filter(
+      const currEvs = currentAllEvents.filter(
         (event) => event.owner._id.toString() !== req.session.currentUser._id.toString(),
       );
       pastEvents = pastAllEvents.filter(
         (event) => event.owner._id.toString() !== req.session.currentUser._id.toString()
       );
+
+
+
+      currentEvents = await Promise.all(currEvs.map(async (event) => { 
+        const curEvent = await Event.findOne({ _id: event._id}).populate('owner keeper'); 
+        const pet = await Pet.find({_id: event.pet });
+        const extractType = [];
+        pet.forEach((el) => {
+         return extractType.push(el.petType);
+        });
+        const petType = extractType.join(", ");
+        // console.log(petType);  
+
+        curEvent.petType = petType;
+        return curEvent;
+        console.log(curEvent);  
+      }));
+
+      console.log(currentEvents);
+
+      
+      
     } else {
       events = allEvents;
       currentEvents = currentAllEvents;
@@ -37,13 +60,13 @@ router.get('/', async (req, res, next) => {
     }
     const { owner } = events;
     const { keeper } = events;
-    const [{ pets }] = events;
-    console.log(pets)
-    res.render('events/events', { events, currentEvents, pastEvents, owner, keeper, pets });
+    
+    res.render('events/events', { events, currentEvents, pastEvents, owner, keeper });
   } catch (error) {
     next(error);
   }
 });
+
 
 // GET list user's own events
 router.get('/myevents', checkIfLoggedIn, async (req, res, next) => {
@@ -123,8 +146,7 @@ router.post('/', checkIfLoggedIn, async (req, res, next) => {
     if (selectedPet === 'All') {
       pet = await Pet.find({ owner });
     } else {
-      pet = await Pet.findOne({ $and: [ { owner }, { petName: selectedPet } ] });
-       
+      pet = await Pet.findOne({ $and: [ { owner }, { petName: selectedPet } ] });       
     }    
     await Event.create({
       owner,
