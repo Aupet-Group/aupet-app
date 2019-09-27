@@ -58,8 +58,12 @@
         {{#if this.keeper}}
           <button class="button-blue" id="keeper-selected">Keeper already selected</button>
         {{else}}
-          {{#unless ../ownEvents}}       
-            <button class="button-red"><a href="/events/{{this._id}}/enroll">Enroll</a></button>
+          {{#unless ../ownEvents}} 
+             {{#if this.enrolled}}
+                <button class="button-grey" id="keeper-selected">You are already enrolled</button>
+             {{else}} 
+                <button class="button-red"><a href="/events/{{this._id}}/enroll">Enroll</a></button>  
+             {{/if}}     
           {{/unless}}      
         {{/if}}
       </div>
