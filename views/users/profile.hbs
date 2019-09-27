@@ -22,7 +22,7 @@
     <button class="button-grey-large"><a href="/events/enrolledin">Enrolled in</a></button>
     {{else }} {{!-- 3rd party --}}
     <button class="button-grey-large"><a href="/pets/userpets/{{users._id}}">Pets</a></button>
-    <button class="button-grey-large"><a href="/events/userevents/:userId">Tasks</a></button>
+    <button class="button-grey-large"><a href="/events/userevents/{{users._id}}">Tasks</a></button>
     <button class="button-grey-large"><a href="/events/enrolledin">Enrolled in</a></button>
     {{/if}}
   </div>

@@ -15,7 +15,7 @@ const today = new Date().toISOString().slice(0, 10);
 router.get('/', async (req, res, next) => {
   let events;
   let currentEvents;
-  let pastEvents; 
+  let pastEvents;
   try {
     const allEvents = await Event.find({}).populate('owner').populate('keeper').populate('pet');
     const currentAllEvents = await Event.find({ start: { $gte: today } }).populate('owner').populate('keeper').populate('pet');
@@ -34,11 +34,11 @@ router.get('/', async (req, res, next) => {
       events = allEvents;
       currentEvents = currentAllEvents;
       pastEvents = pastAllEvents;
-    }    
+    }
     const { owner } = events;
     const { keeper } = events;
     const [{ pets }] = events;
-    // console.log(currentEvents)
+    console.log(pets)
     res.render('events/events', { events, currentEvents, pastEvents, owner, keeper, pets });
   } catch (error) {
     next(error);
@@ -49,11 +49,13 @@ router.get('/', async (req, res, next) => {
 router.get('/myevents', checkIfLoggedIn, async (req, res, next) => {
   const owner = res.locals.currentUser._id;
   try {
-    const currentEvents = await Event.find({ $and: [ { owner }, { start: {$gte: today} }] });
-    const pastEvents = await Event.find({ $and: [ { owner }, { start: {$lt: today} }] }); 
+    const currentEvents = await Event.find({ $and: [{ owner }, { start: { $gte: today } }] });
+    const pastEvents = await Event.find({ $and: [{ owner }, { start: { $lt: today } }] });
     const enabled = true;
     ownEvents = true;
-    res.render('events/events', { currentEvents, pastEvents, enabled, ownEvents });
+    res.render('events/events', {
+      currentEvents, pastEvents, enabled, ownEvents,
+    });
   } catch (error) {
     next(error);
   }
@@ -62,57 +64,21 @@ router.get('/myevents', checkIfLoggedIn, async (req, res, next) => {
 // GET list 3rd party user's events
 router.get('/userevents/:userId', checkIfLoggedIn, async (req, res, next) => {
   const { userId } = req.params;
-  const thirdParty = true;  
+  const thirdParty = true;
   try {
-    const user = await User.findById({ _id: userId })
+    const user = await User.findById({ _id: userId });
     const events = await Event.find({ owner: userId }).populate('owner keeper');
-    const currentEvents = await Event.find({ $and: [ { owner: userId }, { start: {$gte: today} }] }).populate('owner keeper');
-    const pastEvents = await Event.find({ $and: [ { owner: userId }, { start: {$lt: today} }] }).populate('owner keeper'); 
+    const currentEvents = await Event.find({ $and: [{ owner: userId }, { start: { $gte: today } }] }).populate('owner keeper');
+    const pastEvents = await Event.find({ $and: [{ owner: userId }, { start: { $lt: today } }] }).populate('owner keeper');
     const { owner } = events;
     const { keeper } = events;
-    res.render('events/events', { currentEvents, pastEvents, user, owner, keeper, thirdParty });
+    res.render('events/events', {
+      currentEvents, pastEvents, user, owner, keeper, thirdParty,
+    });
   } catch (error) {
     next(error);
   }
 });
-
-// WIP Detalle del Pet en el listado
-
-// // GET all events listing
-// router.get('/', async (req, res, next) => {
-//   try {
-//     const events = await Event.find({}).populate('owner');
-//     const { owner } = events;
-
-//     console.log(events);
-//     const eventsWithPets = events.map(async (event) => {
-//       const { pet } = event;
-//       event.pet = await Pet.findById(pet);
-//       // console.log(eventPet);
-//       // return eventPet;
-//     });
-//     console.log(eventsWithPets);
-//     res.render('events/events', { events, owner, eventsWithPets });
-//   } catch (error) {
-//     next(error);
-//   }
-// });
-
-// // GET list user's own events
-// router.get('/myevents', checkIfLoggedIn, async (req, res, next) => {
-//   const owner = res.locals.currentUser._id;
-//   try {
-//     const events = await Event.find({ owner }).populate('pet');
-//     const [{ pet }] = events;
-//     console.log(pet);
-//     const enabled = true;
-//     ownEvents = true;
-//     res.render('events/events', { events, pet, enabled, ownEvents });
-//   } catch (error) {
-//     next(error);
-//   }
-// });
-
 
 // GET list events where the user is enrolled in as a keeper or as a candidate
 
@@ -120,6 +86,11 @@ router.get('/enrolledin', checkIfLoggedIn, async (req, res, next) => {
   try {
     const { _id } = req.session.currentUser;// string type
     const events = await Event.find({ $or: [{ candidates: _id }, { keeper: _id }] }).populate('owner').populate('keeper');
+    for (let i = 0; i < events.length; i++) {
+      if (events[i].keeper) {
+        if (events[i].keeper._id.toString() === _id) { events[i].keeperyes = 'yes'; }
+      }
+    }
     const { owner } = events;
     res.render('events/enrolledin', { events, owner, _id });
   } catch (error) {
@@ -143,8 +114,8 @@ router.get('/new', checkIfLoggedIn, async (req, res, next) => {
 router.post('/', checkIfLoggedIn, async (req, res, next) => {
   let pet;
   const {
- title, description, selectedPet, initialDateTime, finalDateTime, location 
-} = req.body;
+    title, description, selectedPet, initialDateTime, finalDateTime, location,
+  } = req.body;
   const owner = res.locals.currentUser._id;
   const start = initialDateTime;
   const end = finalDateTime;
@@ -154,8 +125,7 @@ router.post('/', checkIfLoggedIn, async (req, res, next) => {
     } else {
       pet = await Pet.findOne({ $and: [ { owner }, { petName: selectedPet } ] });
        
-    }
-    console.log("pet", pet)
+    }    
     await Event.create({
       owner,
       title,
@@ -168,7 +138,7 @@ router.post('/', checkIfLoggedIn, async (req, res, next) => {
       address: { location },
       pet,
     });
-    res.redirect('/events');
+    res.redirect('/events/myevents');
   } catch (error) {
     next(error);
   }
@@ -215,7 +185,9 @@ router.get('/:eventId/update', checkIfLoggedIn, isValidID('eventId'), async (req
     const pets = event.pet;
     const enabled = true;
     if (userId === event.owner.toString()) {
-      res.render('events/edit', { event, pets, today, enabled });
+      res.render('events/edit', {
+        event, pets, today, enabled,
+      });
     } else {
       req.flash('error', "You can't edit this event.");
     }
@@ -230,8 +202,8 @@ router.post('/:eventId', checkIfLoggedIn, isValidID('eventId'), async (req, res,
   const { eventId } = req.params;
   const owner = res.locals.currentUser._id;
   const {
- title, description, selectedPet, initialDateTime, finalDateTime, location 
-} = req.body;
+    title, description, selectedPet, initialDateTime, finalDateTime, location,
+  } = req.body;
   const start = initialDateTime;
   const end = finalDateTime;
   try {
