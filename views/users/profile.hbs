@@ -45,6 +45,9 @@
   <p>Adress: {{user.address.[0].street}} {{user.address.[0].number}} </p>
   <p>Location: {{user.address.[0].location}}</p>
   <p>Zipcode: {{user.address.[0].zipcode}}</p>
+  {{#if keeperActive}}
+  <p>Keeper.</p>
+  {{/if }}
   <br>
 </div>
 {{else}}
@@ -56,7 +59,10 @@
   <p>Adress: {{users.address.[0].street}} {{users.address.[0].number}} </p>
   <p>Location: {{users.address.[0].location}}</p>
   <p>Zipcode: {{users.address.[0].zipcode}}</p>
-</div>
+  {{#if keeperActive}}
+  <p>Keeper.</p>
+  {{/if }}
+ </div>
 {{/if}}
 
 {{#if enabled}}
