@@ -21,7 +21,7 @@ body {
 }
 
 .main-container {
-  padding: 10px 15px 75px 15px;
+  padding: 0 15px 75px 15px;
   max-width: 540px;
   width: 100%;
 }
@@ -31,7 +31,6 @@ h1 {
   color: #2c6ea5;
   font-weight: bolder;
   text-align: center;
-  padding-top: 10px;
 }
 
 h2 {
@@ -54,10 +53,13 @@ p {
   font-size: 1.2rem;
   font-weight: lighter;
 }
+
 ul {
   list-style-type: none;
 }
+
 .subtitle {
+  margin-top: -20px;
   display: flex;
   justify-content: center;
   padding-bottom: 25px;
@@ -653,6 +655,10 @@ button {
   text-align: center;
 }
 
+.event-info {
+  padding-bottom: 20px;
+}
+
 .event-form {
   button {
     margin-top: 30px;
@@ -706,7 +712,7 @@ button {
   padding-left: 5px;
 
   p {
-    font-size: 0.9rem;
+    font-size: 1rem;
   }
 }
 

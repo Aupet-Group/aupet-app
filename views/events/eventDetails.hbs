@@ -3,18 +3,19 @@
 <p class="paw">🐾🐾🐾🐾🐾🐾</p>
 </div>
 <section>
-  {{#unless user}}
-    <p>Owner: <a href="/users/{{event.owner._id}}">
+  <div class="event-info">
+   {{#unless user}}
+     <p>Owner: <a href="/users/{{event.owner._id}}">
   
-    {{#if event.owner.name}}
+     {{#if event.owner.name}}
       {{ event.owner.name }} 
-    {{else}}
+     {{else}}
       {{ event.owner.email}}
-    {{/if}} </a></p>  
+     {{/if}} </a></p>  
 
-  {{/unless}}
-  <p>{{ event.description }}</p>
-  <ul class="events">
+   {{/unless}}
+   <p>{{ event.description }}</p>
+   <ul>
     {{#each pets}}
     <li>
       <div class="two-divs-inline">
@@ -29,12 +30,12 @@
       </div>          
      </li>
     {{/each}}
-  </ul>
-  <p>Where: {{ event.address.location }}</p>
-  <p>Starts: {{ event.start }} </p>
-  <p>Ends: {{ event.end }} </p>
+   </ul>
+   <p>Where: {{ event.address.location }}</p>
+   <p>Starts: {{ event.start }} </p>
+   <p>Ends: {{ event.end }} </p>
+  </div>
   
-
 
  {{#if user}}
   <div class="events-btns-inline">
@@ -46,15 +47,15 @@
          <button class="button-red" type="submit" value="Delete">Delete</button>
      </form>
     </div>
-  </div>
+   </div>
+  {{else}}
+    {{#unless past}}
+   <div class="centred-btn">
+     <button id="enroll" class="home-button button-blue"><a href="/events/{{event._id}}/enroll">Enroll</a></button>
+   </div>
+     {{/unless}}
   {{/if}}
 
-
-  <div class="centred-btn">
-{{#unless user}}
-     <button id="enroll" class="home-button button-blue"><a href="/events/{{event._id}}/enroll">Enroll</a></button>
-{{/unless}}
-  </div>
    
 </section>
 
@@ -85,7 +86,7 @@
 
 <section>
   {{#if candidates}}
-  <ul class="events"><h2>Candidates:</h2>  
+  <ul><h2>Candidates:</h2>  
     {{#each candidates}}
       <li>
         <div class="candidates">     

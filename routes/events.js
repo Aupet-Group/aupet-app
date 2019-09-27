@@ -176,16 +176,21 @@ router.post('/', checkIfLoggedIn, async (req, res, next) => {
 
 // GET event details
 router.get('/:eventId', isValidID('eventId'), async (req, res, next) => {
+  let past = false;
   const { eventId } = req.params;
   const { _id } = req.session.currentUser;
   try {
     let user = false;
-    const event = await Event.findById(eventId).populate('owner pet candidates');
+    const event = await Event.findById(eventId).populate('owner pet candidates keeper');
     const { owner } = event;
     const pets = event.pet;
     const { candidates } = event;
+    const { keeper } = event;
     if (_id === event.owner._id.toString()) {
       user = true;
+    }
+    if (event.start < today) {
+      past = true;
     }
     res.render('events/eventDetails', {
       event,
@@ -193,6 +198,8 @@ router.get('/:eventId', isValidID('eventId'), async (req, res, next) => {
       user,
       pets,
       candidates,
+      keeper,
+      past
     });
   } catch (error) {
     next(error);
@@ -318,25 +325,14 @@ router.get(
     const { eventId } = req.params;
 
     try {
-      let event = await Event.findById(eventId).populate('keeper pet candidates');
-      const pets = event.pet;
-      const { candidates } = event;
-      let allocated = false;
-
+      let event = await Event.findById(eventId);
       if (event.keeper) {
         req.flash('error', 'Sorry. This task is already allocated.');
-        allocated = true;
       } else {
         event = await Event.findByIdAndUpdate(eventId, { $set: { keeper: userId } }, { new: true });
-        allocated = true;
         req.flash('success', "You've just accepted a keeper for your task.");
       }
-      res.render('events/eventDetails', {
-        event,
-        pets,
-        candidates,
-        allocated,
-      });
+      res.redirect(`/events/${eventId}`);
     } catch (error) {
       next(error);
     }
