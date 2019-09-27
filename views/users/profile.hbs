@@ -19,7 +19,10 @@
     {{#if enabled}}
     <button class="button-grey-large"><a href="/pets">All my pets</a></button>
     <button class="button-grey-large"><a href="/events/myevents">My tasks</a></button>
-
+    <button class="button-grey-large"><a href="/events/enrolledin">Enrolled in</a></button>
+    {{else }} {{!-- 3rd party --}}
+    <button class="button-grey-large"><a href="/pets/userpets/{{users._id}}">Pets</a></button>
+    <button class="button-grey-large"><a href="/events/userevents/:userId">Tasks</a></button>
     <button class="button-grey-large"><a href="/events/enrolledin">Enrolled in</a></button>
     {{/if}}
   </div>

@@ -118,8 +118,8 @@ router.get('/userevents/:userId', checkIfLoggedIn, async (req, res, next) => {
 
 router.get('/enrolledin', checkIfLoggedIn, async (req, res, next) => {
   try {
-    const { _id } = req.session.currentUser;
-    const events = await Event.find({ $or: [{ candidates: _id }, { keeper: _id }] }).populate('owner');
+    const { _id } = req.session.currentUser;// string type
+    const events = await Event.find({ $or: [{ candidates: _id }, { keeper: _id }] }).populate('owner').populate('keeper');
     const { owner } = events;
     res.render('events/enrolledin', { events, owner, _id });
   } catch (error) {

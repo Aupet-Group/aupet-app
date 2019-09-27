@@ -14,12 +14,12 @@ require('dotenv').config();
 
 hbs.registerPartials(path.join(__dirname, '/views/partials'));
 hbs.registerHelper('ifequal', (firstValue, secondValue, options) => {
-  if (firstValue === secondValue) { return options.fn(this); }
+  if (firstValue.toString() === secondValue.toString()) { return options.fn(this); }
   return options.inverse(this);
 });
 
 hbs.registerHelper('ifnotequal', (firstValue, secondValue, options) => {
-  if (firstValue !== secondValue) { return options.fn(this); }
+  if (firstValue.toString() !== secondValue.toString()) { return options.fn(this); }
   return options.inverse(this);
 });
 
