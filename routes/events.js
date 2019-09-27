@@ -15,29 +15,31 @@ const today = new Date().toISOString().slice(0, 10);
 router.get('/', async (req, res, next) => {
   let events;
   let currentEvents;
-  let pastEvents; 
+  let pastEvents;
   try {
     const allEvents = await Event.find({}).populate('owner keeper').populate('owner keeper');
-    const currentAllEvents = await Event.find({start: {$gte: today}}).populate('owner keeper');
-    const pastAllEvents = await Event.find({start: {$lt: today}}).populate('owner keeper');    
+    const currentAllEvents = await Event.find({ start: { $gte: today } }).populate('owner keeper');
+    const pastAllEvents = await Event.find({ start: { $lt: today } }).populate('owner keeper');
     if (req.session.currentUser) {
       events = allEvents.filter(
         (event) => event.owner._id.toString() !== req.session.currentUser._id.toString(),
       );
       currentEvents = currentAllEvents.filter(
-        event => event.owner._id.toString() !== req.session.currentUser._id.toString()
+        (event) => event.owner._id.toString() !== req.session.currentUser._id.toString(),
       );
       pastEvents = pastAllEvents.filter(
-        event => event.owner._id.toString() !== req.session.currentUser._id.toString()
+        (event) => event.owner._id.toString() !== req.session.currentUser._id.toString(),
       );
     } else {
       events = allEvents;
       currentEvents = currentAllEvents;
       pastEvents = pastAllEvents;
-    }    
+    }
     const { owner } = events;
     const { keeper } = events;
-    res.render('events/events', { events, currentEvents, pastEvents, owner, keeper });
+    res.render('events/events', {
+      events, currentEvents, pastEvents, owner, keeper,
+    });
   } catch (error) {
     next(error);
   }
@@ -47,11 +49,13 @@ router.get('/', async (req, res, next) => {
 router.get('/myevents', checkIfLoggedIn, async (req, res, next) => {
   const owner = res.locals.currentUser._id;
   try {
-    const currentEvents = await Event.find({ $and: [ { owner }, { start: {$gte: today} }] });
-    const pastEvents = await Event.find({ $and: [ { owner }, { start: {$lt: today} }] }); 
+    const currentEvents = await Event.find({ $and: [{ owner }, { start: { $gte: today } }] });
+    const pastEvents = await Event.find({ $and: [{ owner }, { start: { $lt: today } }] });
     const enabled = true;
     ownEvents = true;
-    res.render('events/events', { currentEvents, pastEvents, enabled, ownEvents });
+    res.render('events/events', {
+      currentEvents, pastEvents, enabled, ownEvents,
+    });
   } catch (error) {
     next(error);
   }
@@ -60,15 +64,17 @@ router.get('/myevents', checkIfLoggedIn, async (req, res, next) => {
 // GET list 3rd party user's events
 router.get('/userevents/:userId', checkIfLoggedIn, async (req, res, next) => {
   const { userId } = req.params;
-  const thirdParty = true;  
+  const thirdParty = true;
   try {
-    const user = await User.findById({ _id: userId })
+    const user = await User.findById({ _id: userId });
     const events = await Event.find({ owner: userId }).populate('owner keeper');
-    const currentEvents = await Event.find({ $and: [ { owner: userId }, { start: {$gte: today} }] }).populate('owner keeper');
-    const pastEvents = await Event.find({ $and: [ { owner: userId }, { start: {$lt: today} }] }).populate('owner keeper'); 
+    const currentEvents = await Event.find({ $and: [{ owner: userId }, { start: { $gte: today } }] }).populate('owner keeper');
+    const pastEvents = await Event.find({ $and: [{ owner: userId }, { start: { $lt: today } }] }).populate('owner keeper');
     const { owner } = events;
     const { keeper } = events;
-    res.render('events/events', { currentEvents, pastEvents, user, owner, keeper, thirdParty });
+    res.render('events/events', {
+      currentEvents, pastEvents, user, owner, keeper, thirdParty,
+    });
   } catch (error) {
     next(error);
   }
@@ -118,6 +124,11 @@ router.get('/enrolledin', checkIfLoggedIn, async (req, res, next) => {
   try {
     const { _id } = req.session.currentUser;// string type
     const events = await Event.find({ $or: [{ candidates: _id }, { keeper: _id }] }).populate('owner').populate('keeper');
+    for (let i = 0; i < events.length; i++) {
+      if (events[i].keeper) {
+        if (events[i].keeper._id.toString() === _id) { events[i].keeperyes = 'yes'; }
+      }
+    }
     const { owner } = events;
     res.render('events/enrolledin', { events, owner, _id });
   } catch (error) {
@@ -141,8 +152,8 @@ router.get('/new', checkIfLoggedIn, async (req, res, next) => {
 router.post('/', checkIfLoggedIn, async (req, res, next) => {
   let pet;
   const {
- title, description, selectedPet, initialDateTime, finalDateTime, location 
-} = req.body;
+    title, description, selectedPet, initialDateTime, finalDateTime, location,
+  } = req.body;
   const owner = res.locals.currentUser._id;
   const start = initialDateTime;
   const end = finalDateTime;
@@ -204,7 +215,9 @@ router.get('/:eventId/update', checkIfLoggedIn, isValidID('eventId'), async (req
     const pets = event.pet;
     const enabled = true;
     if (userId === event.owner.toString()) {
-      res.render('events/edit', { event, pets, today, enabled });
+      res.render('events/edit', {
+        event, pets, today, enabled,
+      });
     } else {
       req.flash('error', "You can't edit this event.");
     }
@@ -219,8 +232,8 @@ router.post('/:eventId', checkIfLoggedIn, isValidID('eventId'), async (req, res,
   const { eventId } = req.params;
   const owner = res.locals.currentUser._id;
   const {
- title, description, selectedPet, initialDateTime, finalDateTime, location 
-} = req.body;
+    title, description, selectedPet, initialDateTime, finalDateTime, location,
+  } = req.body;
   const start = initialDateTime;
   const end = finalDateTime;
   try {
