@@ -8,9 +8,13 @@
         <img class="img-rounded" src="{{pet.img}}">
     </div>
     <div class="list-center">
-        <p> Pet type: {{../pet.petType }}</p>
+        <p> Pet type: {{pet.petType }}</p>
+        <p> Pet weight: {{pet.petWeight }}</p>
+        <p> Pet age: {{pet.petAge }} </p>
+
+        {{!-- <p> Pet type: {{../pet.petType }}</p> 
         <p> Pet weight: {{ ../pet.petWeight }}</p>
-        <p> Pet age: {{../pet.petAge }} </p>
+        <p> Pet age: {{../pet.petAge }} </p --}}
     </div>
 
     {{#if userpets}}
