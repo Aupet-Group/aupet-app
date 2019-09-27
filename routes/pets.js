@@ -122,4 +122,28 @@ router.post('/imageUpload/:petId', checkIfLoggedIn, upload.single('photo'), asyn
   }
 });
 
+// Show 3rd-party profile's pets
+router.get('/userpets/pet/:_id', checkIfLoggedIn, async (req, res, next) => {
+  const { _id } = req.params;
+  const userpets = true;
+  try {
+    const pet = await Pet.findById(_id);
+    res.render('pets/petDetails', { pet, userpets });
+  } catch (error) {
+    next(error);
+  }
+});
+
+// Get a list of pets of a owner 3rd
+router.get('/userpets/:owner', checkIfLoggedIn, async (req, res, next) => {
+  const userpets = true;
+  const { owner } = req.params;
+  try {
+    const pets = await Pet.find({ owner });
+    res.render('pets/listpets', { pets, userpets, owner });
+  } catch (error) {
+    next(error);
+  }
+});
+
 module.exports = router;

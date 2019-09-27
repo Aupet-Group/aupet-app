@@ -7,19 +7,21 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const mongoose = require('mongoose');
 const MongoStore = require('connect-mongo')(session);
-
 const flash = require('connect-flash');
+
 const { notifications } = require('./middlewares/auth.js');
 require('dotenv').config();
 
-hbs.registerPartials(path.join(__dirname, '/views/partials'));
+hbs.registerPartials(path.join(__dirname, '/views/partials')); 
+
+// Do no use with objects or array
 hbs.registerHelper('ifequal', (firstValue, secondValue, options) => {
-  if (firstValue === secondValue) { return options.fn(this); }
+  if (firstValue.toString() === secondValue.toString()) { return options.fn(this); }
   return options.inverse(this);
 });
 
 hbs.registerHelper('ifnotequal', (firstValue, secondValue, options) => {
-  if (firstValue !== secondValue) { return options.fn(this); }
+  if (firstValue.toString() !== secondValue.toString()) { return options.fn(this); }
   return options.inverse(this);
 });
 
@@ -92,6 +94,7 @@ app.use('/', authRouter);
 app.use('/pets', petsRouter);
 app.use('/events', eventRouter);
 app.use('/reviews', reviewsRouter);
+
 
 // catch 404 and forward to error handler
 app.use((req, res) => {

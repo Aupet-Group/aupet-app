@@ -11,9 +11,11 @@
         <p>Starts: {{ this.start }} </p>
         <p>Ends: {{ this.end }} </p>
         <p>Owner: <a href="/users/{{this.owner._id}}">{{ this.owner.name }} </a></p> 
-        {{#ifequal _id this.keeper}}
-         <h2>You are the keeper selected</h2>
+        {{#if this.keeper._id}}
+        {{#ifequal ../_id this.keeper._id}}
+         <h2>You are the selected keeper</h2>
         {{/ifequal}}
+        {{/if}}
         <button class="button-grey"><a href="/events/{{this._id}}">Details</a></button>
     </li>
     {{/each}}

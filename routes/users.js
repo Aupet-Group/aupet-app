@@ -59,21 +59,24 @@ router.post('/', checkIfNameisEmpty, async (req, res, next) => {
 router.get('/keepers', checkIfLoggedIn, async (req, res, next) => {
   try {
     const keepersWithoutUser = await User.find({ keeper: true });
-    const users = keepersWithoutUser.filter(keeperFilter => keeperFilter.id.toString() !== req.session.currentUser.id);
+    const users = keepersWithoutUser.filter(
+      keeperFilter => keeperFilter._id.toString() !== req.session.currentUser._id.toString(),
+    );
     res.render('users/users', { users });
   } catch (error) {
     next(error);
   }
 });
 
-// Shoe details of keepers
+// Show details of keepers
 
 router.get('/users/:_id', checkIfLoggedIn, checkIfNameInDatabaseIsEmpty, async (req, res, next) => {
   const { _id } = req.params;
   try {
     const users = await User.findOne({ _id });
     const enabled = false;
-    res.render('users/profile', { users, enabled });
+    const keeperActive = users.keeper === true;
+    res.render('users/profile', { users, enabled, keeperActive });
   } catch (error) {
     next(error);
   }
@@ -85,7 +88,8 @@ router.get('/profile', checkIfLoggedIn, checkIfNameInDatabaseIsEmpty, async (req
   try {
     const user = await User.findOne({ _id });
     const enabled = true;
-    res.render('users/profile', { user, enabled });
+    const keeperActive = user.keeper === true;
+    res.render('users/profile', { user, enabled, keeperActive });
   } catch (error) {
     next(error);
   }
@@ -109,7 +113,6 @@ router.get('/imageUpload', checkIfLoggedIn, async (req, res, next) => {
 router.post('/imageUpload', checkIfLoggedIn, upload.single('photo'), async (req, res, next) => {
   const { _id } = req.session.currentUser;
   try {
-    console.log(_id);
     req.session.currentUser.fileName = `${_id}_user`;
     await User.findByIdAndUpdate({ _id }, { $set: { img: req.file.url } });
     res.redirect('/profile');
