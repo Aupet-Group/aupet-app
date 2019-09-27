@@ -19,18 +19,18 @@ router.get('/', async (req, res, next) => {
   try {
     const allEvents = await Event.find({}).populate('owner keeper');
     const currentAllEvents = await Event.find({ start: { $gte: today } });
-    const pastAllEvents = await Event.find({ start: { $lt: today } }).populate('owner keeper');   
+    const pastAllEvents = await Event.find({ start: { $lt: today } });   
     if (req.session.currentUser) {
       events = allEvents.filter(
-        (event) => event.owner._id.toString() !== req.session.currentUser._id.toString(),
+        (event) => event.owner._id.toString() !== req.session.currentUser._id.toString()
       );
       currEvs = currentAllEvents.filter(
-        (event) => event.owner._id.toString() !== req.session.currentUser._id.toString(),
+        (event) => event.owner._id.toString() !== req.session.currentUser._id.toString()
       );
       pastEvs = pastAllEvents.filter(
         (event) => event.owner._id.toString() !== req.session.currentUser._id.toString()
-      );  
-       
+      ); 
+      
     } else {
       events = allEvents;
       currEvs = currentAllEvents;
@@ -39,6 +39,12 @@ router.get('/', async (req, res, next) => {
 
     const currentEvents = await Promise.all(currEvs.map(async (event) => { 
       const curEvent = await Event.findOne({ _id: event._id}).populate('owner keeper'); 
+      curEvent.candidates.forEach((candidate) => { 
+        if (req.session.currentUser) {
+          if (req.session.currentUser._id.toString() === candidate.toString()) {
+            curEvent.enrolled = true;
+          };         
+        }});              
       const pet = await Pet.find({_id: event.pet });
       const extractType = [];
       pet.forEach((el) => {
@@ -128,6 +134,12 @@ router.get('/userevents/:userId', checkIfLoggedIn, async (req, res, next) => {
     
     const currentEvents = await Promise.all(currEvs.map(async (event) => { 
       const curEvent = await Event.findOne({ _id: event._id}).populate('owner keeper'); 
+      curEvent.candidates.forEach((candidate) => { 
+        if (req.session.currentUser) {
+          if (req.session.currentUser._id.toString() === candidate.toString()) {
+            curEvent.enrolled = true;
+          };         
+        }});    
       const pet = await Pet.find({_id: event.pet });
       const extractType = [];
       pet.forEach((el) => {
@@ -249,9 +261,15 @@ router.get('/:eventId', isValidID('eventId'), async (req, res, next) => {
   try {
     let user = false;
     const event = await Event.findById(eventId).populate('owner pet candidates keeper');
-    const { owner } = event;
-    const pets = event.pet;
     const { candidates } = event;
+    candidates.forEach((candidate) => { 
+      if (req.session.currentUser) {
+        if (_id === candidate._id.toString()) {
+          event.enrolled = true;
+        };         
+      }});       
+    const { owner } = event;
+    const pets = event.pet;    
     const { keeper } = event;
     if (_id === event.owner._id.toString()) {
       user = true;
@@ -374,7 +392,7 @@ router.get('/:eventId/enroll', checkIfLoggedIn, isValidID('eventId'), async (req
           req.flash('error', 'You are already enrolled. Wait to be accepted by the owner.');
         }
       } else {
-        req.flash('error', 'Sorry. The task is already allocated to other keeper. Try with another task.');
+        req.flash('error', 'Sorry. The task is already allocated. Try with another task.');
       }
     }
     res.redirect(`/events/${eventId}`);

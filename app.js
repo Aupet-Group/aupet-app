@@ -14,7 +14,7 @@ require('dotenv').config();
 
 hbs.registerPartials(path.join(__dirname, '/views/partials')); 
 
-// Do no use with objects or array
+// Do not use with objects or array
 hbs.registerHelper('ifequal', (firstValue, secondValue, options) => {
   if (firstValue.toString() === secondValue.toString()) { return options.fn(this); }
   return options.inverse(this);

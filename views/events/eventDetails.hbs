@@ -49,11 +49,11 @@
     </div>
    </div>
   {{else}}
-    {{#unless past}}
+    {{#unless past}}{{#unless keeper}}{{#unless event.enrolled}}
    <div class="centred-btn">
      <button id="enroll" class="home-button button-blue"><a href="/events/{{event._id}}/enroll">Enroll</a></button>
    </div>
-     {{/unless}}
+     {{/unless}}{{/unless}}{{/unless}}
   {{/if}}
 
    
