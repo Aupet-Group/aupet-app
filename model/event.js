@@ -14,6 +14,7 @@ const eventSchema = new Schema(
     finalDateTime: Date,
     end: String,
     pet: [{ type: Schema.Types.ObjectId, ref: Pet }],
+    petType: String,
     address: {
       street: String,
       number: Number,
