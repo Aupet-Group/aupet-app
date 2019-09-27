@@ -136,6 +136,24 @@ router.get('/enrolledin', checkIfLoggedIn, async (req, res, next) => {
   }
 });
 
+// GET list events where the user is enrolled in as a keeper or as a candidate as 3rd party
+
+router.get('/enrolledin/:_id', checkIfLoggedIn, async (req, res, next) => {
+  try {
+    const { _id } = req.params;// string type
+    const events = await Event.find({ $or: [{ candidates: _id }, { keeper: _id }] }).populate('owner').populate('keeper');
+    for (let i = 0; i < events.length; i++) {
+      if (events[i].keeper) {
+        if (events[i].keeper._id.toString() === _id) { events[i].keeperyes = 'yes'; }
+      }
+    }
+    const { owner } = events;
+    res.render('events/enrolledin', { events, owner, _id });
+  } catch (error) {
+    next(error);
+  }
+});
+
 // GET form to create new event
 router.get('/new', checkIfLoggedIn, async (req, res, next) => {
   const owner = res.locals.currentUser._id;
