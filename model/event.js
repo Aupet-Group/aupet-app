@@ -22,6 +22,7 @@ const eventSchema = new Schema(
       location: String,
     },
     candidates: [{ type: Schema.Types.ObjectId, ref: User }],
+    enrolled: { type: Boolean, default: undefined },
     keeper: { type: Schema.Types.ObjectId, ref: User },
   },
   {
