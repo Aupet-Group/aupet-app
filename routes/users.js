@@ -27,7 +27,7 @@ router.get('/profile/update', checkIfLoggedIn, async (req, res, next) => {
 
 router.post('/', checkIfNameisEmpty, async (req, res, next) => {
   const { _id } = req.session.currentUser;
-  const { email, name, lastName, phone, owner: ownerString, keeper: keeperString, street, number, zipcode } = req.body;
+  const { email, name, lastName, phone, owner: ownerString, keeper: keeperString, street, number, zipcode, location } = req.body;
 
   const owner = ownerString === 'checked';
   const keeper = keeperString === 'checked';
@@ -45,6 +45,7 @@ router.post('/', checkIfNameisEmpty, async (req, res, next) => {
           'address.0.street': street,
           'address.0.number': number,
           'address.0.zipcode': zipcode,
+          'address.0.location': location,
         },
       },
     );
