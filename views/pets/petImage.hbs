@@ -1,0 +1,14 @@
+<div class="container-view">
+    <h1>Upload an Image of your Pet</h1>
+    <form action="/pets/imageUpload/{{pet._id}}" method="post" enctype="multipart/form-data">
+        <div class="form-group">
+            <div class="image-wrap-center">
+                <img src="{{pet.img}}" margin-top="10%" width="50%">
+            </div>
+        </div>
+        <div class="form-group-userphoto">
+            <label for="file" class="button-blue">UPLOAD<input id="userupload" type="file" name="photo"></label>
+            <input id="usersave" class="button-blue" type="submit" value="SAVE">
+        </div>
+    </form>
+</div>
