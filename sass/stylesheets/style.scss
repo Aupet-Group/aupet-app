@@ -21,9 +21,16 @@ body {
 }
 
 .main-container {
-  padding: 0 15px 75px 15px;
   max-width: 540px;
   width: 100%;
+  position: relative;
+  min-height: calc(-105px + 100vh);
+  display: block;
+  margin: 0 auto;
+}
+
+.content-wrap {
+  padding: 0 15px 75px 15px;  
 }
 
 h1 {
@@ -65,6 +72,11 @@ ul {
   padding-bottom: 25px;
 }
 
+form {
+  font-size: 18px;
+  line-height : 35px;
+}
+
 // Header & Nav bar
 
 header {
@@ -72,6 +84,8 @@ header {
   width: 100%;
   padding-top: 15px;
   background-color: #ffffff;
+  display: block;
+  margin: 0 auto;
 
   div {
     float: left;
@@ -180,7 +194,7 @@ ul.nav-items {
 // Footer
 
 footer {
-  position: fixed;
+  position: absolute;
   bottom: 0;
   max-width: 540px;
   width: 100%;
@@ -456,6 +470,7 @@ button {
 .home-container {
   display: flex;
   flex-direction: column;
+  padding-bottom: 30px;
 }
 
 .home-event-finder {
