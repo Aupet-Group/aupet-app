@@ -29,8 +29,6 @@ router.get('/new', checkIfLoggedIn, (req, res, next) => {
 
 router.post('/', async (req, res, next) => {
   const { petType, petWeight, petName, petAge, petImg } = req.body;
-
-  const { petId } = req.params;
   const owner = req.session.currentUser._id;
   await User.findByIdAndUpdate({ _id: owner }, { $set: { owner: true } });
 
@@ -53,7 +51,6 @@ router.post('/', async (req, res, next) => {
 
 router.get('/:petId', async (req, res, next) => {
   const { petId } = req.params;
-
   try {
     const pet = await Pet.findById(petId);
     res.render('pets/petDetails', { pet });
@@ -73,27 +70,8 @@ router.get('/:petId/update', checkIfLoggedIn, async (req, res, next) => {
   }
 });
 
-// Post update Pet
-
-router.post('/:petId', checkIfLoggedIn, async (req, res, next) => {
-  const { petId } = req.params;
-  const pet = Pet.findById(petId);
-  const { petType, petWeight, petAge, petName } = req.body;
-  try {
-    await Pet.findByIdAndUpdate(petId, {
-      petType,
-      petWeight,
-      petAge,
-      petName,
-    });
-    res.redirect(`/pets/${petId}`);
-  } catch (error) {
-    next(error);
-  }
-});
-
 // Upload pet Image
-
+// get form
 router.get('/imageUpload/:petId', checkIfLoggedIn, async (req, res, next) => {
   try {
     const { petId } = req.params;
@@ -108,15 +86,16 @@ router.get('/imageUpload/:petId', checkIfLoggedIn, async (req, res, next) => {
     next(error);
   }
 });
-
+// upload image
 router.post('/imageUpload/:petId', checkIfLoggedIn, upload.single('photo'), async (req, res, next) => {
   // const { _id } = req.session.currentUser;
   const { petId } = req.params;
   try {
-    console.log(petId);
     // req.session.currentUser.fileName = `${petId}_pet`;  aqui como hago en pet?
-    await Pet.findByIdAndUpdate({ petId }, { $set: { img: req.file.url } });
+    await Pet.findByIdAndUpdate({ _id: petId }, { $set: { img: req.file.url } });
+    console.log('Hola');
     res.redirect(`/pets/${petId}`);
+    // res.render('pets/editPet', pet);
   } catch (error) {
     next(error);
   }
@@ -141,6 +120,24 @@ router.get('/userpets/:owner', checkIfLoggedIn, async (req, res, next) => {
   try {
     const pets = await Pet.find({ owner });
     res.render('pets/listpets', { pets, userpets, owner });
+  } catch (error) {
+    next(error);
+  }
+});
+
+// Post update Pet
+
+router.post('/:petId', checkIfLoggedIn, async (req, res, next) => {
+  const { petId } = req.params;
+  const { petType, petWeight, petAge, petName } = req.body;
+  try {
+    await Pet.findByIdAndUpdate(petId, {
+      petType,
+      petWeight,
+      petAge,
+      petName,
+    });
+    res.redirect(`/pets/${petId}`);
   } catch (error) {
     next(error);
   }
