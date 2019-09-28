@@ -37,7 +37,9 @@
 <hr>
 {{#if user}}
 <div class="p-wrap">
-
+  {{#if keeperActive}}
+  <a class="button-red" href="#"> Keeper</a>
+  {{/if }}
   <p>Name: {{user.name}}</p>
   <p>Last Name: {{user.lastName}}</p>
   <p>Email: {{user.email}}</p>
@@ -45,13 +47,13 @@
   <p>Address: {{user.address.[0].street}} {{user.address.[0].number}} </p>
   <p>Location: {{user.address.[0].location}}</p>
   <p>Zipcode: {{user.address.[0].zipcode}}</p>
-  {{#if keeperActive}}
-  <p>Keeper.</p>
-  {{/if }}
   <br>
 </div>
 {{else}}
 <div class="p-wrap">
+  {{#if keeperActive}}
+  <a class="button-red" href="#"> Keeper</a>
+  {{/if }}
   <p>Name: {{users.name}}</p>
   <p>Last Name: {{users.lastName}}</p>
   <p>Email: {{users.email}}</p>
@@ -59,10 +61,8 @@
   <p>Adress: {{users.address.[0].street}} {{users.address.[0].number}} </p>
   <p>Location: {{users.address.[0].location}}</p>
   <p>Zipcode: {{users.address.[0].zipcode}}</p>
-  {{#if keeperActive}}
-  <p>Keeper.</p>
-  {{/if }}
- </div>
+
+</div>
 {{/if}}
 
 {{#if enabled}}
