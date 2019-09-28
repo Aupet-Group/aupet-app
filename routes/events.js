@@ -301,7 +301,7 @@ router.get('/:eventId/update', checkIfLoggedIn, isValidID('eventId'), async (req
     const enabled = true;
     if (userId === event.owner.toString()) {
       res.render('events/edit', {
-        event, pets, today, enabled,
+        event, pets, enabled,
       });
     } else {
       req.flash('error', "You can't edit this event.");
